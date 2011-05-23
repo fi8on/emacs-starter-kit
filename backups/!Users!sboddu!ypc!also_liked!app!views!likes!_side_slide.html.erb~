@@ -1,0 +1,14 @@
+ <ul id="mycarousel" class="jcarousel jcarousel-skin-tango">
+    <li>Listing 1</li>
+    <li>Listing 2</li>
+    <li>Listing 3</li>
+    <li>Listing 4</li>
+    <li>Listing 5</li>
+    <li>Listing 6</li>
+    <li>Listing 7</li>
+    <li>Listing 8</li>
+    <li>Listing 9</li>
+    <li>Listing 10</li>
+    <li>Listing 11</li>
+    <li>Listing 12</li>
+  </ul>

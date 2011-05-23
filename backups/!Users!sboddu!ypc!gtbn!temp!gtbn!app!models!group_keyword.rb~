@@ -1,0 +1,32 @@
+class GroupKeyword < ActiveRecord::Base
+  belongs_to 'tag_business_groups' ,:foreign_key => "tag_business_group_id"
+ 
+   def self.csv_header
+    "ID,Business group ID,Keywords,Created At,Updated At"
+  end
+
+   def to_csv
+    Time.zone = 'Pacific Time (US & Canada)'
+    id.to_s << "," << tag_business_group_id.to_s << "," << keywords << "," << created_at.to_s << "," << updated_at.to_s
+  end
+
+   def self.deleting_keywords(id)
+    @group_business_id = id
+    @group_id = GroupKeyword.find(@group_business_id)
+    @group_id.update_attribute(:is_deleted, 1)
+    @group_id.tag_business_group_id
+  end
+
+   def self.get_updated_kw(timestamp)
+     kw_list = find(:all,:conditions => ["updated_at > ?",timestamp])
+     kw_list.delete_if{|kw| Group.find_by_id(kw.tag_business_group_id,:conditions =>["status = ? and is_deleted = ?",1,0]).blank?}
+     kw_list
+   end
+
+   def self.get_by_group_id(group_id)
+     find(:all,:select =>"keywords",:conditions => {:tag_business_group_id =>group_id ,:is_deleted => 0 }).map(&:keywords)
+   end
+end
+
+
+

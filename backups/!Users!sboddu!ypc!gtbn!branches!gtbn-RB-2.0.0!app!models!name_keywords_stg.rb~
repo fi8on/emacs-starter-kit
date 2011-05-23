@@ -1,0 +1,3 @@
+class NameKeywordsStg
+  set_table_as "name_keywords_stg"
+end

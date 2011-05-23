@@ -1,0 +1,11 @@
+# This is the config file for Unicorn, usage:
+# cd $RAILS_ROOT && unicorn_rails -E production -D -c config/unicorn.rb
+
+timeout 300
+worker_processes 3
+listen "0.0.0.0:8001"
+
+pid "<%= app_path %>/shared/pids/unicorn.pid"
+stderr_path "<%= app_path %>/shared/log/unicorn_stderr.log"
+stdout_path "<%= app_path %>/shared/log/unicorn_stdout.log"
+

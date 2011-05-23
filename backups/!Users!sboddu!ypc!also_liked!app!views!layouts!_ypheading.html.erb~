@@ -1,0 +1,14 @@
+<div id="header">
+    <% if  controller.controller_name =='listings' and  controller.action_name =='index' -%>
+   		<h1>Interactive Data Tools (IDT)</h1>
+    <% else %>
+    	<h1>Listing User Interface (LUI)</h1>
+    <% end %>
+	
+	<div id="roles">
+		Logged in as: <%= @current_user.real_role %>
+	</div>
+    <div id="meta">
+        <%= link_to "Logout (#{@current_user.name})", SSO_URL + root_url %>
+    </div>
+</div>

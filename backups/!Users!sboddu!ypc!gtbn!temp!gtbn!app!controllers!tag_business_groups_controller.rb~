@@ -1,0 +1,119 @@
+require 'csv'
+require 'pp'
+class TagBusinessGroupsController < ApplicationController
+  before_filter :require_login
+
+  layout "business_group"
+  active_scaffold :group do |configure|
+    configure.list.columns =[:id,:group_name,:created_at,:updated_at,:comments,:status]
+    configure.columns[:status].label ='<nobr>Group Status</nobr>'
+    configure.columns[:created_at].label ='Date of Creation'
+    configure.columns[:updated_at].label ='Last Modified'
+    configure.update.columns =[:group_name,:status,:comments]
+    configure.create.columns =[:group_name,:status,:comments]
+    configure.actions.exclude :search
+    configure.actions.add :live_search
+    configure.actions.exclude :delete
+
+    configure.live_search.link.label = "Search Business Group"
+    configure.live_search.columns = [:group_name]
+    configure.live_search.full_text_search = true
+    configure.create.link.label = "Create New Business Group"
+    configure.show.link = " "
+    configure.action_links.add 'business_names_list',:label => 'Business-Names',:type => :record, :parameters =>{ :controller =>'group_business_names' },  :page => true
+    configure.action_links.add 'keywords_list',:label => 'Keywords',:type => :record, :parameters =>{ :controller =>'group_keywords' },  :page => true
+    configure.action_links.add 'delete_groups',:label => 'Delete', :type =>:record,:parameters =>{ :controller =>'tag_business_groups' }, :method =>:post, :page => true
+  end
+
+  def delete_groups
+    Group.deleting_group(params[:id])
+    flash[:info] = 'Group Deleted'
+    redirect_to :action => "business_group_list", :id => params[:id]
+  end
+
+  def business_group_list
+  end
+
+
+ def import_business_groups_from_csv
+   parsed_file = CSV::Reader.parse(params[:csv_file])
+   Time.zone = 'Pacific Time (US & Canada)'
+   parsed_file.each do |row|
+      if row[0] and row[0] != 'Ghost Tag Group Name'
+         row[0] = format_names(row[0].to_s)
+         @duplicate_group = Group.find(:first,:conditions => { :group_name =>"#{row[0]}" ,:is_deleted =>0 })
+       if(!@duplicate_group and row[0] != 'Ghost Tag Group')
+         newGroup = Group.new()
+         newGroup.group_name = row[0]
+         newGroup.status = false    # default value
+         newGroup.is_deleted = 0
+         newGroup.save!()
+         business_names = row[1].split("|")
+         keywords       = row[2].split("|")
+         for business in business_names
+           business = format_names(business.to_s)
+         @duplicate_business = GroupBusinessName.find(:first,:conditions => { :business_names =>"#{business}" ,:tag_business_group_id =>newGroup.id, :is_deleted => 0 })
+         if(!@duplicate_business)
+           newBusiness = GroupBusinessName.new()
+           newBusiness.tag_business_group_id = newGroup.id
+           newBusiness.business_names = business
+           newBusiness.is_deleted = 0
+           newBusiness.save!()
+           end
+         end
+
+         for keyword in keywords
+           keyword = format_names(keyword.to_s)
+           @duplicate_keyword = GroupKeyword.find(:first,:conditions => { :keywords =>"#{keyword.to_s}" ,:tag_business_group_id =>newGroup.id ,:is_deleted => 0})
+           if(!@duplicate_keyword)
+             newKeywords = GroupKeyword.new()
+             newKeywords.tag_business_group_id = newGroup.id
+             newKeywords.keywords = keyword
+             newKeywords.is_deleted = 0
+             newKeywords.save!()
+           end
+         end
+
+       end
+       if(@duplicate_group)
+         business_names = row[1].split("|")
+         keywords       = row[2].split("|")
+         for business in business_names
+           business = format_names(business.to_s)
+           @duplicate_business = GroupBusinessName.find(:first,:conditions => { :business_names =>"#{business}" ,:tag_business_group_id =>@duplicate_group.id ,:is_deleted =>0})
+           if(!@duplicate_business)
+             newBusiness = GroupBusinessName.new()
+             newBusiness.tag_business_group_id = @duplicate_group.id
+             newBusiness.business_names = business
+             newBusiness.is_deleted =0
+             newBusiness.save!()
+           end
+         end
+
+         for keyword in keywords
+           keyword = format_names(keyword.to_s)
+           @duplicate_keyword = GroupKeyword.find(:first,:conditions => { :keywords =>"#{keyword.to_s}" ,:tag_business_group_id =>@duplicate_group.id ,:is_deleted =>0})
+           if(!@duplicate_keyword)
+             newKeywords = GroupKeyword.new()
+             newKeywords.tag_business_group_id = @duplicate_group.id
+             newKeywords.keywords = format_names(keyword.to_s)
+             newKeywords.is_deleted =0
+             newKeywords.save!()
+           end
+         end
+        end
+     end
+   end
+   csv_path = params[:csv_file]
+   redirect_to :action => "business_group_list"
+ end
+
+
+ def format_names(string)
+   string.strip!
+   string
+ end
+
+
+end
+

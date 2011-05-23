@@ -1,0 +1,25 @@
+:options:
+:tpkgs:
+- :name: ruby-ypc
+  :version: 1.8.6.114.20090807.2
+  :package: 2
+  :preinstall: true
+- :name: gem-sqlite3-ruby
+  :version: 1.2.5
+  :package: 1
+  :preinstall: true
+- :name: gem-activerecord-oracle-adapter
+  :version: 1.0.0.9250
+  :package: 1
+- :name: atti-logrotate
+  :version: 0.2.8
+  :package: 1
+  :preinstall: true
+- :name: atti-logrotate
+  :version: 0.2.8
+  :package: 1
+  :preinstall: true
+- :name: gem-ruby-oci8
+  :version: 2.0.4
+  :package: 1
+  :preinstall: true

@@ -1,0 +1,123 @@
+require "csv"
+class GroupBusinessNamesController < ApplicationController
+  before_filter :require_login
+  active_scaffold :group_business_names do | configure |
+    configure.columns = [:business_names,:tag_business_group_id]
+    configure.list.columns =[:tag_business_group_id,:business_names,:created_at]
+    configure.actions.exclude :show
+    configure.actions.exclude :delete
+    configure.columns[:tag_business_group_id].label ="Group Id"
+    configure.create.link.label = "New Business &nbsp;&nbsp; "
+    configure.search.link.label = "  Search"
+    configure.actions.swap :search, :live_search
+    configure.action_links.add 'export_business_names',:label => 'Export', :parameters =>{ :controller =>'group_business_names' }, :method =>:post, :page => true
+    configure.action_links.add 'delete_business_names',:label => 'Delete', :type =>:record,:parameters =>{ :controller =>'group_business_names' }, :method =>:post, :page => true
+  end
+
+   def delete_business_names
+     group_id = GroupBusinessName.deleting_business_name(params[:id])
+     redirect_to :action => "business_names_list", :id =>group_id
+  end
+
+  def business_names_list
+    @id = params[:id]
+    @group_name = Group.find(@id)
+  end
+
+  def search_business_names
+    if @params['search']
+    @items_pages, @items = paginate :items,
+    :order_by => 'description',
+    :conditions => [ 'LOWER(description) LIKE ?',
+                       '%' + @params['search'].downcase + '%' ],
+    :per_page => 20
+    @mark_term = @params['search']
+    render_without_layout
+  else
+    @items_pages, @items = paginate :items,
+    :order_by => 'description', :per_page => 20
+  end
+  end
+
+
+  def update_business_names
+    @total_business_names = params[:businessNames_list]
+   count = 0
+    @total_business_names.to_i.times {
+      if params["add_businessName_#{count}".to_sym]
+        newBusiness = GroupBusinessName.new()
+        newBusiness.tag_business_group_id = params[:id]
+        newBusiness.business_names = params["add_businessName_#{count}".to_sym]
+        Time.zone = 'Pacific Time (US & Canada)'
+        newBusiness.created_at = Time.zone.now
+        newBusiness.save!()
+      end
+      count = count + 1
+    }
+    redirect_to :action => "business_names_list", :id => params[:id]
+  end
+
+  def update_business_notes
+    field = params[:business]
+    fields = field.to_s.titleize
+     if fields
+       newGroupNotes = BusinessNamesNote.new()
+       newGroupNotes.tag_business_group_id = params[:id]
+       newGroupNotes.business_name_notes = fields
+       Time.zone = 'Pacific Time (US & Canada)'
+       newGroupNotes.created_at = Time.zone.now
+       newGroupNotes.save!()
+    end
+    redirect_to :action => "business_names_list", :id => params[:id]
+  end
+
+  def import_business_names_from_csv
+    parsed_file = CSV::Reader.parse(params[:csv_file])
+    Time.zone = 'Pacific Time (US & Canada)'
+    parsed_file.each do |row|
+      if row[0]
+        row[0] = format_names(row[0].to_s)
+        @duplicate = GroupBusinessName.find(:first,:conditions => { :business_names =>"#{row[0]}" ,:tag_business_group_id =>params[:id] ,:is_deleted =>0})
+        if(!@duplicate and row[0].to_s != 'Business Names')
+        newBusiness = GroupBusinessName.new()
+        newBusiness.tag_business_group_id = params[:id]
+        newBusiness.business_names = row[0]
+        newBusiness.is_deleted = 0
+        newBusiness.created_at = Time.zone.now
+        newBusiness.save!()
+        end
+      end
+      begin
+      rescue CSV::IllegalFormatError #rescue the error to more gracefully display the info
+      end
+    end
+
+    redirect_to :action => "business_names_list", :id => params[:id]
+  end
+
+
+  def export_business_names
+    # find_page is how the List module gets its data. see Actions::List#do_list
+    records = find_page().items
+    return if records.size == 0
+    # Note this code is very generic.  We could move this method and the
+    # action_link configuration into the ApplicationController and reuse it
+    # for all our models.
+    data = ""
+    cls = records[0].class
+    data << cls.csv_header << "\r\n"
+    records.each do |inst|
+      data << inst.to_csv << "\r\n"
+    end
+    send_data data, :type => 'text/csv', :filename => cls.name.pluralize + '.csv'
+  end
+
+
+  def format_names(string)
+    string.strip!
+    string
+ end
+
+end
+
+

@@ -1,0 +1,17 @@
+.leftedge {
+	border-color: black black black #00FFFF;
+	border-style: solid;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 1px
+}
+.topedge {  border-color: #FF0000 black black; border-style: solid; border-top-width: 1px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px}
+.topleftedge {
+	border-color: #FF0000 black black #00FFFF;
+	border-style: solid;
+	border-top-width: 1px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 1px
+}

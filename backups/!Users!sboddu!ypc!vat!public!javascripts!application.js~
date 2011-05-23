@@ -1,0 +1,91 @@
+// // Place your application-specific JavaScript functions and classes here
+// // This file is automatically included by javascript_include_tag :defaults
+
+
+$('content_resize').ready(function() {
+  
+  $.ajax({ url: "/validations/new", dataType: 'json', 
+
+           success: function(data){
+             var hour_attributes = [];
+             var url_attributes = [];
+             $.each(data,function(index,obj){
+               //   if(obj.attr_type == "hours_op"){
+               hour_attributes.push({
+                 att_type : obj.attr_type,
+                 ypid : obj.attribute.id,
+                 status : obj.attribute.status,
+                 pre_validation : obj.attribute.pre_validation,
+                 post_validation : format_hours(obj.attribute.post_validation),
+                 comment : obj.attribute.comment,
+                 created_at : obj.attribute.created_at,
+                 updated_at : obj.attribute.updated_at,
+                 user : obj.attribute.users
+               });
+               
+
+               //   }
+               // else(obj.attr_type == "url"){
+               //   url_attributes.push({
+               //     att_type : obj.attr_type,
+               //     ypid : obj.attribute.id,
+               //     status : obj.attribute.status,
+               //   pre_validation : obj.attribute.pre_validation,
+               //   post_validation : obj.attribute.post_validation,
+               //   created_at : obj.attribute.created_at,
+               //   updated_at : obj.attribute.updated_at,
+               //   user : obj.attribute.users
+               // });
+               
+               //  }
+               
+             });
+             if(data.length < 1){
+               $('#attribue_submit').hide();
+               $('.fbg').replaceWith('<h2>No more data for validation </h2>');
+             }
+             
+             // Compile the inline template as a named template
+             //ensures that the conversion from markup to a
+             //compiled-template function only happens once everytime
+             //a template is rendered the markup is converted to
+             //compiled function. 
+             $( "#attributeTemplate" ).template( "att_template" );
+             $.tmpl( "att_template", hour_attributes).appendTo( "#AttributeHolder" );            
+           }
+         }); 
+});
+
+function format_hours(pipe_hours)
+{
+  if(pipe_hours) {
+    var days = [];
+    var day_of_week = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+    hours = pipe_hours.split("|");
+    hours.shift();
+    var i = 0,j=0;
+    var hours_of_operation = [];
+    while(i < hours.length){ 
+      open_hr =  hours[i].substring(0,2);
+      open_min = hours[i].substring(2,4);
+      close_hr = hours[i+1].substring(0,2);
+      close_min = hours[i+1].substring(2,4);
+      days.push({
+        day_of_week : day_of_week[j],
+        open_hour : open_hr,
+        open_min : open_min,
+        close_hour : close_hr,
+        close_min : close_min });
+      
+      i = i + 2;    
+      j = j + 1;
+    };
+  }
+  else {
+    // dont know what to do here
+    days = "";
+  }
+  return days;
+}               
+
+

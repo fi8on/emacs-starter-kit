@@ -1,0 +1,12 @@
+class Group < ActiveRecord::Base
+  set_table_name "tag_business_groups"
+  has_many :group_business_names
+  has_many :group_keywords
+
+  def self.deleting_group(id)
+    @group_id = id
+    @group_id = self.find(@group_id)
+    @group_id.update_attribute(:is_deleted, 1)
+  end
+
+end

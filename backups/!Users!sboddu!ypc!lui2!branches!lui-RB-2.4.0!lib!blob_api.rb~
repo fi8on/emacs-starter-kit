@@ -1,0 +1,14 @@
+class BlobApi
+
+  def get_images
+
+  end
+
+  def update_images
+
+  end
+
+  
+
+  
+end

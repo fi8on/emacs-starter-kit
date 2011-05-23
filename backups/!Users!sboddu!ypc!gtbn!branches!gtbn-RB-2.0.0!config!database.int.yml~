@@ -1,0 +1,5 @@
+qa:
+  adapter: oracle_enhanced
+  database: QA2YP.YELLOWPAGES.COM
+  username: ypc
+  password: ypcqa2
