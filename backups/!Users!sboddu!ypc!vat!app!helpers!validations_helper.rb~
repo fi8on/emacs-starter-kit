@@ -1,9 +1,0 @@
-module ValidationsHelper
-
-
-  def hours_of_op_format(hours)
- 
-  end
-
-  
-end

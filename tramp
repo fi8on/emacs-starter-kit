@@ -15,4 +15,6 @@
   ("perl" "\\perl")
   ("id" "/usr/bin/id")
   ("gid-integer" 0)
-  ("readlink" nil)))
+  ("readlink" nil))
+ (["scpc" nil "bin" nil]
+  nil))

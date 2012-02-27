@@ -1,2 +1,0 @@
-<% coupon_url = get_coupon_url(@ypid, @current_user.name) %>
-<iframe src=<%= "#{COUPONS_IFRAME}token=24QV1CQ7BcNrFelJbhh528ZxaFpPuE6YXc"   %> width="100%" height="600" id='frameCoupon'></iframe> 

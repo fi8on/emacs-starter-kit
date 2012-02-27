@@ -1,9 +1,0 @@
-# This is the config file for Unicorn, usage:
-# cd $RAILS_ROOT && unicorn_rails -E production -D -c config/unicorn.rb
- 
-timeout <%= "#{app_config['timeout']}" %>
-worker_processes <%= "#{app_config['worker_processes']}" %>
-listen <%= "'#{app_config['app_port']}'" %>
- 
-stderr_path "/usr/local/nextgen/clui/shared/log/error.log"
-stdout_path "/usr/local/nextgen/clui/shared/log/rails.log"

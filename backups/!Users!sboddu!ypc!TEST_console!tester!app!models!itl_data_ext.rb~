@@ -1,4 +1,0 @@
-class ItlData < ActiveRecord::Base
-set_table_name 'listing_improvement_ext'
-
-end
