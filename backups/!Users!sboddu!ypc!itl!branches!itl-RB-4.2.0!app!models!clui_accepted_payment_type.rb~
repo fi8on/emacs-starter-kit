@@ -1,0 +1,11 @@
+class CluiAcceptedPaymentType < ActiveRecord::Base
+  belongs_to :listing
+  belongs_to :payment_type
+
+  validates_presence_of :payment_type_id
+  validates_numericality_of :listing_id, :payment_type_id, :allow_blank=>true, :only_integer=>true, :greater_than=>0
+
+  def type
+    payment_type.name
+  end
+end

@@ -1,0 +1,35 @@
+  <% if members.any? %>
+  <table class="list members">
+    <thead><tr>
+	<th>Role</th>
+	<th>Permissions</th>
+	<th style="width:15%"></th>
+    </tr></thead>
+    <tbody>
+      <% members.each do |member| %>
+      <% next if member.new_record? %>
+      <tr id="member-<%= member.id %>" class="<%= cycle 'odd', 'even' %> member">
+	<td class="<%= member.role.class.name.downcase %>"><%= link_to_user member.role %></td>
+        <td class="roles">
+          <span id="member-<%= member.id %>-roles"><%=h member.permissions.collect(&:to_s).join(', ') %></span>
+          
+          <%= form_for(member, :url => {:controller => 'members', :action =>  'edit', :id => member},:html => { :id =>    "member-#{member.id}-roles-form", :class => 'hidden_form' },:remote =>true) do |f| %>
+      	  <p><% permissions.each do |permission| %>
+            <label><%= check_box_tag 'member[permission_ids][]', permission.id, member.permissions.include?(permission),:disabled => member.member_permissions.detect {|mr| mr.permission_id == permission.id && !mr.inherited_from.nil?} %> <%=h permission %></label><br />
+            <% end %></p>
+          <%= hidden_field_tag 'member[permission_ids][]', '' %>
+          <p><%= submit_tag "Change", :class => "small" %>
+            <%= link_to_function "Cancel", "$('#member-#{member.id}-roles').show(); $('#member-#{member.id}-roles-form').hide(); return false;" %></p>
+          <% end %>
+        </td>
+        <td class="buttons">
+          <%= link_to("Edit", "",:onclick =>    "$('#member-#{member.id}-roles').hide();    $('#member-#{member.id}-roles-form').show(); return false;" ,    :class => 'icon icon-edit') if (User.current.admin?  or  User.current.project_admin_of?(@project)) %>
+          <%= link_to("Delete", member_destroy_confirm_path(member), :class  => 'icon icon-del') if (User.current.admin? or  User.current.project_admin_of?(@project)) %> 
+        </td>
+      </tr>
+      <% end; reset_cycle %>
+    </tbody>
+  </table>
+  <% else %>
+  <p class="nodata">No Data</p>
+  <% end %>

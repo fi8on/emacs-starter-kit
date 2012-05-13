@@ -1,0 +1,13 @@
+class Website < ActiveRecord::Base
+  set_table_name "clui.websites"
+  belongs_to :listing
+
+  validates_presence_of :url
+  validates_numericality_of :listing_id, :allow_blank=>true, :only_integer=>true, :greater_than=>0
+  validates_length_of :url, :allow_blank=>true, :maximum=>1000
+  validates_format_of :url, :allow_blank=>true, :with=>/\A(?:(http|https):\/\/)?[\w\.\-]+\.\w{2,3}(?:\/.*)?\z/, :message=>"is not valid"
+
+  # def before_validation
+  #   strip_whitespace :url
+  # end
+end

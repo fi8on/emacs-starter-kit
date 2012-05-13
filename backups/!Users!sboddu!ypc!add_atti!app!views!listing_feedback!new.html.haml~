@@ -1,0 +1,250 @@
+#step_tracker
+  %input{:type => 'hidden', :id => 'user_from_yellowpages', :value => !from_listings?}
+  %input{:type => 'hidden', :id => 'paid_listing', :value => paid?}
+
+  .left
+    %h2 Improve This Listing
+  .right
+
+
+-# %p.intro
+  Please help us keep the information about
+  %span.bold== #{@listing_feedback.name}
+  accurate by updating the information below. You do
+  %span.bold NOT
+  need to update all fields.
+
+- if errors?
+  %h3 There are errors:
+  %ul
+    - @listing_feedback.errors.full_messages.each do |e|
+      %li= e
+
+- form_for @listing_feedback, :html => { :id => 'listing_feedback_form', :method => :post } do |f|
+  %fieldset.getting_started
+    %h3 Getting Started
+    .rounded-5
+      %h4 Are you a Representative of this Business?
+      -# This is a temporary hack, I hope.
+      - rep_itl = (%w{development qa qa1 qa2 qa3 qa_citysearch}.include? Rails.env) ? "http://listings.yellowpages.stage.keen.com/Services/CreateServiceStarter.aspx?ypid=#{@listing_feedback.ypid}" : "http://listings.yellowpages.com/Services/CreateServiceStarter.aspx?ypid=#{@listing_feedback.ypid}"
+      %p #{ link_to 'Go to the Business Representative "Improve this Listing" form',  rep_itl, :class => 'arrow' }
+    .circle
+      %strong OR
+    .rounded-5
+      %h4 Are you a Customer of this Business?
+      %p Please fill out the form below with any updated information about this business. You do NOT need to update all the fields.
+
+  %fieldset
+    %h3 Business Status and Location
+    - if paid?
+      .field
+        %span.label Business Name:
+        %span= @listing_feedback.name
+
+      - if not @listing_feedback.omit_address?
+        .field
+          %span.label Street Address:
+          %span.address= @listing_feedback.address
+          %span.city_state #{@listing_feedback.city}, #{@listing_feedback.state} #{@listing_feedback.zip}
+    - else
+      .field
+        = f.label :name, "Business Name"
+        = f.text_field :name, :maxlength => 255, :size => 60, :class => 'long'
+      .field
+        = f.label :address, "Street Address"
+        = f.text_field :address, :maxlength => 100, :size => 60, :class => 'long'
+      .field
+        = f.label :city
+        == #{@listing_feedback.city}
+      .field
+        = f.label :state
+        #{@listing_feedback.state}
+      .field.mtop
+        = f.label :zip, "ZIP Code"
+        = f.text_field :zip, :maxlength => 5, :class => "zip"
+
+        .validation_message
+          The ZIP code must be 5 digits.
+
+  .business_open_info
+    %fieldset
+      .field
+        = f.label :location_description
+        = f.text_area :location_description, :maxlength => 500
+        %span.note eg. This business is located at a prime spot of Downtown LA between Wilshire and West.
+
+  %fieldset
+    .field{ :style => 'padding-left:185px;' }
+      = f.label :closed, "Is #{@listing_feedback.name} out of business? Check this box:", :style => 'width:auto;'
+      = f.check_box :closed, :class => "noborder"
+
+  .business_open_info
+    %fieldset
+      %h3 Business Contact Information
+      - if paid?
+        .field
+          .label Primary Phone Number:
+          #{@listing_feedback.phone}
+      - else
+        .field
+          = f.label :phone, "Primary Phone Number"
+          = f.text_field :phone, :class => "phone_number", :maxlength => 14
+
+          .validation_message
+            = invalid_phone_message
+
+      #addtl_phones_field.field
+        = label_tag "Additional Phones:"
+        .table-container
+          %table#addtl_phones_table
+            %thead
+              %tr
+                %th{:scope => "col"} Phone Type
+                %th{:scope => "col"} Phone Number
+                %th{:scope => "col"} Description (Optional)
+                %th{:scope => "col"}
+                  %span.hidden Remove
+            %tbody
+              -# TODO stuff isn't staying deleted on submit with form error
+              - @listing_feedback.additional_phones.each do |ph|
+                %tr
+                  %td= ph.type
+                  %td= ph.number
+                  %td= ph.label
+                  %td.action
+                    = hidden_field_tag 'listing_feedback[additional_phones][current][]', ph.number
+                    = link_to 'Remove', '#', :class => 'remove'
+              %tr.dummy_markup{ :style => 'display:none' }
+                %td= select_tag 'listing_feedback[additional_phones][types][]', options_for_phone_type
+                %td= text_field_tag 'listing_feedback[additional_phones][values][]', nil, :class => 'phone_number', :maxlength => 14
+                %td= text_field_tag 'listing_feedback[additional_phones][labels][]', nil, :maxlength => 50
+                %td &nbsp;
+
+
+          = link_to "Add another phone number", '#', :class => 'add'
+          %span.maxlistcount (Maximum 3)
+
+        .validation_message
+          = invalid_phone_message
+
+      .field#email-addresses
+        = label_tag "Email Addresses:"
+        = text_array_field f, :emails, :maxlength => 100, :size => 60
+
+        .validation_message
+          Email addresses must be properly formatted. eg. username@yourdomain.com
+
+      .field#web-sites
+        = label_tag "Web Sites:"
+        = text_array_field f, :websites, :maxlength => 160, :size => 60
+
+        .validation_message
+          Web Sites must be valid urls. eg. http://www.yellowpages.com/ or www.yellowpages.com
+
+
+    %fieldset
+      %h3 Visiting The Business
+
+      .field
+        = label_tag "General Opening Info:"
+        .options.two-col
+          .option
+            = f.check_box :open_7_days
+            Open 7 days a week
+          .option
+            = f.check_box :emergency_service
+            24-hour emergency service
+          .option
+            = f.check_box :open_24_hours
+            Open 24 hours a day
+          .option
+            = f.check_box :appointments_available
+            Appointments Available
+
+      .field#business-hours-field
+        = label_tag "Business Hours:"
+        = hidden_field_tag 'listing_feedback[operating_hours][merged_weekdays]', @listing_feedback.operating_hours['merged_weekdays'], :id => 'op_hours_merged'
+        .table-container
+          %table#business_hours_table
+            %thead
+              %tr
+                %th{:scope => "col"}
+                %th{:scope => "col"} Opening Time
+                %th{:scope => "col"}
+                %th{:scope => "col"} Closing Time
+                %th.center{:scope => "col"} Closed
+            %tbody
+              = op_hours_pair('weekdays')
+              %tr.restoreweekdays
+                %td Weekdays
+                %td{ :colspan => 4 }
+                  = link_to "Same time for each weekday", "#", :class => 'mergeweekdays'
+              %tr.differenttimes
+                %td
+                %td{ :colspan => 4 }
+                  = link_to "Add different times for each weekday", '#', :class => 'splitweekdays'
+              = ListingFeedback::OperatingHours::DAYS.map {|d| op_hours_pair(d) }.join("\n")
+      .clear
+      #payment_types_fields
+        = hidden_field_tag 'listing_feedback[payment_methods][]', '' # make sure the setter gets called
+        - ListingFeedback::PaymentMethods.method_sets.each do |name, list|
+          .field
+            = label_tag "#{name}:"
+            .options
+              - list.each do |text,value,opts|
+                .option
+                  = check_box_tag 'listing_feedback[payment_methods][]', value, offers_payment?(value), (opts || {}).merge(:id => "listing_feedback_payment_types_#{value}")
+                  = text
+            .clear
+
+    - unless paid?
+      %fieldset
+        %h3 Business Categories
+        .field
+          = label_tag "What is the business?"
+          = text_array_field f, :categories
+
+    %fieldset
+      %h3 Services
+      .field
+        = label_tag  "Customer Wi-fi:"
+        = f.check_box :wifi
+        This business provides wi-fi
+
+        #wifi_options
+          .option
+            = f.label :wifi_paid, "Free wi-fi?"
+            = f.radio_button :wifi_paid, 'false'
+            Yes
+            = f.radio_button :wifi_paid, 'true'
+            No
+
+          #paid_wifi_options
+            .option
+              = f.label :wifi_supplier_id, "Choose provider:"
+              = f.select :wifi_supplier_id, wifi_suppliers, :include_blank => true
+
+            #other_wifi_supplier.option
+              = f.label :wifi_supplier_other, "Which provider?"
+              = f.text_field :wifi_supplier_other
+
+  .field
+    = f.label :feedback, "Additional Feedback:"
+    = f.text_area :feedback, :maxlength => feedback_max_length
+    .clear
+    %span{:id => "feedback_lengthinfo"}
+    - if @listing_site_from_params
+      = f.hidden_field :site, :value => @listing_site_from_params
+
+  .clear
+  = f.submit('Submit Changes')
+  %span#reviewed.note.inline Information provided will be reviewed before it is added to the live site. This may take 7-10 days.
+
+- content_for :javascript_include do
+  - javascript_tag do
+    (function(){
+    $("#listing_feedback_feedback").keyup(function(){
+    limitChars("#listing_feedback_feedback",  #{feedback_max_length}, "#feedback_lengthinfo");
+    });
+    limitChars("#listing_feedback_feedback",  #{feedback_max_length}, "#feedback_lengthinfo");
+    })();

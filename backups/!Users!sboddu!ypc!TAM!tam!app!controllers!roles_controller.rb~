@@ -1,0 +1,125 @@
+class RolesController < ApplicationController
+  layout 'admin'
+  
+  before_filter :require_admin,:except => [:new,:create,:index,:edit]
+  
+  # GET /roles
+  def index
+    @roles = Role.find(:all, :order => 'lastname')
+  end
+
+  # GET /roles/1
+  def show
+    @role = Role.find(params[:id])
+  end
+
+  # GET /roles/new
+  def new
+    @role = Role.new
+  end
+
+  # GET /roles/1/edit
+  def edit
+    @role = Role.find(params[:id], :include => :projects)
+  end
+
+  # POST /roles
+  def create
+    @role = Role.new(params[:role])
+    respond_to do |format|
+      if @role.save
+        flash[:notice] = "Role creation successful"
+        format.html { redirect_to(roles_path) }
+      else
+        format.html { render :action => "new" }
+      end
+    end
+  end
+
+  # PUT /roles/1
+  def update
+    @role = Role.find(params[:id])
+
+    respond_to do |format|
+      if @role.update_attributes(params[:role])
+        flash[:notice] = "Update successful"
+        format.html { redirect_to(roles_path) }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
+  # DELETE /roles/1
+
+  def destroy
+    @role = Role.find(params[:id])
+    @role.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(roles_url) }
+    end
+  end
+  
+  def add_users
+    @role = Role.find(params[:id])
+    users = User.find_all_by_id(params[:user_ids])
+    @role.users << users if request.post?
+    respond_to do |format|
+      format.html { redirect_to :controller => 'groups', :action => 'edit', :id => @role, :tab => 'users' }
+      format.js { 
+        render(:update) {|page| 
+          page.replace_html "tab-content-users", :partial => 'roles/users'
+          users.each {|user| page.visual_effect(:highlight, "user-#{user.id}") }
+        }
+      }
+    end
+  end
+  
+  def remove_user
+    @role = Role.find(params[:id])
+    @role.users.delete(User.find(params[:user_id])) if request.post?
+    respond_to do |format|
+      format.html { redirect_to :controller => 'roles', :action => 'edit', :id => @role, :tab => 'users' }
+      format.js { render(:update) {|page| page.replace_html "tab-content-users", :partial => 'roles/users'} }
+    end
+  end
+  
+  def autocomplete_for_user
+    @role = Role.find(params[:id])
+    @users = User.active.like(params[:q]).find(:all, :limit => 100) - @role.users
+    render :layout => false
+  end
+  
+  def edit_membership
+    @role = Role.find(params[:id])
+    @membership = Member.edit_membership(params[:membership_id], params[:membership], @role)
+    @membership.save if request.post?
+    respond_to do |format|
+      if @membership.valid?
+        format.html { redirect_to :controller => 'roles', :action => 'edit', :id => @role, :tab => 'memberships' }
+        format.js {
+          render(:update) {|page|
+            page.replace_html "tab-content-memberships", :partial => 'roles/memberships'
+            page.visual_effect(:highlight, "member-#{@membership.id}")
+          }
+        }
+      else
+        format.js {
+          render(:update) {|page|
+            page.alert("Failed to Save","Error")
+          }
+        }
+      end
+    end
+  end
+  
+  def destroy_membership
+    @role = Role.find(params[:id])
+    Member.find(params[:membership_id]).destroy if request.post?
+    respond_to do |format|
+      format.html { redirect_to :controller => 'roles', :action => 'edit', :id => @role, :tab => 'memberships' }
+      format.js { render(:update) {|page| page.replace_html "tab-content-memberships", :partial => 'roles/memberships'} }
+    end
+  end
+end

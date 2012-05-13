@@ -1,0 +1,11 @@
+
+
+
+
+
+ldap_credentials:
+  tam_username: svc_tamprod
+  tam_password: 1eadLnPPPx5jca99
+  yp_host: irvldap.yellowpages.local
+  corp_host: irvldap.corp.yp.com
+

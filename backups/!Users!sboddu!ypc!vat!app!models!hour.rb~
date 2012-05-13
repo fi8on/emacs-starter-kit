@@ -1,0 +1,19 @@
+class ImportAttribute < ActiveRecord::Base
+  belongs_to :import, :foreign_key => "import_id"
+
+  HOURS_OPTIONS = [ 'Valid', 'Invalid', 'Not_Sure']
+  
+  def self.get_attributes(user=nil,options ={}, no_of_attr = 1)
+    conditions = []
+    arguments = []
+    options['attr_type'] = 'hours'
+    conditions = ["status IS ? AND (import_attributes.users IS ? OR import_attributes.users = ?) AND imports.work_status = ?",  nil, nil,user,true]
+    
+    if !options.blank?
+      conditions =  ["status IS ? AND attr_type = ? AND (import_attributes.users IS ? OR import_attributes.users = ?)  ", nil,options['attr_type'],nil,user]
+    end
+  
+    find(:all,:include => 'import',:order => 'imports.processing_order',:limit => no_of_attr,:conditions =>conditions, :order =>'imports.processing_order',:lock => true)
+  end
+
+end

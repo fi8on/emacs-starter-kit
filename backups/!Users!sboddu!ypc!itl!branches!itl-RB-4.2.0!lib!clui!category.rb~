@@ -1,0 +1,8 @@
+class Category < ActiveRecord::Base
+  set_table_name "clui.categories"
+  belongs_to :listing
+
+  validates_presence_of :code
+  validates_numericality_of :listing_id, :code, :allow_blank=>true, :only_integer=>true, :greater_than=>0  
+  validates_length_of :description, :allow_blank=>true, :maximum=>255
+end

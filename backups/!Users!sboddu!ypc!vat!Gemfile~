@@ -1,0 +1,104 @@
+source "http://gems.gemcutter.wc1.yellowpages.com"
+source "http://gems.atti.wc1.yellowpages.com"
+source "http://gems.github.wc1.yellowpages.com"
+
+
+gem "rails", "3.0.9"
+gem "activerecord-oracle_enhanced-adapter",'1.3.0'
+gem "fastercsv",'1.5.4'
+gem "net-http-persistent", "1.5.2"  # Need to be removed from Gemfile once vendetta updates it's required version.
+gem "haml", "3.0.23"
+gem "rake", "0.8.7", :require => nil
+gem "geoip", "1.1.1"
+gem "io-extra", "1.2.0"
+gem "validatable", "1.6.7"
+gem "geolitecity", ">=0.9.0"
+gem "nokogiri", "~>1.4.1"
+gem "rack", "1.2.1", :require => nil
+gem "classy_struct", "0.3.2"
+gem "rest-client", "1.6.1", :require => 'rest_client'
+gem "feedback_widget", "0.9.6"
+gem "vendetta", "2.5.1"
+gem "bunny", "0.6.0"
+gem "thumper", "0.0.5"
+gem "unicorn", "1.1.2", :require => nil
+gem "radiant_client", "1.0.4.1"
+gem "sso_client", "0.1.4"
+gem "httparty", "0.7.8"
+gem "crack"
+gem "vpim", "0.695"
+gem "mislav-will_paginate", "2.3.11"
+gem "ezcrypto", "0.7.2"
+gem "fast_xs", "0.7.3"
+gem "amikula-sprite", "0.1.11"
+gem "json", "1.2.3"
+gem "refraction", "0.2.0"
+gem "memcache-client"
+gem "tmail_client", "0.1.2"
+gem "whenever", "0.5.0", :require => nil
+gem "lwes", "0.6.1"
+gem "oauth2", "0.0.10"
+gem "shared_oauth_client", "0.0.13"
+gem "multi_json", "0.0.4"
+gem "hoe", "2.8.0"
+gem "admin_tool_client", '0.2.1'
+gem "declarative_authorization", '0.5.3'
+gem "yacht", '0.1.2'
+gem "sqlite3",'1.3.3'
+gem "titleize",'1.2.0'
+gem "ar-extensions",'0.9.2'
+
+# TODO: remove once a gem has been created
+
+### TODO: Remove once feature tests all use nokogiri.
+gem "hpricot", "0.8.1"
+
+### Ruby 1.9.2 does not include test-unit.
+gem "test-unit", "1.2.3"
+
+group :test do
+  gem "rcov", "0.9.8"
+
+  # RSpec needs this version under 1.9 :<
+
+  gem 'spork', '0.8.4'
+  gem 'ZenTest'
+  gem "rspec", "1.3.1"
+  gem "rspec-rails", "1.3.3", :require => nil
+  gem "cucumber", "0.8.5"
+  gem "cucumber-rails", "0.3.2"
+  gem "gherkin", "2.1.5"
+  gem "webrat", "0.7.1"
+  gem "selenium-client", "1.2.18"
+  gem "mash", "0.1.1"
+  gem "mechanize", "1.0.0"
+  gem "mock_lobster", "0.0.1", :require => nil
+  gem "rack-test", "0.5.7"
+  gem "yard"
+  gem "parallel_tests", "0.4.5"
+  gem "faker", "0.3.1"
+  gem "samuel", "0.3.2", :require => nil
+
+  # need webmock to test timeouts, which fakeweb does not support
+  # MAKE SURE TO require webmock BEFORE fakeweb
+  gem "webmock", "1.6.4"
+
+  # MAKE SURE TO require fakewb AFTER webmock
+  gem "fakeweb"
+
+  gem "launchy"
+  gem "simplecov", "0.4.2"
+  gem "therubyracer", "0.9.0"
+  gem 'ruby-debug19'
+  gem "rkelly-dmcinnes", "1.0.3"
+end
+
+group :deployment do
+end
+
+group :profile do
+  gem "fakeweb"
+  gem "vcr", "1.4.0"
+  gem 'rack-contrib'
+  gem 'ruby-prof'
+end

@@ -1,0 +1,4 @@
+dev:
+  adapter: sqlite3
+  database: db/dev.sqlite3
+  timeout: 5000

@@ -1,0 +1,22 @@
+class Attribute < ActiveRecord::Base
+  attr_accessor :attr_type
+  
+  def after_initialize
+    self.find_att_type
+  end
+  
+  def self.get_attributes(id ={}, no_of_attr = 1) 
+    id.blank?? find(:all, :conditions =>{:status => 'valid'},:limit => no_of_attr) : find(:all, :conditions =>["status = ? AND id = ?", 'valid',id ],:limit => no_of_attr) 
+  end
+ 
+  def find_att_type
+    if !((self.pre_validation  =~  /([01]?[0-9]|2[0-3])(:[0-5][0-9])?$/).blank? and (self.post_validation  =~  /([01]?[0-9]|2[0-3])(:[0-5][0-9])?$/).blank?)  
+      self.attr_type = "hours_op"
+    elsif  !((self.pre_validation =~ /^((http|https?:\/\/)?((?:[-a-z0-9]+\.)+[a-z]{2,}))$/).blank? and (self.post_validation  =~ /^((http|https?:\/\/)?((?:[-a-z0-9]+\.)+[a-z]{2,}))$/).blank?)
+      self.attr_type = "url"
+    else
+      self.attr_type = "unknown"
+    end
+  end
+      
+end

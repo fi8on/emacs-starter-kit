@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Vertical Nav Script</title>
+<link href="menu_toggle_adder.css" rel="stylesheet" type="text/css">
+<!--[if IE 6]>
+  <link rel="stylesheet" type="text/css" href="ie6_menu_toggle_adder.css">
+<![endif]-->
+<link href="sample.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p class="menu_header">Shop By Category</p>
+<ul id="menu">
+  <li><a href="#">Parent Category Number 1</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1A</a></li>
+      <li><a href="#">Sub Category Link 2A</a></li>
+      <li><a href="#">Sub Category Link 3A</a></li>
+      <li><a href="#">Sub Category Link 4A</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Category Number 2</a></li>
+  <li><a href="#">Parent Category Number 3</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1B</a></li>
+      <li><a href="menu_toggle_adder_sample.htm">Sub Category Link 2B</a></li>
+      <li><a href="#">Sub Category Link 3B</a></li>
+      <li><a href="#">Sub Category Link 4B</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Category Number 4</a></li>
+  <li><a href="#">Category Number 5</a></li>
+  <li><a href="#">Parent Category Number 6</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1F</a></li>
+      <li><a href="#">Sub Category Link 2F</a></li>
+      <li><a href="#">Sub Category Link 3F</a></li>
+      <li><a href="#">Sub Category Link 4F</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Parent Category Number 7</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1G</a></li>
+      <li><a href="#">Sub Category Link 2G</a></li>
+      <li><a href="#">Sub Category Link 3G</a></li>
+      <li><a href="#">Sub Category Link 4G</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Parent Category Number 8</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1H</a></li>
+      <li><a href="#">Sub Category Link 2H</a></li>
+      <li><a href="#">Sub Category Link 3H</a></li>
+      <li><a href="#">Sub Category Link 4H</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Parent Category Number 9</a>
+    <ul>
+      <li><a href="#">Sub Category Link 1I</a></li>
+      <li><a href="#">Sub Category Link 2I</a></li>
+      <li><a href="#">Sub Category Link 3I</a></li>
+      <li><a href="#">Sub Category Link 4I</a></li>
+    </ul>
+  </li>
+</ul>
+<img class="menu_bottom_shape" src="images/bottom_shape.gif">
+
+<script type="text/javascript" src="jquery-1.2.5.min.js"></script>
+<script type="text/javascript" src="jquery.menu_toggle_adder-1.0.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#menu').menu_toggle_adder(
+		{
+			animate_toggle: 'yes',
+			highlight_selected_link: 'yes',
+			toggle: 'images/toggle.gif',
+			toggled: 'images/toggled.gif',
+			toggle_selected: 'images/toggle_selected.gif',
+			toggled_selected: 'images/toggled_selected.gif'
+		}
+	);
+ });
+ </script>
+ </body>
+</html>

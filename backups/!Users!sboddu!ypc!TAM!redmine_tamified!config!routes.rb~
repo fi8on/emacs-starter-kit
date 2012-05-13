@@ -1,0 +1,91 @@
+ActionController::Routing::Routes.draw do |map|
+  # Add your own custom routes here.
+  # The priority is based upon order of creation: first created -> highest priority.
+  
+  # Here's a sample route:
+  # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
+  # Keep in mind you can assign values other than :controller and :action
+
+  map.home '', :controller => 'welcome'
+  
+  map.signin 'login', :controller => 'account', :action => 'login'
+  map.signout 'logout', :controller => 'account', :action => 'logout'
+  
+  map.connect 'projects/:project_id/time_entries/report', :controller => 'time_entry_reports', :action => 'report'
+  map.with_options :controller => 'time_entry_reports', :action => 'report',:conditions => {:method => :get} do |time_report|
+    time_report.connect 'time_entries/report'
+    time_report.connect 'time_entries/report.:format'
+    time_report.connect 'projects/:project_id/time_entries/report.:format'
+  end
+
+  # TODO: wasteful since this is also nested under issues, projects, and projects/issues
+  map.resources :time_entries, :controller => 'timelog'
+  
+  map.connect 'projects/:id/wiki', :controller => 'wikis', :action => 'edit', :conditions => {:method => :post}
+  map.connect 'projects/:id/wiki/destroy', :controller => 'wikis', :action => 'destroy', :conditions => {:method => :get}
+  map.connect 'projects/:id/wiki/destroy', :controller => 'wikis', :action => 'destroy', :conditions => {:method => :post}
+  
+
+   # Misc issue routes. TODO: move into resources
+ 
+   map.connect 'projects/:id/members/new', :controller => 'members', :action => 'new'
+
+  map.with_options :controller => 'users' do |users|
+    users.connect 'users/:id/edit/:tab', :action => 'edit', :tab => nil, :conditions => {:method => :get}
+    
+    users.with_options :conditions => {:method => :post} do |user_actions|
+      user_actions.connect 'users/:id/memberships', :action => 'edit_membership'
+      user_actions.connect 'users/:id/memberships/:membership_id', :action => 'edit_membership'
+      user_actions.connect 'users/:id/memberships/:membership_id/destroy', :action => 'destroy_membership'
+    end
+  end
+
+  map.resources :users, :member => {
+    :edit_membership => :post,
+    :destroy_membership => :post
+  },
+  :except => [:destroy]
+
+  # For nice "roadmap" in the url for the index action
+  map.connect 'projects/:project_id/roadmap', :controller => 'versions', :action => 'index'
+
+
+  map.resources :projects, :member => {
+    :copy => [:get, :post],
+    :settings => :get,
+    :modules => :post,
+    :archive => :post,
+    :unarchive => :post
+  } do |project|
+    project.resource :project_enumerations, :as => 'enumerations', :only => [:update, :destroy]
+    project.resources :files, :only => [:index, :new, :create]
+    project.resources :versions, :collection => {:close_completed => :put}, :member => {:status_by => :post}
+    project.resources :time_entries, :controller => 'timelog', :path_prefix => 'projects/:project_id'
+
+
+  end
+
+  # Destroy uses a get request to prompt the user before the actual DELETE request
+  map.project_destroy_confirm 'projects/:id/destroy', :controller => 'projects', :action => 'destroy', :conditions => {:method => :get}
+
+  # TODO: port to be part of the resources route(s)
+  map.with_options :controller => 'projects' do |project_mapper|
+    project_mapper.with_options :conditions => {:method => :get} do |project_views|
+      project_views.connect 'projects/:id/settings/:tab', :controller => 'projects', :action => 'settings'
+      project_views.connect 'projects/:project_id/issues/:copy_from/copy', :controller => 'issues', :action => 'new'
+    end
+  end
+  
+   map.resources :groups
+  
+  #left old routes at the bottom for backwards compat
+  map.connect 'projects/:project_id/timelog/:action/:id', :controller => 'timelog', :project_id => /.+/
+  
+  map.with_options :controller => 'sys' do |sys|
+    sys.connect 'sys/projects.:format', :action => 'projects', :conditions => {:method => :get}
+  end
+ 
+  # Install the default route as the lowest priority.
+  map.connect ':controller/:action/:id'
+
+end

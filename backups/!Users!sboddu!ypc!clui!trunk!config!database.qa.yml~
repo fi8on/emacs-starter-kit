@@ -1,0 +1,11 @@
+qa:
+  adapter: oracle_enhanced
+  database: qa2yp.yellowpages.com
+  username: clui_app
+  password: clui_appqa2
+
+migration:
+  adapter: oracle_enhanced
+  database: qa2yp.yellowpages.com
+  username: clui
+  password: cluiqa2

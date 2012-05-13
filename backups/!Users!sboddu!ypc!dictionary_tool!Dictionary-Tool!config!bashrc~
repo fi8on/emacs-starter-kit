@@ -1,0 +1,12 @@
+# Source global definitions (if not there)
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+export PATH=/home/t/ruby-1.8.7-p249-3/bin:/home/t/bin:/home/t/mysql-5.1.48/bin:$PATH
+export LD_LIBRARY_PATH=/home/t/lib:/home/t/oracle_client-10.2.0.1.0/lib
+export ORACLE_HOME=/home/t/oracle_client-10.2.0.1.0
+export TNS_ADMIN=/usr/local/nextgen/jobtracker/current/config
+export TZ=America/Los_Angeles
+alias l='ls -al'
+alias c=clear

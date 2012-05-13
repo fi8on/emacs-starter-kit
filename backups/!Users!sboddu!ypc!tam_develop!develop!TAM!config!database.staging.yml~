@@ -1,0 +1,16 @@
+
+<% database_name = (/ev1/ =~ "#{Rails.env}") ? "tamdb1.prod.ev1.yellowpages.com" : "tamdb1.prod.wc1.yellowpages.com" %>
+
+<%= Rails.env %>:
+  adapter: oracle_enhanced
+  database: <%= database_name %>
+  username: xxxx
+  password: xxxx
+
+
+
+ldap_credentials:
+  tam_username: svc_tamprod
+  tam_password: 1eadLnPPPx5jca99
+  yp_host: irvldap.yellowpages.local
+  corp_host: irvldap.corp.yp.com

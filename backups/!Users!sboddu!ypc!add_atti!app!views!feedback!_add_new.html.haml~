@@ -1,0 +1,4 @@
+.error-message
+  - if error_message.respond_to?(:errors)
+    = error_messages_for('errors', :object => error_message, :header_message => header_message, :message => nil)
+ 

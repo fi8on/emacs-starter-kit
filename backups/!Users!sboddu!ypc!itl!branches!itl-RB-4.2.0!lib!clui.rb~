@@ -1,0 +1,45 @@
+module Clui 
+ 
+  Dir.glob(File.join(RAILS_ROOT,'lib','clui','*.rb')).each{|file| require file}
+
+  class << self  
+    
+    def add_listing(user,listing)
+      gather_listing_data(listing)
+    end
+    
+    def gather_listing_data(listing)
+      #  Listing
+      #  Phone
+      #  OperationHour
+      #  AcceptedPaymentType
+      #  Category
+      #  Website
+
+      begin
+               
+        #   @clui_listing s= Listing.new(listing)
+        #   @clui_listing = Listing.new({"name"=>itl.name, "address"=>itl.address, "city"=>itl.city, "zip"=>itl.zip, "state"=>itl.state})
+        @clui_listing = Listing.new({"name"=>"test", "address"=>"some address, no heaven", "city"=> "los angeles", "zip"=>90007, "state"=>"CA"})
+     #    @clui_listing.primary_phone = Phone.new({"primary"=>"1", "phone"=>"2133453459"})
+         @clui_listing.phones << Phone.new({"primary"=>"1", "phone"=>"2133453459" })
+         @clui_listing.categories << Category.new("code" => 8004734, "description" => "Furniture Stores")
+        
+        @clui_listing.websites << Website.new({"url"=>"www.url.com"})
+        # sub = {"status"=>"new", "source"=>"EGC", "username"=>"sboddu", "ip_address"=>"127.1.0.1", "feedback"=>""}
+        # @clui_listing.build_submission(sub)
+        @clui_listing.submission = Submission.new({"status"=>"new", "source"=>"EGC", "username"=>"sboddu", "ip_address"=>"127.1.0.1", "feedback"=>""})
+     
+        @clui_listing.save!
+  
+        #    @clui_listing.accpeted_payment_type = AcceptedPaymentType.new(listing)
+        #    @clui_listing.operation_hour = OperationHour.load_phone(listing)
+                
+      rescue Exception => e
+        p e
+      end
+      
+    end
+  end  
+  
+end

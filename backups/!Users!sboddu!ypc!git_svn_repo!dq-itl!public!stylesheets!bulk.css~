@@ -1,0 +1,23 @@
+.reportUI {
+  height:               40px;
+  overflow:             hidden;
+  background-color:     #EFEFEF;
+  border-bottom-width:  1px;
+  border-bottom-style:  solid;
+  border-bottom-color:  silver;
+}
+
+.reportUIToolbar {
+  margin:               0;
+  padding-left:         5px;
+  font-size:            small;
+  white-space:          nowrap;
+  background-color:     transparent;
+  overflow:             hidden;
+  position:             relative;
+  top:                  15%
+}
+
+.reportUIType {
+  margin-left:      10px;
+}

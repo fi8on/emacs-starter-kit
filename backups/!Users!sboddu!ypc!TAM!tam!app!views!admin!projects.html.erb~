@@ -1,0 +1,41 @@
+<div class="contextual">
+    <%= link_to("New Project", {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') %> 
+</div>
+
+<h2>Projects</h2>
+
+<% form_tag({}, :method => :get) do %>
+<fieldset><legend>Filters</legend>
+<label>Status :</label>
+<%= select_tag 'status', project_status_options_for_select(@status), :class => "small", :onchange => "this.form.submit(); return false;"  %>
+<label>Project:</label>
+<%= text_field_tag 'name', params[:name], :size => 30 %>
+<%= submit_tag "Apply", :class => "small", :name => nil %>
+</fieldset>
+<% end %>
+&nbsp;
+
+<div class="autoscroll">
+<table class="list">
+  <thead><tr>
+	<th>Projects</th>
+	<th>Is Public</th>
+	<th>Created On</th>
+  <th></th>
+  </tr></thead>
+  <tbody>
+<% project_tree(@projects) do |project, level| %>
+  <tr class="<%= cycle("odd", "even") %> <%= project.css_classes %> <%= level > 0 ? "idnt idnt-#{level}" : nil %>">
+	<td class="name"><span><%= link_to_project(project, {:action => 'settings'}, :title => project.short_description) %></span></td>
+	<td align="center"><%= checked_image project.is_public? %></td>
+	<td align="center"><%= project.created_on.to_date %></td>
+  <td class="buttons">
+          <%= link_to("Delete", project_destroy_confirm_path(project), :class => 'icon icon-del') %>
+  </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+</div>
+
+<% html_title("Projects") -%>

@@ -1,0 +1,2 @@
+"tab-content-members", :partial => 'projects/settings/members'
+$('#tab-content-members').html("<%= escape_javascript(render('users')) %>");

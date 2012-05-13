@@ -1,0 +1,4 @@
+Validation template
+  <%= link_to 'Go Validate', new_validation_path , :id =>  'content',:rel => 'updater' %>
+
+ 

@@ -1,0 +1,58 @@
+require 'category_attributes/attributes_helper'
+require 'category_attributes/chain'
+require 'category_attributes/listing'
+
+
+# This class will deal only with attributes and Rservices. No connection to LDB 
+module CategoryAttributes
+  def initialize(attribute)
+    @permissible = attribute
+  end
+  
+  # -- Getters
+  # you would need this for updating an existing value
+  def attribute_id; @permissible['attribute_id']; end
+  
+  # the human readable attribute
+  def label; @permissible['attribute_text']; end
+  
+  # the key that ldb expects
+  def attr_code; @permissible['attribute_code']; end
+  
+  # an array of values this attribute can have
+  def allowed_values; @permissible['allowed_values']; end
+  
+  # returns the group
+  def group;@permissible['attr_group']; end
+  
+  # --HELPERS
+  # true for if the attribute can only have one value
+  def is_single?
+    @permissible['attr_group'] == 'S'
+  end
+  
+  class << self
+    # retrieve the attributes for this category
+    def permissible(category)
+      # get("attributes?app=lui")
+      resp = [
+        {
+          "category_name"=>"Restaurants",
+          "category_code"=>"8001234",
+          "attributes" =>[ 
+            { "attribute_code"=>"cuisine", "attr_group"=>"M", "attribute_text"=>"Cuisine", "is_general"=>"Y", "display_order"=>1, "ratable"=>"Y", 
+              "allowed_values" =>["Chinese", "Mexican" , "American", "Italian", "mittal"]
+            },
+            { "attribute_code"=>"menu_type", "attr_group"=>"M", "attribute_text"=>"Menu Type", "is_general"=>"Y", "display_order"=>1, "ratable"=>"Y", 
+              "allowed_values" =>[ "Early Morning", "Happy Hour", "Late Night", "24 Hour"]
+            },
+            { "attribute_code"=>"parking", "attr_group"=>"S", "attribute_text"=>"Parking", "is_general"=>"Y", "display_order"=>1, "ratable"=>"Y", 
+              "allowed_values" =>[ "Yes", "No", "Lot"]
+            }
+          ]
+        }
+      ]
+      resp.first['attributes']
+    end
+  end
+end

@@ -1,0 +1,20 @@
+
+class AccountController < ApplicationController
+  before_filter :require_login
+#  helper :custom_fields
+#  include CustomFieldsHelper   
+  
+  # Login request and validation
+  def login
+    user = User.find_by_login(@sso.user)
+    self.logged_user = user
+    redirect_to :controller => 'welcome' ,:action =>'index'
+  end
+
+  # Log out current user and redirect to welcome page
+  def logout
+   # logout_user
+    redirect_to "#{SSO_URL}http://#{request.host_with_port}"
+  end
+  
+end

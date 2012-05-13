@@ -1,0 +1,15 @@
+ 
+
+ module Lookup
+    include ActionController::UrlWriter
+   ACCOUNT_MENU = {
+     "Home" => :home,
+     "Projects" =>  { :controller => 'projects', :action => 'index' },
+     "Administration" =>  { :controller => 'admin', :action => 'index' }
+   }
+
+   
+   LOGGED_MENU =  { "Logout" => SSO_URL  }
+  
+  
+ end

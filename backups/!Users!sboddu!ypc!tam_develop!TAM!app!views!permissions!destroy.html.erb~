@@ -1,0 +1,12 @@
+<h2>Confirmation</h2>
+<div class="warning">
+<p><strong><%=h @role_to_destroy %></strong><br />
+  Are you sure you want to delete this role and related data ?
+</p>
+<p>
+    <%= form_tag(role_path(@role_to_destroy), :method => :delete) do %>
+    <label><%= check_box_tag 'confirm', 1 %> Yes </label>
+    <%= submit_tag "Delete" %>
+    <% end %>
+</p>
+</div>

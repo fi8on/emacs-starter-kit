@@ -1,0 +1,8 @@
+
+every 30.minutes do
+  command "cd <%= current_path %> && rake RAILS_ENV=#{Rails.env} gtbn_cron:delta_load"
+end
+
+every 1.day, :at => '4:30 am' do
+  command "cd <%= current_path %> && rake RAILS_ENV=#{Rails.env} blt_cron:full_load"
+end

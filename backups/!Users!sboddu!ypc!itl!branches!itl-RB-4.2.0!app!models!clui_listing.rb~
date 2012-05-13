@@ -1,0 +1,13 @@
+class CluiListing < ActiveRecord::Base
+
+  has_one :submission
+  has_one :operation_hour
+  has_one :primary_phone, :class_name=>'Phone', :conditions => {:primary=>true}
+  has_many :phones
+  has_many :accepted_payment_types
+  has_many :categories
+  has_many :websites
+
+  
+  
+end

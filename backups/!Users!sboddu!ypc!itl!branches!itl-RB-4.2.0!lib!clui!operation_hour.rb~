@@ -1,0 +1,62 @@
+class OperationHour < ActiveRecord::Base
+  set_table_name "clui.operation_hours"
+  belongs_to :listing
+
+  WEEKDAYS = %w{monday tuesday wednesday thursday friday}
+  WEEKEND = %w{saturday sunday}
+  WEEK = WEEKDAYS + WEEKEND
+  DAY_TIME_FIELDS = [
+    [:monday_closed, :monday_open, :monday_close],
+    [:tuesday_closed, :tuesday_open, :tuesday_close],
+    [:wednesday_closed, :wednesday_open, :wednesday_close],
+    [:thursday_closed, :thursday_open, :thursday_close],
+    [:friday_closed, :friday_open, :friday_close],
+    [:saturday_closed, :saturday_open, :saturday_close],
+    [:sunday_closed, :sunday_open, :sunday_close]
+  ]
+
+  validates_numericality_of :listing_id, :allow_blank=>true, :only_integer=>true, :greater_than=>0
+  validates_inclusion_of :open_7_days, :open_24_hours, :emergency_service, :appointments_available, :monday_closed, :tuesday_closed, :wednesday_closed, :thursday_closed, :friday_closed, :saturday_closed, :sunday_closed, :allow_blank=>true, :in=>[true, false]
+  DAY_TIME_FIELDS.each do |closed_flag, open_time, close_time|
+    validates_length_of open_time, :is => 4, :allow_nil => true, :message => "time should contain {{count}} digits"
+    validates_length_of close_time, :is => 4, :allow_nil => true, :message => "time should contain {{count}} digits"
+    validates_each open_time, close_time, :allow_nil => true do |record, attr, value|
+      record.errors.add attr, "time is not valid" unless valid_time?(value)
+    end
+  end
+  validate :time_settings
+
+  def before_validation
+    digits_only :monday_open, :monday_close, :tuesday_open, :tuesday_close, :wednesday_open, :wednesday_close, :thursday_open, :thursday_close, :friday_open, :friday_close, :saturday_open, :saturday_close, :sunday_open, :sunday_close
+  end
+
+  protected
+
+  def self.valid_time?(time_string)
+    begin
+      DateTime.strptime(time_string, '%H%M')
+      return time_string.size == 4
+    rescue ArgumentError
+      false
+    end
+  end
+
+  def time_settings
+    days_closed = 0
+    DAY_TIME_FIELDS.each do |closed_attr, open_attr, close_attr|
+      day_closed = send(closed_attr)
+      day_open = send(open_attr)
+      day_close = send(close_attr)
+      if day_closed
+        days_closed += 1
+        errors.add(open_attr, "time should be '0000' when business is closed") unless day_open == '0000'
+        errors.add(close_attr, "time should be '0000' when business is closed") unless day_close == '0000'
+      elsif open_24_hours
+        errors.add(open_attr, "time should be '0000' when business is open 24 hours") unless day_open == '0000'
+        errors.add(close_attr, "time should be '2359' when business is open 24 hours") unless day_close == '2359'
+      end
+    end
+    errors.add_to_base("Business must be open at least one day a week") if days_closed == 7
+  end
+  
+end

@@ -1,0 +1,58 @@
+
+ <%= stylesheet_link_tag 'global'%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title> VAT : Validation Tool </title>
+   
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" ></script>
+      <%= yield :javascript %>
+    <%= stylesheet_link_tag 'application','datePicker','jqtransform','blueprint/screen','blueprint/ie'  %>
+    <%= javascript_include_tag  'jquery','jquery-ui-1.7.2.custom.min' , 'execute','jquery.tmpl','jquery.validate.min','date.js','jquery.bgiframe.min','jquery.datePicker','jquery.watermark.min','jquery.tablednd_0_5','jquery.jqtransform','application'  %>
+    <%= stylesheet_link_tag 'global'%>
+    <!--[if IE 7]>
+    <%= stylesheet_link_tag "ie7" %>
+    <![endif]-->
+  </head>
+  <body class='home_main'>
+    <div id="container">
+      <div id="global-header">
+       
+          <div id="header-user-links">
+            <ul style="" id="signed-in">
+              <li class="last">
+              <span style="padding: -3px 0pt;">  
+                <%=  link_to "Logout (#{@current_user.name})", SSO_URL  + root_url %> 
+              </span>
+             </li>
+            </ul>
+          </div>
+
+        <div id="header-navigation">
+          <div id="header-branding">
+            <a >  href="http://www.yellowpages.com/">YP.com</a>
+          </div>
+          
+          <div id='global-title'>
+            <h1>Validation Tool </h1>            
+          </div>
+        </div>
+      </div>
+      <div id="category-drawer">
+        <div class="drawer-pull">
+         
+        </div>
+      </div>
+      <div id='canvas' class='home index'>
+        <%= yield%>
+      </div>
+    </div>
+  </body>
+  <script type='text/javascript'>
+    jQuery(document).ready(function(){
+
+    });
+  </script>
+</html>
+

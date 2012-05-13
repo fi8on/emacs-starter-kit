@@ -1,0 +1,5 @@
+every 4.hours do
+  command "cd <%= current_path  %> && TNS_ADMIN=/home/t/tns-admin/admin && bundle exec rake RAILS_ENV=#{Rails.env} cache:users"
+end
+
+

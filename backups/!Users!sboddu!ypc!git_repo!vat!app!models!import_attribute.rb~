@@ -1,0 +1,30 @@
+class Attribute < ActiveRecord::Base
+  belongs_to :import
+  attr_accessor :attr_type
+  
+  def after_initialize
+    self.find_att_type
+  end
+  
+  def self.get_attributes(user=nil,id ={}, no_of_attr = 1)
+    if id.blank?
+      hash_conditions = ["status IS ? AND (users IS ? OR users = ?)  ", nil, nil,user]
+    else
+      hash_conditions = Attribute.merge_conditions(hash_conditions) + "AND ID = #{id}"
+      #  conditions = Attribute.merge_conditions(hash_conditions) + " AND attributes.id = #{id}"
+    end
+    find(:all, :conditions =>hash_conditions,:limit => no_of_attr,:lock => true)
+  end
+ 
+  def find_att_type
+ #   p self.pre_validation,self.post_validation
+    if !((self.pre_validation  =~  /([01]?[0-9]|2[0-3])(:[0-5][0-9])?$/).blank? and (self.post_validation  =~  /([01]?[0-9]|2[0-3])(:[0-5][0-9])?$/).blank?)
+      self.attr_type = "hours_op"
+    elsif  !((self.pre_validation =~ /^((http|https?:\/\/)?((?:[-a-z0-9]+\.)+[a-z]{2,}))$/).blank? and (self.post_validation  =~ /^((http|https?:\/\/)?((?:[-a-z0-9]+\.)+[a-z]{2,}))$/).blank?)
+      self.attr_type = "url"
+    else
+      self.attr_type = "unknown"
+    end
+  end
+      
+end

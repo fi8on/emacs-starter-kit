@@ -1,0 +1,7 @@
+<% database_name = (/ev1/ =~ "#{Rails.env}") ? "db/development_ev1.sqlite3" : "db/development_wc1.sqlite3" %>
+
+<%= Rails.env %>:
+  adapter: sqlite3
+  database: <%= database_name %>
+  pool: 5
+  timeout: 5000

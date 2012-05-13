@@ -1,0 +1,21 @@
+require 'zlib'
+
+class WikiContent < ActiveRecord::Base
+  set_locking_column :version
+  belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
+  validates_presence_of :text
+  validates_length_of :comments, :maximum => 255, :allow_nil => true
+  
+  acts_as_versioned
+  
+  def visible?(user=User.current)
+    page.visible?(user)
+  end
+    
+  def project
+    page.project
+  end
+  
+  
+ 
+end

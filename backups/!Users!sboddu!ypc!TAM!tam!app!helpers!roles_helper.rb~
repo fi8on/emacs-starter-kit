@@ -1,0 +1,18 @@
+
+module RolesHelper
+  # Options for the new membership projects combo-box
+  def options_for_membership_project_select(user, projects)
+    options = content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---")
+    options << project_tree_options_for_select(projects) do |p|
+      {:disabled => (user.projects.include?(p))}
+    end
+    options
+  end
+  
+  def role_settings_tabs
+    tabs = [{:name => 'general', :partial => 'roles/general', :label => 'general'},
+            {:name => 'users', :partial => 'roles/users', :label => 'users'},
+            {:name => 'memberships', :partial => 'roles/memberships', :label => 'projects'}
+            ]
+  end
+end

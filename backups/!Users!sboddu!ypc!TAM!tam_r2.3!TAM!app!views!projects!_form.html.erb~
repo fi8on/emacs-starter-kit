@@ -1,0 +1,26 @@
+<%= error_messages_for 'project' %>
+
+<div class="box">
+<!--[form:project]-->
+<p><%= f.text_field :name, :required => true, :size => 60 %></p>
+
+<p><%= f.text_area :description, :rows => 5, :class => 'wiki-edit' %></p>
+<p><%= f.text_field :identifier, :required => true, :size => 60 %></p>
+
+<p><%= f.text_field :homepage, :size => 60 %></p>
+<p><%= f.check_box :is_public %></p>
+
+</div>
+
+<% if @project.new_record? %>
+<fieldset class="box"><legend>Project</legend>
+    <label class="floating">
+
+    </label>
+<% end %>
+<%= hidden_field_tag 'project[enabled_module_names][]', '' %>
+<%= javascript_tag 'observeProjectModules()' %>
+</fieldset>
+
+
+<!--[eoform:project]-->

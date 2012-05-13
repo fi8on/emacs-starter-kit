@@ -1,0 +1,37 @@
+<div class="contextual">
+<%= link_to(l(:button_edit), edit_user_path(@user), :class => 'icon icon-edit') if User.current.admin? %>
+</div>
+
+<h2><%= avatar @user, :size => "50" %> <%=h @user.name %></h2>
+
+<div class="splitcontentleft">
+<ul>
+  <% @user.visible_custom_field_values.each do |custom_value| %>
+	<% if !custom_value.value.blank? %>
+    <li><%=h custom_value.custom_field.name%>: <%=h show_value(custom_value) %></li>
+	<% end %>
+	<% end %>
+    <li><%=l(:label_registered_on)%>: <%= format_date(@user.created_on) %></li>
+	<% unless @user.last_login_on.nil? %>
+		<li><%=l(:field_last_login_on)%>: <%= format_date(@user.last_login_on) %></li>
+	<% end %>
+</ul>
+
+<% unless @memberships.empty? %>
+<h3>Projects</h3>
+<ul>
+<% for membership in @memberships %>
+	<li><%= link_to_project(membership.project) %>
+    (<%=h membership.permissions.sort.collect(&:to_s).join(', ') %>, <%= format_date(membership.created_on) %>)</li>
+<% end %>
+</ul>
+<% end %>
+
+</div>
+
+<div class="splitcontentright">
+
+
+</div>
+
+<% html_title @user.name %>

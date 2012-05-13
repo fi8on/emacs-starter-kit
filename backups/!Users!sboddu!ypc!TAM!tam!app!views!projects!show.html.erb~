@@ -1,0 +1,34 @@
+
+<h2>Overview</h2> 
+	
+<div class="splitcontentleft">
+	<div class="wiki">
+		<%= textilizable @project.description %>
+	</div>	
+	<ul>
+	<% unless @project.homepage.blank? %><li>Homepage: <%= auto_link(h(@project.homepage)) %></li><% end %>
+ 
+	<% @project.visible_custom_field_values.each do |custom_value| %>
+	<% if !custom_value.value.blank? %>
+	   <li><%= custom_value.custom_field.name%>: <%=h show_value(custom_value) %></li>
+	<% end %>
+	<% end %>
+	</ul>	
+
+ 
+</div>
+
+<div class="splitcontentright">
+  <%= render :partial => 'members_box' %>
+</div>
+
+<% content_for :sidebar do %>
+    <% if @total_hours && User.current.allowed_to?(:view_time_entries, @project) %>
+    <h3>Time Spent</h3>
+    <p><span class="icon icon-time">Total Hours</span></p>
+    <p><%= link_to("Details", {:controller => 'timelog', :action => 'index', :project_id => @project}) %> |
+    <%= link_to("Report", {:controller => 'time_entry_reports', :action => 'report', :project_id => @project}) %></p>
+    <% end %>
+<% end %>
+
+

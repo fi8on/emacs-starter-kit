@@ -1,0 +1,31 @@
+<div id="the_div">
+  <ul id="the_list">
+    <li id="the_item">Click me!</li>
+  </ul>
+</div>
+
+<p id="log"></p>
+
+<script type="text/javascript" charset="utf-8">
+  function log(string){
+    document.getElementById('log').innerHTML += (string + '<br/>');
+  }
+
+  document.getElementById('the_div').addEventListener(
+    'click', function(){ log('the_div!') }, true);
+    
+  document.getElementById('the_list').addEventListener(
+    'click', function(){ log('the_list!') }, true);
+    
+  document.getElementById('the_item').addEventListener(
+    'click', function(){ log('the_item!') }, true);
+</script>
+
+<!--
+   1. Change the addEventListener calls so that the events occur in the following order.      
+      the_div! the_item! the_list!
+   2. Change the addEventListener calls so that the events occur in the following order.      
+      the_item! the_list! the_div!
+   3. Change the addEventListener calls so that the events occur in the following order.      
+      the_item! (no other events)
+-->

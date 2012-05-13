@@ -1,0 +1,5 @@
+qa2:
+  adapter: oracle_enhanced
+  database: qa2yp.yellowpages.com
+  username: ITL_ADMIN
+  password: ITLADMINQA2

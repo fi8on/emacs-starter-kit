@@ -1,0 +1,20 @@
+require 'net/ldap'
+
+username = "svc_tamdev"
+password = "f4UT0odbV5KmTdXa"
+host = "corp.yp.com" 
+ldap = Net::LDAP.new :host => host,  :port => 389
+ldap.auth username, password
+
+  filter = Net::LDAP::Filter.eq( "cn", "*" )
+treebase = "ou=people,dc=corp,dc=yp,dc=com"
+
+ldap.search( :base => treebase, :filter => filter ) do |entry|
+  puts "DN: #{entry.dn}"
+  entry.each do |attribute, values|
+    puts "   #{attribute}:"
+    values.each do |value|
+      puts "      --->#{value}"
+    end
+  end
+end

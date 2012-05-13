@@ -1,0 +1,113 @@
+#!/usr/ruby/env ruby
+
+# =============================================================================
+# GTBN push updates keywords on name_keywords_stg(for business name keywords).
+#
+# Currently it does 2 things
+#
+# 1) Do a delta update based on timestamp on the updated keywords
+#
+# 2) Do a complete load of data on updating once a week to take care of any discrepancy.
+#
+# In summary:
+#  - It would lookup for all the ypids with the exact business name in listing_extract
+#    and update the ypids on  name keywords stg.
+# 
+# It should handle the following scenarios
+#
+# 1) If a business name is added with a keyword that should be updated on name_keywords_stg
+# 2) If a keyword is updated or added it should be updated accodingly for all the business names in name_keywords_stg
+# 3) If a business name is deleted it should remove all the keywords for those business_names 
+# 4) If a business name is updated it should rerun and updated all the keywords for those business names
+# 5) If a keyword is deleted it should remove that keyword from all the business names 
+# 6) If a group is deleted, it should delete all the keywords from the business names that are assigned those keywords.
+# 7) It takes care of all the duplicates while doing so.
+# 8) It should take care of the moving ypids on name_keywords_stg.
+# =============================================================================
+
+
+ENV["RAILS_ENV"] ||= "qa2"
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment.rb")
+
+class GtbnPush
+
+  def process_delta
+    p "Delta updates started ....."
+    group_ids = []   
+   
+    last_processed = LastProcessed.last_processed_date   # getting the last delta process timestamp.
+    p last_processed
+ 
+    updated_keywords = GroupKeyword.find(:all,:limit =>1)
+    updated_keywords.each {|kw| group_ids << kw.tag_business_group_id}
+    
+    # updated_groups = Group.get_updated_group(last_processed)
+    updated_groups = Group.find(:all,:limit =>1)
+    updated_groups.each {|gr|group_ids << gr.id }
+    
+     updated_bnames = GroupBusinessName.get_updated_bn(last_processed,group_ids.uniq).uniq
+    # updated_bnames = GroupBusinessName.find(:all,:limit => 1)
+    @all_touched_bn = BusinessKeywords.new(updated_bnames)
+    @all_touched_bn.get_bname_status
+    @all_touched_bn.process_updates
+    @all_touched_bn.redirects_maping
+  end
+
+  def process_full
+    p "reload full data to name_keywords_stg"
+  end
+  
+end
+
+class BusinessKeywords
+  attr_accessor :final_status
+  
+  def initialize(updated_bnames)
+    @bnames = updated_bnames
+  end
+  
+  def get_bname_status
+    @final_status = []
+    @bnames.each do |bn|
+      @final_status << calculate_updates(bn)
+    end
+  end
+  
+  def calculate_updates(bn)
+    h ={}
+    h['business_name'] = bn.business_names
+    group = Group.find(bn.tag_business_group_id)
+    keywords = GroupKeyword.get_by_group_id(bn.tag_business_group_id)
+    if (bn.is_deleted.to_s == "1" or group.is_deleted.to_s == "1" or group.status.to_s == "0" )
+      h['status'] = { 'bn_is_deleted' => true}
+    else
+      h['status'] = { 'bn_is_deleted' => false}
+    end
+    h['keywords'] = keywords
+    h['ypid_list'] =  ListingExtract.get_ypids_for_update(bn.business_names)
+    return h
+  end
+
+  def process_updates
+    @redirects = []
+    @final_status.each do |bn|
+      if !bn['status']['bn_is_deleted']
+        bn.ypid_list.each do |n|
+          bn_keywords = NameKeywordsStg.add_keywords(n)
+          bn_keywords.name_keywords = bn['keywords']
+          bn_keywords.status = 'A'
+          bn_keywords.created_at = Time.now
+        end
+      else
+        NameKeywordsStg.remove_keywords(bn.ypid_list)
+      end
+    end
+  end
+
+  def redirects_maping
+    ypids = NameKeywordsStg.get_redirected_ypids
+    Redirect.check_changed_ypid(ypids)
+    
+  end
+  
+end

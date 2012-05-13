@@ -1,0 +1,30 @@
+require 'spec_helper'
+
+describe Coupon do
+  before(:each) do
+    results = {}
+    results = {"results"=>{"coupon"=>{"created_at"=>"2011-11-20T18:15:00Z", "coupon_redemption_type"=>nil, "coupon_order"=>nil, "coupon_url"=>nil, "coupon_updated_date"=>nil, "coupon_image_tag_line"=>nil, "coupon_disclaimer"=>"some restrictions may apply, one coupon per customer offer expires 11/1/2012.", "coupon_attrs"=>[], "is_paid"=>1.0, "coupon_offer_id"=>"97740db8d2b21c12f31d4fb3701c0065", "coupon_keywords"=>nil, "coupon_description"=>"not valid with any other offers", "updated_at"=>"2012-01-05T06:03:22Z", "lock_version"=>1.0, "coupon_suppressed_date"=>nil, "id"=>"5D76853E-A6C9-E0C0-88B0-77A39AB27200", "coupon_is_suppressed"=>0.0, "created_by"=>"PKG_COUPONS", "coupon_start_date"=>"2011-11-20T00:00:00Z", "coupon_source_code"=>"SP", "source_product_ids"=>"500364500502249712,500364500502249711,500364500502249701,500364500502249712,500364500502249711,500364500502249701,500364500502249712,500364500502249711,500364500502249701", "coupon_thumbnail_url"=>nil, "coupon_is_deleted"=>0.0, "updated_by"=>"sboddu", "coupon_expiration_date"=>nil, "coupon_created_user"=>nil, "coupon_source_id"=>"400067430647", "coupon_title"=>"$15 dollars off kitchen faucet or garbage disposal installation with purchase", "coupon_estimated_dollars"=>nil, "status"=>"NEW", "coupon_image_url"=>nil, "md5_id"=>nil, "coupon_suppress_reason"=>nil, "coupon_type"=>0.0}, "listing"=>{"pao_search_image"=>nil, "pager"=>nil, "ldb_timestamp"=>"2011-11-20T18:17:57Z", "dup_checksum"=>nil, "heading_code"=>"8002327|8003138|8015836", "opt_ins"=>nil, "extra_url"=>"http://www.costlessplumbing.net^|http://costlessplumbing.com^|", "location_description"=>nil, "logo_image"=>nil, "emergency_phone"=>nil, "fwp_id"=>nil, "display_priority_point_value"=>nil, "associations"=>nil, "use_weblink_flag"=>nil, "average_rating"=>nil, "opt_out_ind"=>nil, "omit_ctc_ind"=>nil, "postal_city"=>"Fresno", "coupon_cust_provided_url"=>nil, "pao_image"=>nil, "video_ad"=>nil, "coupon_details"=>nil, "itl_block"=>0.0, "product_codes"=>nil, "keywords"=>nil, "ad_source_code"=>"SP", "oad_flag"=>"Y", "coupon_use_url_flag"=>nil, "phone_text"=>"(559) 441-9600", "name_keywords"=>nil, "area_code"=>"559", "slogan"=>"RESIDENTIAL/COMMERCIAL", "created_at"=>"2009-02-27T17:43:01Z", "extra_fax"=>nil, "address_text"=>nil, "fwp_url"=>nil, "assumed_lon"=>nil, "display_tier"=>nil, "accreditation"=>nil, "languages"=>nil, "audio_url"=>nil, "extra_email"=>nil, "coupon_flag"=>nil, "display_ad"=>nil, "customer_id"=>nil, "feature_id"=>nil, "tag_name"=>nil, "lon"=>-10.0, "purl"=>"AMA^http://www.costlessplumbing.net|INF^http://costlessplumbing.com|", "seniority_date"=>nil, "extra_line50"=>nil, "graphic_file_ext"=>nil, "directory_code"=>"FRS", "primary_heading_code"=>"8015836", "dup_checksum_new"=>21943942, "popular_business"=>nil, "hours_text"=>"24 Hours Monday-Sunday", "use_assumed_geo_flag"=>nil, "heading_text"=>"Plumbing, Drains & Sewer Consultants", "all_heading_text"=>"Plumbing, Drains & Sewer Consultants~Water Heater Repair~Plumbing-Drain & Sewer Cleaning", "storefront_images"=>nil, "pager_pin"=>nil, "version"=>49, "after_hours_phone"=>nil, "directory_state"=>"CA", "red_listing_color"=>nil, "enhline"=>nil, "ratable"=>nil, "wifis"=>[], "years"=>0, "assumed_lat"=>nil, "parent_estab_id"=>nil, "cus_link"=>nil, "social_networks"=>[], "extra_toll_free"=>nil, "additional_text"=>nil, "all_directories"=>nil, "services"=>"-Sewer Line Repair-Disposals-Faucets-Toilets-Water Heater-Water Line Repair", "rating_count"=>nil, "trade_list_ind"=>nil, "timestamp"=>"2011-11-20T17:27:37Z", "more_info_flag"=>"Y", "brand_codes"=>[], "amenities"=>"24 Hour Emergency Service|", "lat"=>-10.0, "publish"=>"1", "vanity_city"=>nil, "aka"=>nil, "listing_id"=>21943942.0, "hours_xltd"=>"{\"default\":{\"standard_hours\":{\"TUESDAY\":\"0000-2359\",\"SATURDAY\":\"0000-2359\",\"WEDNESDAY\":\"0000-2359\",\"THURSDAY\":\"0000-2359\",\"SUNDAY\":\"0000-2359\",\"MONDAY\":\"0000-2359\",\"FRIDAY\":\"0000-2359\"}},\"special_1\":{}}", "certification"=>nil, "general_info"=>"-24 Hour Emergency Service-Free Estimates-Flat Rate Prices-Senior Discounts, FAUCETS GARBAGE DISPOSALS, TOILETS, WATER HEATERS, REPIPES, LEAK DETECTION, WATER LINE REPAIR, SEWER LINE REPAIR, GAS LEAK DETECTION, VIDEO SEWER INSPECTIONS HYDRO JETTING -INDUSTRIAL -COMMERCIAL-RESIDENTIAL APARTMENTS, RESTAURANTS, STORMDRAINS, CULVERTS, MUNICIPAL LINES, DAIRYS, AG, VIDEO INSPECTION AND LINE LOCATING. SEWER RODDING EQUIPMENT.", "listing_attrs"=>[], "chain_id"=>nil, "priority_point_value"=>nil, "hotlist_score"=>nil, "blacklists"=>[], "tier"=>999.0, "omit_phone_ind"=>"N", "partition"=>nil, "mobile_phone"=>nil, "ad_source_record_id"=>"400067430647", "state"=>"CA", "listing_name"=>"Costless Plumbing", "listing_sub_types"=>nil, "email_address"=>nil, "graphic_click_thru_url"=>nil, "display_text"=>nil, "zip4"=>"1926", "brand_text"=>"American Standard,Bradford White,Flat Rate Prices,Fast Response,Drain Cleaning,Video Sewer Inspections,Sewer Line Repair or Replacement,Sewer Line Locating,Sewer & Drain Cleaning,Service and Repair,SE Habla Espanol,Residential,Franke,Hangsgrohe,Peerless", "appearance_id"=>nil, "distr_image_name"=>nil, "ypid"=>21943942, "extra_vanity"=>nil, "extra_phone"=>nil, "payment_text"=>"MASTER CARD, VISA", "neighborhood"=>nil, "price_range"=>nil, "listing_source"=>"MDM", "zip"=>"93702", "csl_cnt"=>nil}}}
+    
+    Api.stub(:get_coupons).and_return(results)
+  end
+
+  it "should create a new instance given valid attributes" do
+    @coupon = Coupon.new('sboddu')
+    @coupon.should be_an_instance_of Coupon
+    @coupon.data.size.should_not be_nil
+  end
+
+
+  it "should have instance of data" do
+    @coupon = Coupon.new('sboddu')
+    @coupon.data.size.should_not be_nil
+  end
+
+  it "should check format_for_display" do
+    @coupon = Coupon.new('sboddu')
+    @coupon.format_for_display
+    coupon_instances =   (@coupon.methods - Class.methods)
+    coupon_instances.should have(:post_validation)
+  end
+  
+end

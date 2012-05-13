@@ -1,0 +1,346 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta name="robots" content="storehosue,giving,charity" />
+  <meta name="keywords" content="storehouse,giving,charity,christ,christian" />
+  <meta name="title" content="storehouse,giving,charity" />
+  <title>THE STOREHOUSE | Storehouse &amp; Giving</title>
+
+ <%= stylesheet_link_tag 'style','prettyPhoto','nivo-slider','colorpicker','style-switcher','green','noscript' %>
+
+<%= javascript_include_tag :all %>
+
+
+<script type="text/javascript"> 
+    $(window).load(function() {
+      $('#slider').nivoSlider({
+        effect:'random',
+        pauseTime:7000, // How long each slide will show
+        directionNav:true, // Next and Prev navigation
+        directionNavHide:true, // Only show on hover
+        controlNav:true // 1,2,3... navigation                
+      });
+		});
+
+
+</script>
+<script> $.noConflict(); </script>
+
+
+<script type="text/javascript">
+  Cufon.replace('h1')('h2')('h3')('h4')('h5')('#myslidemenu a',{hover: 'true'})('#myslidemenu li li a',{textShadow: '1px 1px #ffffff',hover: 'true'})('a.button', {hover: 'true'})('.nivo-caption p');
+</script>
+<!-- Javascript End //-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+  <div id="wrapper">
+    <div id="topwrapper"></div>
+    <div id="mainwrapper">
+      <!-- Header Start -->
+      <div id="header">
+        <div class="center">
+          <!-- Logo Start -->
+          <div id="logo">
+            <a href="./index.html"><img src="./images/logo.png" alt="logo" /></a>
+          </div>
+          <!-- Logo End -->
+          
+          <div id="headerright">
+            <!-- Menu Navigation Start --> 
+            <div id="mainmenu">
+              <div id="myslidemenu" class="jqueryslidemenu">
+                <ul>
+                  <li><a href="./index.html" class="selected">Home</a>
+                    <ul>
+                      <li><a href="./index-kwickslider.html">Kwicks Slider</a></li>
+                      <li><a href="./index-staticvideo.html">Static Video</a></li>
+                      <li><a href="./index-staticimage.html">Static Image</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="./about.html">About</a>
+                    <ul>
+                      <li><a href="#">Company Profile</a></li>
+                      <li><a href="#">Our History</a></li>
+                      <li><a href="#">Vision and Mission</a></li>
+                      <li><a href="#">Our Team</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="#">Features</a>
+                    <ul>
+                      <li><a href="./products.html">Pricing Table</a></li>
+                      <li><a href="./fullwidth.html">Full Width</a></li>
+                      <li><a href="./left-sidebar.html">Left Sidebar</a></li>
+                      <li><a href="./testimonial.html">Testimonial</a></li>
+                      <li><a href="./faq.html">FAQ</a></li>
+                      <li><a href="./elements.html">Elements</a></li>
+                      <li><a href="./columns.html">Columns</a></li>    
+                    </ul>
+                  </li>                    
+                  <li><a href="./services.html">Services</a>
+                    <ul>
+                      <li><a href="#">Multi</a></li>
+                      <li><a href="#">Level</a></li>
+                      <li><a href="#">Dropdown</a>
+                        <ul>
+                          <li><a href="#">Menu</a>
+                            <ul>
+                              <li><a href="#">Demo</a></li>
+                            </ul>
+                          </li>
+                          <li><a href="#">Inner</a></li>
+                          <li><a href="#">Level</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#">Sample</a></li>
+                    </ul>                  
+                  </li>
+                  <li><a href="./portfolio-4col.html">Portfolio</a>
+                    <ul>
+                      <li><a href="./portfolio-4col.html">Portfolio 4 Columns</a></li>
+                      <li><a href="./portfolio-3col.html">Portfolio 3 Columns</a></li>
+                      <li><a href="./portfolio-2col.html">Portfolio 2 Columns</a></li>
+                      <li><a href="./portfolio-1col.html">Portfolio 1 Column</a></li>
+                      <li><a href="./portfolio-4col-filterable.html">Filterable Portfolio</a></li>
+                      <li><a href="./portfolio-detail.html">Portfolio Detail</a></li> 
+                    </ul>
+                  </li>
+                  <li><a href="./blog.html">Blog</a>
+                    <ul>
+                      <li><a href="./single.html">Blog Detail</a></li>
+                    </ul>
+                  </li>
+                  <li><a href="./contact.html">Contact</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- Menu Navigation End -->
+          </div>
+        </div>
+      </div>
+      <!-- Header End  -->
+      
+      <!-- Slideshow Wrapper -->
+      <div id="slide-wrapper">
+        <!-- Slideshow Start -->
+        <div id="slider">
+          <a href="#"><img src="./images/slideimage9.jpg" alt="slide image" /></a> <!-- Slide Item #1 -->
+          <a href="#"><img src="./images/slideimage10.jpg" alt="slide image" /></a> <!-- Slide Item #2 -->
+          <a href="#"><img src="./images/slideimage11.jpg" alt="slide image" /></a> <!-- Slide Item #3 -->
+          <a href="#"><img src="./images/slideimage12.jpg" alt="slide image" /></a> <!-- Slide Item #4 -->
+          <a href="#"><img src="./images/slideimage13.jpg" alt="slide image" /></a> <!-- Slide Item #5 -->
+          <a href="#"><img src="./images/slideimage15.jpg" alt="slide image" title="Slideshow Title" /></a> <!-- Slide Item #6 --> 
+          <a href="#"><img src="./images/slideimage16.jpg" alt="slide image" /></a> <!-- Slide Item #7 -->
+          <a href="#"><img src="./images/slideimage17.jpg" alt="slide image" /></a> <!-- Slide Item #8 -->
+          <a href="#"><img src="./images/slideimage18.jpg" alt="slide image" /></a> <!-- Slide Item #9 -->                   
+        </div>
+        <!-- Slideshow End  -->
+      </div>
+      <!-- Slideshow Wrapper End -->
+      <div class="clear"></div>
+
+      <!-- Features Content -->
+      <div id="featuresbox">
+        <ul>
+          <!-- Features Box #1 -->
+          <li class="first">
+            <img src="./images/bar-chart.png" class="alignleft" alt="" />
+            <h4><a href="#">Economy</a></h4>
+            <div class="clear"></div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitsem fermentum a mattis </p>
+          </li>
+          
+          <!-- Features Box #2 -->
+          <li>
+            <img src="./images/fancy-globe.png" class="alignleft" alt="" />
+            <h4><a href="#">Ecology</a></h4>
+            <div class="clear"></div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitsem fermentum a mattis </p>
+          </li>
+          
+          <!-- Features Box #3 -->
+          <li>
+            <img src="./images/processing.png" class="alignleft" alt="" />
+            <h4><a href="#">Equity</a></h4>
+            <div class="clear"></div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitsem fermentum a mattis </p>
+          </li>
+          
+          <!-- Features Box #4 -->
+          <li class="last"> 
+            <img src="./images/connections.png" class="alignleft" alt="" />
+            <h4><a href="#">Connectivity</a></h4>
+            <div class="clear"></div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elitsem fermentum a mattis </p>
+          </li>                              
+        </ul>
+      </div>
+      <!-- Features Content End -->
+      
+      <div class="clear"></div>
+      <div class="center">
+        <!-- Main Content -->
+        <div class="maincontent">
+          <h3>Welcome to Our Site!</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque condimentum dui quis sem fermentum a mattis ipsum ultrices. Integer eu lacus sit amet mauris hendrerit egestas et eget neque. Mauris ac justo tempus velit imperdiet placerat. Nullam dolor lectus, sollicitudin sed dictum nec, consequat in erat. Quisque nibh ligula</p>
+          
+          <!-- Content Box #1 -->
+          <div class="mainbox">
+            <h4><a href="#">About Us</a></h4>
+            <img src="./images/icon1.png" class="alignleft" alt="" />
+            <p>Integer eu lacus mauris hendrerit egestas imperdiet placerat ullam dolor lectus sollicitudin sed dictum  uisque nibh ligula, pharetra sit amet euismod.</p>
+          </div>
+          
+          <!-- Content Box #2 -->
+          <div class="mainbox box-last">
+            <h4><a href="#">Our Services</a></h4>
+            <img src="./images/icon2.png" class="alignleft" alt="" />
+            <p>Integer eu lacus mauris hendrerit egestas imperdiet placerat ullam dolor lectus sollicitudin sed dictum  uisque nibh ligula, pharetra sit amet euismod.</p>
+          </div>
+          
+          <div class="spacer"></div>
+          
+          <!-- Content Box #3 -->
+          <div class="mainbox">
+            <h4><a href="#">Our Works</a></h4>
+            <img src="./images/icon3.png" class="alignleft" alt="" />
+            <p>Integer eu lacus mauris hendrerit egestas imperdiet placerat ullam dolor lectus sollicitudin sed dictum  uisque nibh ligula, pharetra sit amet euismod.</p>
+          </div>
+          
+          <!-- Content Box #4 -->
+          <div class="mainbox box-last">
+            <h4><a href="#">Our Products</a></h4>
+            <img src="./images/icon4.png" class="alignleft" alt="" />
+            <p>Integer eu lacus mauris hendrerit egestas imperdiet placerat ullam dolor lectus sollicitudin sed dictum  uisque nibh ligula, pharetra sit amet euismod.</p>
+          </div>          
+        </div>
+        <!-- Main Content End -->
+        
+        <!-- Sidebar -->
+        <div id="sidebar">
+        
+          <!-- Sidebar Box -->
+          <div class="sidebar nospace">
+            <div class="sidebartop"></div>
+            <div class="sidebarmain">
+              <div class="sidebarcontent">
+                <h4 class="sidebarheading">Latest News</h4>
+                <ul class="latestnews">
+                  <li>
+                    <a href="#">imperdiet placerat ullam dolor lectus sollicitudin placerat</a>
+                    <p class="posteddate">Posted on January 10, 2011</p>
+                  </li>
+                  <li>
+                    <a href="#">lectus sollicitudin placerat</a>
+                    <p class="posteddate">Posted on January 10, 2011</p>
+                  </li>
+                  <li>
+                    <a href="#">dolor lectus sollicitudin placerat</a>
+                    <p class="posteddate">Posted on January 10, 2011</p>
+                  </li>
+                  <li>
+                    <a href="#">imperdiet placerat ullam dolor </a>
+                    <p class="posteddate">Posted on January 10, 2011</p>
+                  </li>
+                  <li>
+                    <a href="#">imperdiet placerat ullam dolor</a>
+                    <p class="posteddate">Posted on January 10, 2011</p>
+                  </li>
+                </ul>
+                <div class="clear"></div>
+                <a href="#" class="button-more">View All News</a>
+              </div>
+            </div>
+            <div class="sidebarbottom"></div>
+          </div>
+          <!-- Sidebar Box End -->
+        </div>
+        <!-- Sidebar End -->
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <!-- Footer Start -->
+    <div id="bottomwrapper"></div>
+    <div id="footer">
+      <!-- Footer Box #1 -->
+      <div class="footerbox">
+        <h4>Our Networks</h4>
+        <ul>
+          <li><a href="#">Integer eu lacus</a></li>
+          <li><a href="#">mauris hendrerit</a></li>
+          <li><a href="#">egestas imperdiet</a></li>
+          <li><a href="#">placerat ullam dolor </a></li>
+          <li><a href="#">lectus sollicitudin</a></li>
+        </ul>
+      </div>
+      
+      <!-- Footer Box #2 -->
+      <div class="footerbox">
+        <h4>Categories</h4>
+        <ul>
+          <li><a href="#">Integer eu lacus</a></li>
+          <li><a href="#">mauris hendrerit</a></li>
+          <li><a href="#">egestas imperdiet</a></li>
+          <li><a href="#">placerat ullam dolor </a></li>
+          <li><a href="#">lectus sollicitudin</a></li>
+        </ul>
+      </div>
+      
+      <!-- Footer Box #3 -->
+      <div class="footerbox">
+        <h4>Our Address</h4>
+        <ul class="addresslist">
+          <li>
+            Jln. Damai menuju Syurga No. 14,<br />
+            Jakarta 20035,<br />
+            Indonesia
+          </li>
+          <li><strong>Phone </strong>: +62 525625</li>
+          <li><strong>Email </strong>: <a href="#">info@mydomain.com</a></li>
+          <li><strong>Website </strong>: <a href="#">http://www.mydomain.com</a></li>
+        </ul>
+      </div>
+      
+      <!-- Footer Box #4 -->
+      <div class="footerbox box-last">
+        <a href="./index.html"><img src="./images/footerlogo.png" alt="logo" class="aligncenter" /></a>
+        <p>Integer eu lacus mauris hendrerit egestas imperdiet placerat ullam dolor lectus sollicitudin sed dictum  uisque nibh ligula</p>
+        <ul class="social-links">
+          <li><a href="#"><img src="./images/linkedin.png" alt="Linkedin" /></a></li>
+          <li><a href="#"><img src="./images/twitter.png" alt="Twitter" /></a></li>
+          <li><a href="#"><img src="./images/facebook.png" alt="Facebook" /></a></li>
+          <li><a href="#"><img src="./images/flickr.png" alt="Flickr" /></a></li>
+          <li><a href="#"><img src="./images/feed.png" alt="RSS" /></a></li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      
+      <div class="bottom">
+        <!-- Footer Menu -->
+        <div class="footermenu">
+          <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="./about.html">About</a></li>
+            <li><a href="./services.html">Services</a></li>
+            <li><a href="./contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <!-- Footer Menu End -->
+        
+        <!-- Site Copyright -->
+        <div class="copyright">
+          <p>&copy; 2011 - <a href="http://imediapixel.com/">IMediapixel.com</a></p>
+        </div>
+        <!-- Site Copyright End -->     
+      </div>
+    </div>
+    <!-- Footer End  -->
+  </div>
+  <script type="text/javascript">$('#noscript').remove();</script>
+<!-- StyleSheet selection: -->  
+
+  <script type="text/javascript">$('#noscript').remove();</script> 
+</body>
+</html>

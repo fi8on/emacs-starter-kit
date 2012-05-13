@@ -1,0 +1,35 @@
+<div class="contextual">
+<%= link_to 'New Permission', {:action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<h2>Permissions</h2>
+
+<table class="list">
+  <thead><tr>
+    <th>PERMISSION</th>
+    <th>SORT</th>
+	<th></th>
+  </tr></thead>
+  <tbody>
+<% for role in @roles %>
+  <tr class="<%= cycle("odd", "even") %>">
+  <td><%= content_tag(role.builtin? ? 'em' : 'span', link_to(role.name, :action => 'edit', :id => role)) %></td>
+  <td align="center" style="width:15%;">
+  <% unless role.builtin? %>
+    <%= reorder_links('role', {:action => 'edit', :id => role}) %>
+  <% end %>
+  </td>
+  <td class="buttons">
+    <%= link_to(l(:button_delete), { :action => 'destroy', :id => role },
+    															:method => :post, 
+    															:confirm => l(:text_are_you_sure),
+    															:class => 'icon icon-del') unless role.builtin? %>
+  </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<p class="pagination"><%= pagination_links_full @role_pages %></p>
+
+<% html_title(l(:label_role_plural)) -%>

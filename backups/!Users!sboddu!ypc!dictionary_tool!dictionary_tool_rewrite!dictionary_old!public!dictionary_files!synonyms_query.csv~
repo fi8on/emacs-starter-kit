@@ -1,0 +1,58 @@
+#-----------------------------------------------------------------------
+#some test synonym mappings unlikely to appear in real input text
+#aaa => aaaa
+#bbb => bbbb1 bbbb2
+#ccc => cccc1,cccc2
+#a\=>a => b\=>b
+#a\,a => b\,b
+#fooaaa,baraaa,bazaaa
+
+# Some synonym groups specific to this example
+GB,gib,gigabyte,gigabytes
+MB,mib,megabyte,megabytes
+Television, Televisions, TV, TVs
+#notice we use "gib" instead of "GiB" so any WordDelimiterFilter coming
+#after us won't split it into two words.
+
+# Synonym mappings can be used for spelling correction too
+# One-way Synonyms
+pixima => pixma
+t mobile, tmobile => t-mobile
+AT AND T, A T T, A T & T,AT & T, AT&T, AT &T, AT& T, A T AND T, AT T, American Telephone Telegraph => ATT
+#lowes => lowe's
+& => and
+
+
+#I just commented out synonyms from query. ##### signifies that these lines were already commented.
+##### Somewhat Generic synonyms
+#Svc , Service
+#Ctr , Center
+####Inc , Incorporated
+#Dept , Department
+#Div , Division
+#Ind , Industrial
+#Intercontl , Intercontinental
+#Corp , Corporation
+#####Ltd , Limited
+#Intl , International
+#Assn , Association
+#Assoc , Associate
+#Mfr , Manufacturer
+#Mfg , Manufacturing
+#####St , Saint, Street
+#Mt , Mount
+#Apt , Apartment
+#Univ , University
+#Agcy , Agency
+#Attny , Attorney
+#Inc , Llc, Co, Ltd, Incorporated, Company, Limited
+#Shop , Store, Stores
+Shop, Stores => Store
+Jewelry, Jewellery => Jewel
+####Generic Synonyms for person names
+#Dr , Doctor, MD
+
+Doctor => Md, Dds, DC, Dvm, Od
+Dr =>  Md, Dds, DC, Dvm, Od
+Wal mart, Wal-mart => Walmart
+

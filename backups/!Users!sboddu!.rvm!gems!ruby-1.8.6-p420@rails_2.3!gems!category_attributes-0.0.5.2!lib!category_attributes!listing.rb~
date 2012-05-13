@@ -1,0 +1,179 @@
+module CategoryAttributes
+  class Listing 
+    include AttributesHelper
+    include CategoryAttributes
+    
+    attr_accessor :current, :permissible
+  
+    def initialize(user,permissible, current, update=nil)
+      @permissible = permissible
+      current = current.first if is_single? && current.class == Array
+      @current = current
+      @update = update
+      @user = user
+    end
+  
+    # --ACCESSORS
+    def user
+      @user || 'lui'
+    end
+  
+    # returns an array of the current values for this listing
+    # even if the group is SINGLE
+    def current_values
+      if @current.class == Hash
+        [@current['attr_value']]
+      elsif @current.class == Array
+        @current.map{|c| c['attr_value'] unless c['suppress']}
+      else 
+        []
+      end
+    end
+
+    def new_values
+     if @update.class == String
+       [@update]
+     elsif @update.class == Array
+       @update
+     else 
+       []
+     end
+    end
+
+    # tells you if the current values where changed by the user
+    def changed?
+      return false if @update.nil? || discard?
+      current_values.uniq != new_values.uniq
+    end
+  
+    # if this attribute has no values and will not have values then discard it from the call
+    def discard?
+      (current_values.empty? && new_values.empty?)
+    end
+  
+    def to_update_json
+      # "cuisine":[{"attr_code":"cuisine","attr_value":"French","ypid":"5827","display_order":"0","source_record_id":"684944300","created_by":"mkapdi","updated_by":"mkapdi"}]
+      if( is_single? )
+      
+        # build the initial json
+        result = {
+          :attr_code  => attr_code,
+          :attr_value => new_values.first,
+          :ypid       => @ypid,
+          :source_record_id => @ypid,
+          :updated_by => 'mkapdi',
+          :created_by => 'mkapdi',
+          :suppress => 0
+        }
+      
+        # check to see if removing the single attribute
+        if current_values.length > 0 && (new_values.include?('None'))
+          result[:suppress] = 1
+        end
+      
+        # if this attribute was already set, then set the id
+        unless @current['id'].nil?
+          result[:id] = @current['id']
+          result[:created_by] = @current['created_by'] if @current['created_by']
+        end
+      
+      else # for the multivalue attributes
+        result = []
+        @current.each do |current_value|
+          #check to see if its still there
+          current_value['suppress'] = new_values.include?( current_value['attr_value'] ) ? 0 : 1
+          current_value['created_by'] = user
+          current_value['updated_by'] = user
+          result << current_value
+        end
+        (new_values - current_values).each do |value|
+          result << {
+            :attr_code  => attr_code,
+            :attr_value => value,
+            :ypid       => @ypid,
+            :source_record_id => @ypid,
+            :created_by => user,
+            :updated_by => user
+          }
+        end
+      end
+      return result
+    end
+  
+    # returns the notes for this attribute
+    def notes
+      return "" unless changed?
+      if is_single?
+        "#{label} was #{current_values.first} and is now #{new_values.first}"
+      else
+        "#{label} was #{current_values.join(', ')} and is now #{new_values.join(', ')}"
+      end
+    end
+  
+    class << self
+    
+      # return an array of all permissible attributes
+     def find_all_attributes(category_code,user,listing_attrs={})
+        category_code = "8004214"
+        CategoryAttributes.permissible(category_code).map do |perm|
+          current_values = listing_attrs[ perm['attribute_code'] ]
+          new(user,perm, current_values)
+        end
+     end
+
+     
+      # will update the attribute values for a listing
+      def update(user, ypid, new_attrs)
+        attributes = {}
+        listing = get("listings/#{ypid}?app=lui").try(:first)
+        primary_category = listing['primary_heading_code'] # listing['heading_code'].split("|").first 
+        CategoryAttributes.permissible(primary_category).each do |perm|
+          # create a new ListingAttribute that knows its new values and its previous
+          current_values = listing['listing_attrs'][ perm['attribute_code'] ]
+          attribute = new(user, ypid, perm, current_values, new_attrs[perm['attribute_code']])
+          # if its changed, keep it
+          if attribute.changed?
+            attributes[attribute.attr_code] = attribute.to_update_json
+          end
+        end
+      
+        unless attributes.empty?
+          post("listing_attrs", {:app=>'lui', :listing_attrs=>attributes.to_json})
+        end
+        true
+      end
+    
+      private
+
+        def post(query, data=nil)
+          url = URI.parse(LDB_API.to_s + query)
+          http = Net::HTTP.new(url.host, url.port)
+          http.read_timeout = LDB_TIME_OUT
+          http.open_timeout = LDB_TIME_OUT
+          http.start do |http|
+            res = Net::HTTP.start(url.host, url.port) do |http|
+              req = Net::HTTP::Post.new(url.request_uri)
+              req.set_form_data(data) unless data.nil?
+              resp = http.request(req)
+              return JSON.parse(resp.body)
+            end
+          end
+        end  
+
+        def get(query)
+          url = URI.parse(LDB_API.to_s + query)
+          http = Net::HTTP.new(url.host, url.port)
+          http.read_timeout = LDB_TIME_OUT
+          http.open_timeout = LDB_TIME_OUT
+          http.start do |http|
+            Net::HTTP.start(url.host, url.port) do |http|
+              req = Net::HTTP::Get.new(url.request_uri)
+              resp = http.request(req)
+              return JSON.parse(resp.body)
+            end
+          end
+        end
+        
+    end # class << self
+  end
+end

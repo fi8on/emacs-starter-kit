@@ -1,0 +1,3 @@
+class CluiOperationHour < ActiveRecord::Base
+
+  end

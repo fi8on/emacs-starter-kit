@@ -1,0 +1,32 @@
+module CategoryAttributes
+  class Chain
+    include AttributesHelper
+    include CategoryAttributes
+
+    def initialize(user,permissible, current, update=nil)
+      @permissible = permissible
+      current = current.first if is_single? && current.class == Array
+      @current = current
+      @update = update
+      @user = user
+    end
+    
+    # --ACCESSORS
+    def user
+      @user || 'lui'
+    end
+    
+    class << self
+      
+      def find_all_attributes(category_code,user,chain_attrs=[])
+        category = "8004214"
+        CategoryAttributes.permissible(category).map do |perm|
+          current_values = chain_attrs.select {|c| c['attribute_name'].downcase == perm['attribute_code']}.first
+          new(user,perm, current_values)
+        end
+      end
+
+    end
+    
+  end
+end

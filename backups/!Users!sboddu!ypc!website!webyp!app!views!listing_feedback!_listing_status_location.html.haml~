@@ -1,0 +1,48 @@
+
+%fieldset
+  %h3 Business Status and Location
+  - if paid? and !new
+    .field
+      %span.label Business Name:
+      %span= @listing_feedback.name
+    - if not @listing_feedback.omit_address?
+      .field
+        %span.label Street Address:
+        %span.address= @listing_feedback.address
+        %span.city_state #{@listing_feedback.city}, #{@listing_feedback.state} #{@listing_feedback.zip}
+  - else
+    .field
+      = hidden_field_tag :new_listing, new 
+      = f.label :name, "Business Name"
+      = f.text_field :name, :maxlength => 255, :size => 50, :class => 'name'
+      .validation_message
+        The business name cannot be empty.
+    .field
+      = f.label :address, "Street Address"
+      = f.text_field :address, :maxlength => 100, :size => 50, :class => 'street'
+    .field
+      = f.label :city
+      - if new
+        = f.text_field :city, :maxlength => 100, :size => 20, :class => 'city'
+        .validation_message
+          The city name cannot be empty.
+      - else
+        == #{@listing_feedback.city}       
+    .field
+      = f.label :state
+      - if new
+        = f.text_field :state, :maxlength => 10, :size => 5, :class => 'state',:value => ''
+        .validation_message
+          The state name cannot be empty.
+      - else
+        == #{@listing_feedback.state}
+    .field.mtop
+      = f.label :zip, "ZIP Code"
+      = f.text_field :zip, :maxlength => 5, :class => "zip"
+      
+      .validation_message
+        The ZIP code must be 5 digits.
+
+
+
+ 

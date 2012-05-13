@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+	<meta http-equiv="Content-Language" content="en-uk" /> 
+    <meta name="ROBOTS" content="ALL" /> 
+    <meta http-equiv="imagetoolbar" content="no" /> 	
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>toggleEdit JQuery plugin: SIMPLE EDIT/PREVIEW SWITCHING FOR IN-PLACE EDITING AND FORMS</title>
+	<link type="text/css" href="jquery-ui-1.8.16.custom.css" rel="stylesheet" />  
+	<link type="text/css" href="jquery.toggleEdit.css" rel="stylesheet" />   
+	<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+
+	<script type="text/javascript" src="jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="jquery.toggleEdit.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+	<link  href="http://fonts.googleapis.com/css?family=Orbitron:400, 500, 700, 900" rel="stylesheet" type="text/css" >
+
+	<style type="text/css">
+	.logo
+	{
+		font-family: 'Orbitron', serif;
+		font-weight: 600;
+		font-size: 60px;
+		color:#fff;
+		line-height:1;
+		margin:0px;
+		padding:0;
+	}
+
+	.header
+	{
+		width:100%;
+		height:50px;
+		background:#444;
+		border-bottom:1px solid #fff;
+		position:absolute;
+		margin:0;padding:0;
+		padding:25px;
+
+	}
+
+	.content
+	{
+		padding:100px 200px;
+	}
+
+	body, html
+	{
+		font-family:  Helvetica, Arial, "MS Trebuchet", sans-serif;
+		width:100%;
+		margin:0;
+		padding:0;
+		background:#fafafa;
+		line-height:135%;
+		color:#555;
+	}
+
+	h1,h2,h3,h4
+	{
+		font-family:  Helvetica, Arial, "MS Trebuchet", sans-serif;
+		color:#000;
+	}
+
+	.blog-note
+	{
+		float:right;
+	}
+	#demo_events_log
+	{    float: right;
+    height: 320px;
+    margin-left: 50px;
+    width: 200px;
+	}
+	#demo_parent p
+	{
+	   background:black;
+	   color:white;
+	}
+	.demo,#disqus_thread
+	{
+		clear:both;
+	}
+	
+	.demo
+	{
+	
+	   border:1px solid #aaa;
+	   padding:20px;
+	}
+	
+	input[type=text]
+	{
+	   width:150px;
+	}
+	
+	
+	.form-box
+	{    
+        border: 3px dashed #AAAAAA;
+        margin: 20px;
+        padding: 20px;
+        position: relative;
+        width: 400px;
+        font-size:30px;
+	}
+	
+	.form-box:hover
+	{
+	   border-color:#8CDFFF;
+	   color:#8CDFFF;
+	}
+	
+	.form-box input
+	{
+	       width:100%;
+        font-size:20px;
+        line-height:1;
+        margin:0;
+        padding:0;
+	}
+	
+	.form-box .toggleEdit-preview:hover
+	{
+	   border:none;
+	   padding:2px;
+	}
+	
+	#demo_form p{
+	   margin-left:20px;
+	}
+	</style>
+	<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-3072769-3']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+
+    </script>
+
+	</head>
+	<body> 
+
+		<div class="header"> 
+			<h1 class="logo">alzclarke</h1> 
+		</div> 
+		<div class="content"> 
+			<p class="blog-note">by alzclarke... <a href="http://alanclarke.posterous.com/">blog</a></p> 
+			<h1><span class="toggleEdit">toggleEdit v1.6</span> JQuery Plugin</h1> 
+			<p> 
+				A simple plugin for switching inputs between editable and preview modes for inline ( in-place ) editing and forms.
+			</p>   
+			<h2>Project Homepage on JQuery</h2>
+
+			<a href="http://plugins.jquery.com/project/toggleEdit">project homepage and resources</a>
+			<h2>Why</h2> 
+			<ul>
+				<li>enables in place editing</li>
+				<li>enables easy switching of elements between editmode and previewmode</li>
+				<li>makes forms visually subtler and less obtrusive</li>
+			</ul> 
+			
+			<h2>About</h2> 
+
+			<p>Inspired by the great <a href ="http://www.appelsiini.net/projects/jeditable" >jeditable</a>, here are the key differences:</p>
+
+			<ul>
+				<li>Is called on form elements so it does not break if javascript is disabled</li></li>
+				<li>Conforms to the hijax design pattern</li>
+				<li>Provides events for your ajax callbacks but...</li>
+				<li>Decouples the actual ajax callback (mainly because i didn't want to rewrite my ajax calls for legacy systems)</li>
+			</ul>
+
+			<p>Why the different approach?</p>
+asdjfldskjfdslkfjdslkfj
+			<ul>
+				<li>I already have many legacy forms and inline inputs I'd like to retrofit this to</li>
+				<li>The web framework i'm currently using (django) is awesome at generating forms from ORM objects, so inputs are a more natural starting point for me</li>
+				<li>i don't want to rewrite my ajax calls or server side data handling</li>
+				<li>I want my forms to automatically degrade gracefully without js, ie the 'hijax' design pattern; inputs minus js still leaves usable inputs</li>
+
+			</ul>
+			
+			<h2>API</h2>
+            <p>The plugin api consists of the following (click links to skip to api section):</p>
+            <ul>
+				<li><a href="#api_options">options</a></li>
+				<li><a href="#api_events">events</a></li>
+				<li><a href="#api_methods">methods</a></li>
+
+				<li><a href="#api_custom_inputs">custom inputs</a></li>
+			</ul>
+			
+			<h2>Source</h2>
+            <a href="jquery.toggleEdit.js">jquery.toggleEdit.js</a><br/>
+            <a href="jquery.toggleEdit.min.js">jquery.toggleEdit.min.js</a><br/>
+			
+            <a href="toggleEdit.css">toggleEdit.css</a>
+
+			<h2>Recent Updates</h2>
+             <ul>
+					<li>new option: stickyFocus - delays switching for focused elements until blur</li>
+					<li>new 'i' selector... focus, blur and change events only work on form elements. Therefore, for these events to work on custom inputs that have wrapper divs, this selects the inner input variable retrieved by a type.input function (see custom input jsfiddle at the bottom for more info)</li>
+			</ul>
+			<h2>Dependencies</h2>
+
+            <p>JQuery and JQuery UI (built using the JQuery UI widget factory)</p>
+			
+			
+			<h2>Demos</h2>
+            <p>These demos are interactive. Click the demo buttons to trigger each demo and hover and then click the elements accordingly:</p>
+<!--
+            <ul>
+				<li><a href="#default_usage">default usage</a></li>
+				<li><a href="#demo_click">custom event</a></li>
+				<li><a href="#demo_parent">parent listener</a></li>
+				<li><a href="#demo_overflow">callback with textoverflow</a></li>
+				<li><a href="#demo_events">events</a></li>
+			</ul>
+			
+-->		
+				<div id="demo_default" class="demo">
+				<h4>default usage:</h4>
+					<p>
+						Lorem ipsum dolor, { <input type="text" value="blah blah"/> } elit. In hac { <input type="checkbox"/> } velit.
+						Quisque tristique,
+						{ <select>
+
+							<option value="1">option 1</option>
+							<option value="2">option 2</option>
+							<option value="3">option 3</option>
+			   			</select> }
+						ante, a imperdiet tellus mauris sed.
+					</p>
+				<script src="https://gist.github.com/876783.js?file=gistfile1.js"></script>
+				</div>
+
+				<div id="demo_mouseenter" class="demo">
+				<h4>custom event methods:</h4>
+					<p>
+						Lorem ipsum dolor, { <input type="text" value="blah blah"/> } elit. In hac { <input type="checkbox"/> } velit.
+						Quisque tristique,
+						{ <select>
+							<option value="1">option 1</option>
+
+							<option value="2">option 2</option>
+							<option value="3">option 3</option>
+			   			</select> }
+						ante, a imperdiet tellus mauris sed.
+					</p>
+				<script src="https://gist.github.com/876787.js?file=gistfile1.txt"></script>
+				</div>
+				<div id="demo_parent" class="demo">
+
+				<h4>parent listener:</h4>
+					<p>
+						Lorem ipsum dolor, { <input type="text" value="blah blah"/> } elit. In hac { <input type="checkbox"/> } velit.
+						Quisque tristique,
+						{ <select>
+							<option value="1">option 1</option>
+							<option value="2">option 2</option>
+
+							<option value="3">option 3</option>
+			   			</select> }
+						ante, a imperdiet tellus mauris sed .......(click anywhere in the black area)
+					</p>
+				<script src="https://gist.github.com/876794.js?file=gistfile1.txt"></script>
+				</div>
+
+				<div id="demo_events" class="demo">
+					<h4>events:</h4>
+
+						<textarea id="demo_events_log"></textarea>
+						<p>
+							Lorem ipsum dolor, { <input type="text" value="blah blah"/> } elit. In hac { <input type="checkbox"/> } velit.
+							Quisque tristique,
+							{ <select>
+								<option value="1">option 1</option>
+								<option value="2">option 2</option>
+
+								<option value="3">option 3</option>
+				   			</select> }
+							ante, a imperdiet tellus mauris sed.
+						</p>
+					<script src="https://gist.github.com/876795.js?file=gistfile1.txt"></script>
+					</div>
+					
+					
+				<div id="demo_form" class="demo">
+				    <form>
+				    <p>design?</p>
+
+                    <div class="form-box">
+                    <input type="text" name="name" value="name">
+                    </div>
+                    <div class="form-box">
+                    <input type="text" name="mail" value="email">
+                    </div>
+                    <div class="form-box">
+                    <input type="text" name="comment" value="address" size="50">
+                    </div>                                  
+                    </form>
+
+				</div>
+			
+			
+			<h2 id="api_options">Options</h2>
+            <ul>
+				<li><strong>copyCss:</strong> determines whether to copy the input width, height, display and float to the preview element</li>
+		        <li><strong>eventsEnabled:</strong> allows you to enable and disable automatic mode switching based on events</li>
+
+		<li><strong>stickyFocus (new):</strong> delays switching for focused elements until blur</li>
+			<li><strong>defaultText (new):</strong> text to display if no value is entered</li>
+				<li><strong>events:</strong>
+				     <ul>
+				        <li><strong>edit:</strong> event method for switching to edit mode e.g. mouseenter, click etc.</li>
+
+				        <li><strong>preview:</strong> event method for switching to preview mode e.g. mouseenter, click etc.</li>
+				        <li><strong>delayedit:</strong> after the event has fired provide a delay before switching to edit mode: 1000 is 1 second</li>
+				        <li><strong>canceledit:</strong> if this is triggered during the delay, the switch to edit mode will be cancelled</li>
+				        <li><strong>delaypreview:</strong> after the event has fired provide a delay before switching to preview mode: 1000 is 1 second</li>
+
+				        <li><strong>cancelpreview:</strong> if this is triggered during the delay, the switch to preview mode will be cancelled</li>
+			         </ul>
+                <li><strong>listeners: (pass e for edit element, p for preview element, i for the form element (if custom types are being used) or a standard jquery selector)</strong>
+				     <ul>
+				        <li><strong>edit:</strong>selects element that listens for when to trigger edit mode (default='p')</li>
+				        <li><strong>preview:</strong>selects element that listens for when to trigger preview mode (default='e')</li>
+
+				        <li><strong>canceledit:</strong>selects element that listens for when to cancel switch to edit mode (default='p')</li>
+				        <li><strong>cancelpreview:</strong>selects element that listens for when to cancel switch to preview mode (default='e')</li>
+			         </ul>
+				</li>
+				<li><strong>types:</strong>an array of custom input types to enable same functionality for custom inputs</li>
+			</ul>
+
+			
+			<h2 id="api_events">Events</h2>
+			<p>these are passed two parameters, the event object and a ui object consisting of the preview element (ui.preview), the input element (ui.element) and the textual representation of the value (ui.text)</p>
+            <ul>
+				<li><strong>onedit:</strong>fired on switch to edit mode</li>
+				<li><strong>onpreview:</strong>fired on switch to preview mode</li>
+				<li><strong>oncanceledit:</strong>fired on cancelling of switch to edit mode</li>
+
+				<li><strong>oncancelpreview:</strong>fired on cancelling of switch to edit mode</li>
+			</ul>
+			<h2 id="api_methods">Methods</h2>
+            <p>These are called as follows: el.toggleEdit(methodName,param1,param2...)</p>
+            <ul>
+				<li><strong>edit:</strong>switches to edit mode</li>
+
+				<li><strong>preview:</strong>switches to preview mode</li>
+				<li><strong>toggle:</strong>toggles between modes</li>
+				<li><strong>previewEl:</strong>returns preview element</li>
+				<li><strong>enableEvents:</strong>binds events to listener elements</li>
+				<li><strong>disableEvents:</strong>clears events</li>
+
+				<li><strong>destroy:</strong>removes the widget functionality and cleans up after itself</li>
+			</ul>
+			<h2 id="api_custom_inputs">Custom Inputs</h2>
+            <p>A custom input requires three functions, one to test an element and return true if that element is an instance of the custom input ('is'), another to parse the value from the custom input ('text'), and another to retrieve the inner input element if there is one (for blur and focus events). For example:</p>		
+			<iframe style="width: 100%; height: 300px" src="http://jsfiddle.net/alzclarke/VzrEp/embedded/"></iframe>
+		
+				
+			<script type="text/javascript">
+			$('.demo').each(function() {
+			    var f;
+			    var trigger = $('<div>demo</div>').button();
+
+			    switch ($(this).attr('id')) {
+			    case 'demo_default':
+			        f = function() {
+			            $('#demo_default').find('input,select').toggleEdit();
+			        };
+			        break;
+			    case 'demo_mouseenter':
+			        f = function() {
+			            $('#demo_mouseenter').find('input,select').toggleEdit({
+			                events: {
+			                    edit: 'mouseenter'
+			                }
+			            });
+			        };
+			        break;
+				case 'demo_parent':
+			        f = function() {
+                        $('#demo_parent').find('input,select').toggleEdit({
+                            listeners: {
+                                 
+                                edit: '#demo_parent>p',
+                                preview: '#demo_parent>p' 
+                            }
+                        });
+			        };
+		        break;
+			    case 'demo_events':
+			         f = function() {
+							var log = $('#demo_events_log');
+				            $('#demo_events').find('input,select').toggleEdit({
+				                onpreview:function(){
+								 	log.val(log.val()+'onpreview triggered\n');
+								},
+								onedit:function(){
+									log.val(log.val()+'onedit triggered\n');
+								}
+				            });
+				        };
+			        break;
+			     case 'demo_form':
+			         f = function() {
+				            $('#demo_form').find('input,select').toggleEdit();
+				        };
+			        break;
+			    }
+
+			    trigger.click(function() {
+			        f();
+			    })
+
+			    $(this).append(trigger);
+			});
+			
+			</script>
+
+			
+			
+			
+			
+			<div id="disqus_thread"></div> 
+			<script type="text/javascript"> 
+			var disqus_shortname = 'staticvoid';
+			var disqus_identifier = 'toggleEdit';
+			var disqus_url = 'http://www.staticvoid.info/toggleEdit/';
+			(function() {
+				var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
+				</script> 
+				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript> 
+				<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a> 
+			</div> 
+		</body>
+</html>

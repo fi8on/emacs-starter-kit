@@ -1,0 +1,85 @@
+ATTI_CAP_VERSION = '0.5.1'
+
+begin
+  gem 'atti_cap', "=#{ATTI_CAP_VERSION}"
+  require 'atti_cap'
+rescue LoadError
+  puts "Missing prerequisite gem!"
+  puts "gem install -v #{ATTI_CAP_VERSION} atti_cap --source http://gems.atti.wc1.yellowpages.com"
+  exit 1
+end
+
+set :app_name, "tam"
+# set :scm, :git
+# set :repo_path, "git@git.corp.attinteractive.com:dstools/TAM.git"
+# set :repository, "git@git.corp.attinteractive.com:dstools/TAM.git"
+# set :branch, "feature/tam_tests"
+# set :git_shallow_clone, 1
+# set :scm_verbose, true
+set :deployed_rev, (`svn info 2>/dev/null`.match(/^Revision: (\w+)/)[1]).chomp
+set :deploy_via, :copy
+set :copy_strategy, :export
+set :copy_exclude, [".svn/*", ".git/*"]
+set :user, "nextgen"
+set :ruby_prefix, "/home/t/ruby-1.8.7-p249-3"
+set :app_env_args, "PATH=/home/t/bin:#{ruby_prefix}/bin:/usr/local/nextgen/tam/shared/vendor/bundle/ruby/1.8/gems:$PATH GEM_PATH=/usr/local/nextgen/tam/shared/vendor/bundle/ruby/1.8/gems:#{ruby_prefix}/lib/ruby/gems/1.8:$HOME/tam/shared/vendor/bundle/ruby/1.8/bin"
+set :use_memcache, true
+set :use_cron, true
+set :use_logrotate, true
+set :app_server, unicorn
+set :app_processes, 4
+
+set :disable_sso, false
+set :gem_dependencies, :bundler => '-v "~>1.0"'
+
+set :server_list, lambda{[fetch(:app_server)]}
+set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
+set :deploy_via, :remote_cache
+set :use_sudo, false
+default_run_options[:pty] = true
+set :ssh_options, { :forward_agent => true }
+
+case deploy_env
+when "development"
+  set :rails_env, 'development'
+  set :default_database_file, "database.yml"
+  set :app_port, 7101
+  set :domain, 'dev-tam.np.wc1.yellowpages.com'
+  set :server_name, domain
+  role :app, domain
+  role :web, domain
+  role :db, domain, :primary => true
+  role :cron_jobs, 'dev-tam.np.wc1.yellowpages.com'
+when "qa"
+  set :rails_env, 'qa'
+  set :default_database_file, "database.yml"
+  set :app_port, 7101
+  set :domain, 'qa-tam.np.wc1.yellowpages.com'
+  set :server_name, domain
+  role :app, 'qa-tam.np.ev1.yellowpages.com','qa-tam.np.wc1.yellowpages.com'
+  role :web, 'qa-tam.np.ev1.yellowpages.com','qa-tam.np.wc1.yellowpages.com'
+  role :db, domain, :primary => true
+when "production"
+  set :rails_env, 'production'
+  set :app_port, 7101
+  set :domain, 'prod-tam.np.wc1.yellowpages.com'
+  set :server_name, domain
+  role :app, domain
+  role :web, domain
+  role :db, domain, :primary => true
+end
+set :rails_env, deploy_env
+
+
+# before "common:bundler", :env_setup
+# task :env_setup do
+#   run "GEM_PATH=/home/t/ruby-1.8.7-p249-3/bin gem install rubygems-update -v 1.4.2"
+#   run "GEM_PATH=/home/t/ruby-1.8.7-p249-3/bin gem update --system"
+# end
+
+
+after 'deploy:update_code' do
+  run "mkdir -p #{shared_path}/log/archive #{shared_path}/log/rotate #{shared_path}/pids"
+  run "touch #{shared_path}/log/access.log #{shared_path}/log/error.log"
+  run "memcached -d -p 20001 -c 1024 -m 256 -u nextgen"
+end

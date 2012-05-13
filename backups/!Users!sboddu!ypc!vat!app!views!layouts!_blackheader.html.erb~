@@ -1,0 +1,24 @@
+<div id="navbar">
+    <% if 'user' != request.parameters[:controller] %>
+    <div id="navigation">
+        <ul id="nav">
+            <li><%= link_to "Home", root_path %></li>         
+            
+        </ul>
+    </div>
+    <div id="searchform">
+        <% form_tag searches_path do %>
+		
+	        <label>YPID</label>
+	        <%= text_field_tag "search[id]", "" %>
+			
+	        <label>Phone</label>
+	        <%= text_field_tag "search[phone]", "", :onblur => "formatPhone(this)" %>
+			
+        	<span id='invalid_ph_header' style="color:red;display:none">Phone Should be 10 characters long </span>
+        	
+			<%= submit_tag "Search" %>
+        <% end %>
+    </div>
+    <% end %>
+</div>

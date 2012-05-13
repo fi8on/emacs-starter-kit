@@ -1,0 +1,14 @@
+
+- form_for @listing_feedback, :html => { :id => 'listing_feedback_form', :method => :post } do |f|
+  %fieldset.getting_started
+    %h3 Getting Started
+    .rounded-5
+      %h4 Are you a Representative of this Business?
+      -# This is a temporary hack, I hope.
+      - rep_itl = (%w{development qa qa1 qa2 qa3 qa_citysearch}.include? Rails.env) ? "http://listings.yellowpages.stage.keen.com/Services/CreateServiceStarter.aspx?ypid=#{@listing_feedback.ypid}" : "http://listings.yellowpages.com/Services/CreateServiceStarter.aspx?ypid=#{@listing_feedback.ypid}"
+      %p #{ link_to 'Go to the Business Representative "Improve this Listing" form',  rep_itl, :class => 'arrow' }
+    .circle
+      %strong OR
+    .rounded-5
+      %h4 Are you a Customer of this Business?
+      %p Please fill out the form below with any updated information about this business. You do NOT need to update all the fields.

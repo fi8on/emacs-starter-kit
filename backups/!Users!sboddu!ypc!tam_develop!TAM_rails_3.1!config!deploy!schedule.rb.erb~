@@ -1,0 +1,3 @@
+every 4.hours do
+  command "cd <%= current_path %> && bundle exec rake RAILS_ENV=#{Rails.env} cache:users"
+end

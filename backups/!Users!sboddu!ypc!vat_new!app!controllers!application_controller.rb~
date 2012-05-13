@@ -1,0 +1,35 @@
+class ApplicationController < ActionController::Base
+  protect_from_forgery
+
+  filter_parameter_logging :password
+  helper :all # include all helpers, all the time
+  before_filter { |c| Authorization.current_user = c.current_user }
+
+  def current_user
+    if @sso
+       @current_user ||= User.from_login(@sso.user, :roles=>@sso.roles)
+     end
+  end
+
+  def utc_to_pst(str)
+    unless str.blank?
+      zone = ActiveSupport::TimeZone.new(TIMEZONE)
+      Time.parse(str.to_s).in_time_zone(zone).strftime("%b %d,%Y - %I:%M:%S %p") + " PST"
+    else
+      return ""
+    end
+  end
+
+  protected
+  
+  def require_login
+    if @sso = sso_auth(SSO_OPTIONS)
+      render :template => 'layouts/403', :status => 403 unless current_user && authorized?
+    end
+    return true
+  end
+  
+  def authorized?
+    return true
+  end
+end

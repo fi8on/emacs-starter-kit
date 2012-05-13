@@ -1,0 +1,10 @@
+<div id="reviews" class="listing_form_partial" style="<%= display %>">
+	<div id="review_sources">
+		<%= render :partial => "review_sources" %>
+	</div>
+	
+	<div id="search_result" class="review_search_request">
+        <%= render :partial => "reviews/reviews_table", :locals => {:paginate_params => { :controller => 'reviews', :action => 'index', :search => {:ypid => @ypid}}} %>
+	</div>
+	<div class="clear"></div>
+</div>

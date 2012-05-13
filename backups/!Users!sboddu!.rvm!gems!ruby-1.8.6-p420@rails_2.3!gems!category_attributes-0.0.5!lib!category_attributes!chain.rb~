@@ -1,0 +1,18 @@
+module CategoryAttribute
+  class Chain
+    #   include AttributesHelper
+    #   include CategoryAttributes
+    
+    class << self
+      
+      def find_all_attributes(chain,urer)
+        category = "Restaurant"
+        CategoryAttributes.permissible(category).map do |perm|
+          
+        end
+      end
+      
+    end
+    
+  end
+end

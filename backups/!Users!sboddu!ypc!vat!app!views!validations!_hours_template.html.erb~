@@ -1,0 +1,126 @@
+<!-- hours template -->
+
+<script id="attributeTemplate" type="text/x-jquery-tmpl">
+  <div class="rightbar">
+    <div class="right_article">
+      <p class="infopost"> Post Validation Hour of Operation</p>
+      <table class="validations" >   
+        <tr>
+          <td><b>Days </b></td>
+          <td><b>Open Hour</b></td>
+          <td><b>Close Hour</b></td>
+        </tr>
+        {{each post_validation}}
+        <tr>
+          <td><label>${day_of_week}</label></td>
+          <td>${open_hour} : ${open_min}</td>
+          <td>${close_hour} : ${close_min}</td>
+        </tr>        
+        {{/each}}        
+      </table>
+      <br>
+      <label for="extra_data" >Extra Data</label>
+      <textarea id="extra_data" name="extra_data" rows=1  cols="60" disabled="disabled">${extra_data}</textarea>
+    </div>
+  </div>
+  <div class="leftbar">
+    <div class="left_article">
+      <p class="infopost">  Pre Validation Hours of Operation</p>
+      <table>
+        <tr>
+          <td>
+            <p>
+              <label for="pre_validation" >${att_type}</label><br />
+              <textarea id="pre_validation" name="pre_validation" rows = "3" cols = "60">${pre_validation}</textarea>   
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <span class="id_display">  ID(YPID): ${ypid} </span>
+          </td>
+        </tr>
+      </table>  
+    </div>       
+  </div>
+  <div class="clr"></div>
+  
+  <input id="attr_ids[]" name="attr_ids[]" type="hidden" value=${ypid}  />
+
+  {{each  [ 'Valid', 'Invalid', 'Not_Sure']}}
+  <span class="status">  
+    <label for="${$value}" > ${$index + 1}:${$value}</label>
+    <input type="radio"  id="${ypid}_status" name="${ypid}_status[]"  value=${$value}  checked />
+  </span>
+  {{/each}}
+  <span class="status">
+    <%= label_tag "Comments" %> <textarea id="comment" name="comment[]" rows = "2" cols =  "60">${comment}</textarea> 
+  </span>
+  <div class="clr"></div>
+ <hr>
+</script>
+
+
+<!--  Coupons template -->
+
+
+<script id="attributeTemplate" type="text/x-jquery-tmpl">
+  <div class="rightbar">
+    <div class="right_article">
+      <p class="infopost"> Post Validation Hour of Operation</p>
+      <table class="validations" >   
+        <tr>
+          <td><b>Days </b></td>
+          <td><b>Open Hour</b></td>
+          <td><b>Close Hour</b></td>
+        </tr>
+        {{each post_validation}}
+        <tr>
+          <td><label>${day_of_week}</label></td>
+          <td>${open_hour} : ${open_min}</td>
+          <td>${close_hour} : ${close_min}</td>
+        </tr>        
+        {{/each}}        
+      </table>
+      <br>
+      <label for="extra_data" >Extra Data</label>
+      <textarea id="extra_data" name="extra_data" rows=1  cols="60" disabled="disabled">${extra_data}</textarea>
+    </div>
+  </div>
+  <div class="leftbar">
+    <div class="left_article">
+      <p class="infopost">  Pre Validation Hours of Operation</p>
+      <table>
+        <tr>
+          <td>
+            <p>
+              <label for="pre_validation" >${att_type}</label><br />
+              <textarea id="pre_validation" name="pre_validation" rows = "3" cols = "60">${pre_validation}</textarea>   
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <span class="id_display">  ID(YPID): ${ypid} </span>
+          </td>
+        </tr>
+      </table>  
+    </div>       
+  </div>
+  <div class="clr"></div>
+  
+  <input id="attr_ids[]" name="attr_ids[]" type="hidden" value=${ypid}  />
+
+  {{each  [ 'Valid', 'Invalid', 'Not_Sure']}}
+  <span class="status">  
+    <label for="${$value}" > ${$index + 1}:${$value}</label>
+    <input type="radio"  id="${ypid}_status" name="${ypid}_status[]"  value=${$value}  checked />
+  </span>
+  {{/each}}
+  <span class="status">
+    <%= label_tag "Comments" %> <textarea id="comment" name="comment[]" rows = "2" cols =  "60">${comment}</textarea> 
+  </span>
+  <div class="clr"></div>
+ <hr>
+</script>
+

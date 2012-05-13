@@ -1,0 +1,3 @@
+class ouser::User < External
+end
+

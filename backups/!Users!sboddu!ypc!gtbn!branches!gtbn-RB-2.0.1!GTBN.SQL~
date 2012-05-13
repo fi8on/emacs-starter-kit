@@ -1,0 +1,22 @@
+grant select on ypc.listing_extract to gtbn;
+
+grant select on ypc.redirects to gtbn;
+
+grant all on ypc.name_keywords_stg to gtbn;
+
+grant SELECT,INSERT,DELETE,UPDATE on ypc.last_processed to gtbn;
+
+DROP SEQUENCE YPC.NAME_KEYWORDS_STG_SEQ;
+
+CREATE SEQUENCE YPC.NAME_KEYWORDS_STG_SEQ
+  START WITH 47021
+  MAXVALUE 999999999999999999999999999
+  MINVALUE 1
+  NOCYCLE
+  CACHE 20
+  NOORDER;
+
+
+GRANT SELECT ON YPC.NAME_KEYWORDS_STG_SEQ TO GTBN;
+
+ALTER TABLE YPC.NAME_KEYWORDS_STG ADD ID NUMBER(38) NOT NULL;

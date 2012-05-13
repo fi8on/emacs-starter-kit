@@ -1,0 +1,12 @@
+# Your application name
+appname=gtbn
+ 
+# Location where application logs are located
+loglocation=/usr/local/nextgen/gtbn/shared/log
+ 
+# Email address where you want alerts to be sent to
+# Make sure all PRODUCTION ALERTS GO TO log-alerts@yplist.flight.yellowpages.com
+email=log-alerts@yplist.flight.yellowpages.com
+ 
+# list of files that needs to be copied to mogwai
+mogwailist=rails.log,access.log,error.log

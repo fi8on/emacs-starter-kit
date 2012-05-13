@@ -1,0 +1,205 @@
+##
+# Common recipes that can be shared by other applications.
+
+Capistrano::Configuration.instance.load do
+
+  set :logrotate_freq, 168
+  set(:logrotate_files) { ["#{shared_path}/log/*"] }
+  def logrotate(*args)
+    logrotate_files.concat(args).uniq!
+  end
+
+  def run_value(*args)
+    vals = []
+    run(*args) do |stream, type, val|
+      return if type == :err
+      vals << val
+    end
+    return vals.join("\n")
+  rescue
+    nil
+  end
+
+  def run_rake(rake_cmd, env_args=nil)
+    run "cd #{release_path} && rake RAILS_ENV=#{app_env} RACK_ENV=#{app_env} #{env_args} #{rake_cmd}"
+  end
+
+  def upload_asset(filename, remote_path, options={})
+    filename = File.join(File.dirname(__FILE__), "../assets/#{filename}") if File.basename(filename) == filename
+    if !options[:no_erb] && filename =~ /\.erb$/i
+      puts "Running ERB on template file #{filename}"
+      write_remote_file(remote_path, File.read(filename), :process_template => true)
+    else
+      puts "Uploading: #{filename} -> #{remote_path}"
+
+      if (run("test -f #{remote_path}") rescue false)
+        puts "#{remote_path} already exists"
+        return
+      end
+
+      dir = File.dirname(remote_path)
+      run("test -d #{dir} || mkdir -p #{dir}") unless dir == "."
+      upload filename, remote_path, {:via => :scp, :mode => 0644}.merge(options)
+    end
+  end
+
+  def write_remote_file(filepath, string, options={})
+    options = options.merge(:no_erb => true)
+    if options[:process_template]
+      options.delete(:process_template)
+      string = ERB.new(string, nil, '-').result(binding)
+    end
+
+    Dir.mkdir("tmp") unless File.directory?("tmp")
+    filename = "#{Time.now.to_i}-#{File.basename(filepath)}"
+    File.open("tmp/#{filename}", "w+"){|f| f.write(string)}
+    upload_asset("tmp/#{filename}", filepath, options)
+  end
+
+
+  def atti_roles roles_arr, *args
+    roles_arr.each do |r|
+      role(r, *args)
+    end
+  end
+
+  def webapp_roles *args
+    atti_roles([:web, :app], *args)
+  end
+
+
+  set :gem_dependencies,
+    :activesupport => '-v "~>2.3"',
+    :chronic       => '-v "~>0.2"',
+    :rake          => '-v "~>0.8"',
+    :whenever      => '-v "0.3.7"'
+
+  set :gem_sources, [
+    'http://gems.gemcutter.wc1.yellowpages.com',
+    'http://gems.atti.wc1.yellowpages.com',
+    'http://gems.github.wc1.yellowpages.com',
+    'http://gemcutter.org'
+  ]
+
+
+  namespace :common do
+    opts = fetch(:gem_sources).map{|s| "--source #{s}"}.join(" ")
+    opts << " --no-ri --no-rdoc"
+
+
+    desc "Installs required library dependencies for deploy"
+    task :install_lib_dependencies do
+      fetch(:gem_dependencies).each do |name, options|
+        run "gem install #{name} #{options} #{opts}", :pty => true
+      end
+      install_geminstaller
+      install_bundler
+    end
+
+
+    desc "Uploads required file dependencies for deploy"
+    task :install_file_dependencies do
+      install_bash_files
+      upload_asset("script", File.join(release_path, "script"), :recursive => true)
+      run "chmod -R 0755 #{File.join(release_path, "script")}"
+      upload_asset("schedule.rb.erb", File.join(release_path, "config/schedule.rb"))
+      upload_asset("logrotate.conf.erb", File.join(release_path, "config/logrotate.conf"))
+      write_remote_file( File.join(app_path, "script/mogwailist"),
+          logrotate_files.map{|f| File.basename(f, ".log")}.join("\n") )
+    end
+
+
+    desc "Creates needed directories"
+    task :create_dir_dependencies do
+      run "mkdir -p #{shared_path}/log/archive #{shared_path}/pids #{shared_path}/log/rotate"
+    end
+
+
+    desc "Remove .svn dirs"
+    task :remove_svn_dirs, :roles => :web do
+      run "find #{release_path} -name .svn -print | xargs /bin/rm -rf {} \;"
+    end
+
+
+    desc "Uploads common rake task library"
+    task :upload_rake_tasks, :roles => [:web, :app, :cdn] do
+      Dir[File.join(File.dirname(__FILE__), "../assets/*.rake")].each do |rake_file|
+        upload_asset(rake_file, File.join(release_path, "lib/tasks/#{File.basename(rake_file)}"))
+      end
+    end
+
+
+    set :tpkg_config, 'config/tpkginstaller.yml'
+
+    desc "Preinstall tpkgs"
+    task :preinstall_tpkgs, :roles => [:web, :app, :cdn] do
+
+      if !File.file? tpkg_config
+        puts "Warning: no tpkg file (#{tpkg_config})"
+        next
+      end
+
+      tpkg_yaml = YAML::load(ERB.new(IO.read(tpkg_config)).result)
+      tpkg_yaml[:tpkgs].each do |tpkg|
+         if tpkg.include?(:url)
+           tpkg_name = tpkg[:url]
+         else
+           tpkg_name = tpkg.include?(:version) ? "#{tpkg[:name]}=#{tpkg[:version]}" : tpkg[:name]
+           tpkg_name = tpkg.include?(:package) ? "#{tpkg_name}=#{tpkg[:package]}" : tpkg_name if tpkg.include?(:version)
+         end
+         tpkg_cmd = tpkg[:option] =~ /^(downgrade|remove)$/ ? "--#{tpkg[:option]}" : "-u"
+        run "tpkg -n #{tpkg_cmd} #{tpkg_name} #{tpkg_yaml[:options]}", :pty => true
+      end
+    end
+
+
+    set :bundler_gem, "bundler08"
+
+    desc "Install bundler."
+    task :install_bundler, :roles => [:web, :app, :cdn] do
+      run "gem install #{bundler_gem} #{opts}", :pty => true
+    end
+
+
+    desc "Install geminstaller."
+    task :install_geminstaller, :roles => [:web, :app, :cdn] do
+      run "gem install geminstaller #{opts}", :pty => true
+    end
+
+
+    desc "Run geminstaller."
+    task :geminstaller, :roles => [:web, :app, :cdn] do
+      run "geminstaller -g all --config #{release_path}/config/geminstaller.yml", :pty => true
+    end
+
+
+    desc "Run bundler."
+    task :bundler, :roles => [:web, :app, :cdn] do
+      shared_gems = "#{shared_path}/vendor/gems"
+      vendor_gems = "#{release_path}/vendor/gems"
+
+      run "rm -f #{shared_path}/Gemfile && ln -s #{release_path}/Gemfile #{shared_path}/Gemfile"
+      run "mkdir -p #{shared_gems} && ln -s #{shared_gems} #{vendor_gems}"
+      run "cd #{release_path} && gem bundle --only #{rails_env}", :pty => true
+    end
+
+
+    desc "Install bash_files."
+    task :install_bash_files do
+      upload_asset("bashrc.erb", File.join(home_dir, ".bashrc"))
+      upload_asset("bash_profile", File.join(home_dir, ".bash_profile"))
+    end
+
+
+    desc "Install tpkgs."
+    task :tpkginstaller, :roles => [:web, :app] do
+      run_rake('tpkginstaller:install', "APPLICATION=#{app_name}")
+    end
+
+
+    desc "Install the crontab file."
+    task :cron, :roles => [:web, :app] do
+      run_rake('common:cron', "APPLICATION=#{app_name}")
+    end
+  end
+end

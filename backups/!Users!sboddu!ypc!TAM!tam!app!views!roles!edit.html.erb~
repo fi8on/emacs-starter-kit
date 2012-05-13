@@ -1,0 +1,5 @@
+<h2><%= link_to "Roles", roles_path %> &#187; <%= h(@group) %></h2>
+
+<%= render_tabs role_settings_tabs %>
+
+

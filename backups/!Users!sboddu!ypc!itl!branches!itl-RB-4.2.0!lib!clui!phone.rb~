@@ -1,0 +1,25 @@
+class Phone < ActiveRecord::Base
+  set_table_name "clui.phones"
+
+  belongs_to :phone_type
+
+  validates_presence_of :phone
+  validates_numericality_of :listing_id, :phone_type_id, :phone, :allow_blank=>true, :only_integer=>true, :greater_than=>0
+  validates_inclusion_of :primary, :allow_blank=>true, :in=>[true, false]
+  validates_length_of :phone, :allow_blank=>true, :is=>10, :message=> "should contain {{count}} digits"
+  validates_length_of :description, :allow_blank=>true, :maximum=>255
+  validates_each :phone, :allow_blank=>true do |record, attr, value|
+    record.errors.add attr, "cannot start with 0 or 1" if value[0..0] == '0' || value[0..0] == '1'
+    record.errors.add attr, "prefix cannot start with 0 or 1" if value[3..3] == '0' || value[3..3] == '1'
+    record.errors.add_to_base "invalid area code" if %w{211 311 411 511 555 611 711 811 911 900}.include? value[0..2]
+    record.errors.add_to_base "invalid phone prefix" if %w{211 311 411 511 555 611 711 811 911 900}.include? value[3..5]
+  end
+
+  def before_validation
+    # digits_only :phone
+  end
+
+  def type
+    # phone_type.name
+  end
+end

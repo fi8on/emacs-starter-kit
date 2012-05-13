@@ -1,0 +1,9 @@
+<% form_for(:user, :url => { :action => 'update' }, :html => {:method => :put}) do %>
+<div class="box">
+<% Role.all.sort.each do |role| %>
+<label><%= check_box_tag 'user[role_ids][]', group.id, @user.roles.include?(role) %> <%=h group %></label><br />
+<% end %>
+<%= hidden_field_tag 'user[role_ids][]', '' %>
+</div>
+<%= submit_tag l(:button_save) %>
+<% end %>

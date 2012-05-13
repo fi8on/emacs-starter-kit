@@ -1,0 +1,15 @@
+<h2>Confirmation</h2>
+<div class="warning">
+<p><strong><%=h @project_to_destroy %></strong><br />
+  Are you sure you want to delete this project and related data ?
+<% if @project_to_destroy.descendants.any? %>
+<br /><%= l(:text_subprojects_destroy_warning, content_tag('strong', h(@project_to_destroy.descendants.collect{|p| p.to_s}.join(', ')))) %>
+<% end %>
+</p>
+<p>
+    <%= form_tag(project_path(@project_to_destroy), :method => :delete) do %>
+    <label><%= check_box_tag 'confirm', 1 %> Yes </label>
+    <%= submit_tag "Delete" %>
+    <% end %>
+</p>
+</div>

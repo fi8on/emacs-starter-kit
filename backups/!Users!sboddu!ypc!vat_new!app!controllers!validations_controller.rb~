@@ -1,0 +1,57 @@
+class ValidationsController < ApplicationController
+#  before_filter :require_login
+#  filter_access_to :all
+  before_filter :set_attr_type, :only => [:edit,:update]
+  
+  def index    
+  end
+  
+  def edit
+    user =   !@current_user.blank?? @current_user.name : nil
+    options = { "attr_type" => @attr_type}
+    if @attr_type == "hours"
+      @hours_options = Hour::HOURS_OPTIONS
+      attribute_list = Hour.get
+      @attr = attribute_list[0]
+    end
+    
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def update
+    update_attributes = {}
+    statuses = params['status']
+    attr_ids = params['attr_ids']
+    if params.has_key?("coupon")
+       @coupon.update(params)
+    else
+      for i in 0..(params['attr_ids'].length - 1)
+        value = {}
+        id = params['attr_ids'][i]
+        value['status'] = params["#{id}_status"][0].downcase
+        value['status'] = 'Invalid'
+        value['comment'] = params['comment'][i]
+        update_attributes[params['attr_ids'][i]] = value
+      end
+    Hour.update(update_attributes.keys,update_attributes.values)
+    end
+    redirect_to  edit_validation_path 
+  end
+
+  def set_attr_type
+    @attr_type = ATTR_LIST.include?(params["id"])? params["id"]:"NONE"
+     if @attr_type == "coupons"
+       @coupon = Coupon.new
+       if @coupon.data.has_key?('error')
+         @error_attr = @coupon.data
+       else
+         @coupon.format_for_display
+       end
+     end
+  end
+ 
+end
+
+

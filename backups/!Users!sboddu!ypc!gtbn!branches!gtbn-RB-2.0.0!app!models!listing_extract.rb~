@@ -1,0 +1,4 @@
+class ListingExtract < ActiveRecord::Base
+  set_table_name 'ypc.listing_extract'
+  
+end

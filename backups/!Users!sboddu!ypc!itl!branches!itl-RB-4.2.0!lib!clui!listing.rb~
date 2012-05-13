@@ -1,0 +1,40 @@
+class Listing < ActiveRecord::Base
+  set_table_name "clui.listings"
+  set_sequence_name 'clui.listings_seq'
+
+
+  has_one :submission
+ # has_one :operation_hour
+ # has_one :primary_phone, :class_name=>'Phone', :conditions => {:primary=>true}
+  has_many :phones
+  has_many :accepted_payment_types
+  has_many :categories
+  has_many :websites
+
+  validates_associated :submission, :operation_hour, :phones, :accepted_payment_types, :categories, :websites
+  validates_presence_of  :name, :city, :state, :zip, :submission, :phones, :categories
+  validates_length_of :name,    :allow_blank=>true, :maximum=>255
+  validates_length_of :address, :allow_blank=>true, :maximum=>255
+  validates_length_of :city,    :allow_blank=>true, :maximum=>100
+  validates_length_of :state,   :allow_blank=>true, :is=>2
+  validates_length_of :zip,     :allow_blank=>true, :maximum=>10
+  # validates_inclusion_of :state, :allow_blank=>true, :in=>%w{AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY AS DC FM GU MH MP PW PR VI AE AA AE AE AE AP}
+  # validates_format_of :zip, :allow_blank=>true, :with=>/\A\d{5}(?:-\d{4})?\z/, :message=>"is not valid"
+
+#  LISTING_KEYS = ["name", "address", "city", "zip", "state"]
+
+  # def initialize(itl)
+  #   Listing.new({"name"=>itl.name, "address"=>itl.address, "city"=>itl.city, "zip"=>itl.zip, "state"=>itl.state})
+  # #  LISTING_KEYS.each {|t| p t }
+
+    
+  # end
+
+  # def method_available(name)
+    
+  # end
+  
+  # def before_validation
+  #   strip_whitespace :name, :address, :city, :state, :zip
+  # end
+end

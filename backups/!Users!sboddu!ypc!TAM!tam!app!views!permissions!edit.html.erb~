@@ -1,0 +1,6 @@
+<h2><%= link_to "Permissions", :controller => 'permissions', :action => 'index' %> &#187; <%=h @permission.name %></h2> 
+
+<% labelled_tabular_form_for :permission, @permission, :url => { :action => 'edit' }, :html => {:id => 'permission_form'} do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>

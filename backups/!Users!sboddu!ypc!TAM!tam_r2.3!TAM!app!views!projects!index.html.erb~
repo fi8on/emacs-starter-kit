@@ -1,0 +1,17 @@
+<div class="contextual">
+    <%= link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') %>
+ 
+</div>
+
+<h2><%=l(:label_project_plural)%></h2>
+
+<%= render_project_hierarchy(@projects)%>
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+<span class="my-project">Projects:-you are Member</span>
+</p>
+<% end %>
+
+
+<% html_title(l(:label_project_plural)) -%>

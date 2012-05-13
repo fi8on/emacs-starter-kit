@@ -1,0 +1,112 @@
+	.logo
+	{
+		font-family: 'Orbitron', serif;
+		font-weight: 600;
+		font-size: 60px;
+		color:#fff;
+		line-height:1;
+		margin:0px;
+		padding:0;
+	}
+
+	.header
+	{
+		width:100%;
+		height:50px;
+		background:#444;
+		border-bottom:1px solid #fff;
+		position:absolute;
+		margin:0;padding:0;
+		padding:25px;
+
+	}
+
+	.content
+	{
+		padding:100px 200px;
+	}
+
+	body, html
+	{
+		font-family:  Helvetica, Arial, "MS Trebuchet", sans-serif;
+		width:100%;
+		margin:0;
+		padding:0;
+		background:#fafafa;
+		line-height:135%;
+		color:#555;
+	}
+
+	h1,h2,h3,h4
+	{
+		font-family:  Helvetica, Arial, "MS Trebuchet", sans-serif;
+		color:#000;
+	}
+
+	.blog-note
+	{
+		float:right;
+	}
+	#demo_events_log
+	{    float: right;
+    height: 320px;
+    margin-left: 50px;
+    width: 200px;
+	}
+	#demo_parent p
+	{
+	   background:black;
+	   color:white;
+	}
+	.demo,#disqus_thread
+	{
+		clear:both;
+	}
+	
+	.demo
+	{
+	
+	   border:1px solid #aaa;
+	   padding:20px;
+	}
+	
+	input[type=text]
+	{
+	   width:150px;
+	}
+	
+	
+	.form-box
+	{    
+        border: 3px dashed #AAAAAA;
+        margin: 20px;
+        padding: 20px;
+        position: relative;
+        width: 400px;
+        font-size:30px;
+	}
+	
+	.form-box:hover
+	{
+	   border-color:#8CDFFF;
+	   color:#8CDFFF;
+	}
+	
+	.form-box input
+	{
+	       width:100%;
+        font-size:20px;
+        line-height:1;
+        margin:0;
+        padding:0;
+	}
+	
+	.form-box .toggleEdit-preview:hover
+	{
+	   border:none;
+	   padding:2px;
+	}
+	
+	#demo_form p{
+	   margin-left:20px;
+	}

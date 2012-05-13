@@ -1,0 +1,3 @@
+ 
+hellooww
+<%= (user_check_box_tags 'user[]', users).html_safe %>

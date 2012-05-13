@@ -1,0 +1,12 @@
+en:
+  # Text direction: Left-to-Right (ltr) or Right-to-Left (rtl)
+  direction: ltr
+
+  # User form fields
+  field_user: User
+  field_firstname: Firstname
+  field_lastname: Lastname
+  field_mail: Email
+  field_login: Login
+  field_admin: Administrator
+  notice_file_not_found: File not found

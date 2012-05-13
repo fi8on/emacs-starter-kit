@@ -1,0 +1,15 @@
+class Submission < ActiveRecord::Base
+  belongs_to :listing
+
+  validates_presence_of :status, :source, :username
+  validates_numericality_of :listing_id, :ypid, :allow_blank=>true, :only_integer=>true, :greater_than=>0
+  validates_length_of :status, :allow_blank=>true, :maximum=>10
+  validates_length_of :source, :allow_blank=>true, :maximum=>10
+  validates_length_of :username, :allow_blank=>true, :maximum=>255
+  validates_length_of :feedback, :allow_blank=>true, :maximum=>1000
+  validates_format_of :ip_address, :allow_blank=>true, :with => /\A(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)(?:\.(?:25[0-5]|(?:2[0-4]|1\d|[1-9])?\d)){3}\z/, :message=>"is not valid"
+
+  def before_validation
+    strip_whitespace :status, :source, :username, :ip_address
+  end
+end

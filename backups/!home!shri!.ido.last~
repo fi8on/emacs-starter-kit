@@ -1,0 +1,31 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/home/shri/.emacs.d/" . "shri/")
+ ("/home/shri/" . ".emacs.d/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/home/shri/.emacs.d/shri/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "customize.el"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/home/" (20396 18776) "shri/" "../" "./")
+
+ ("/home/shri/" (20399 22203) ".android/" ".bashrc" "Videos/" ".gnome2_private/" ".xscreensaver-getimage.cache" ".xsession-errors" ".gnome2/" "Titanium Studio Workspace/" ".gtk-bookmarks" ".m3u/" ".goutputstream-JSISDW" ".screenlets/" ".xscreensaver" ".java/" ".xsession-errors.old" ".thumbnails/" ".bashrc.backup" ".bash_logout" ".cache/" "Public/" ".macromedia/" ".dbus/" "oab-java6.sh.log" ".HashCheck/" ".dmrc" ".local/" ".goutputstream-RXWUDW" "Pictures/" ".ido.last" "Documents/" ".pam_environment" ".scripts/" ".tilda/" "Ubuntu One/" ".bash_history" "Desktop/" ".gstreamer-0.10/" ".aptanasecure/" ".Xdefaults" "Music/" "octave-core" ".dropbox-dist/" ".adobe/" ".conky/" ".ICEauthority" ".themes/" ".octave_hist" "Downloads/" ".sound/" ".gconf/" "../" ".thunderbird/" ".goutputstream-XBYRDW" ".recentf" ".fontconfig/" ".dropbox/" ".gtkrc-2.0" ".Xauthority" "Dropbox/" ".eclipse/" "applications/" ".pki/" "Templates/" ".mozilla/" ".pulse/" "oab-java6.sh" ".pulse-cookie" ".profile" "./" ".titanium/" ".icons/" ".config/" ".emacs.d/")
+
+ ("/home/shri/.emacs.d/" (20399 22203) "starter-kit-perl.el" "starter-kit-defuns.elc" "._color-theme" "auto-save-list/" "COPYING" "package.elc" "._rsense.el" "starter-kit-bindings.elc" "init.elc" "emacros.el" "elpa-to-submit/" "dominating-file.el" "starter-kit-registers.el" "shri/" "ac-comphist.dat" "tramp" "starter-kit-elpa.el" "starter-kit-js.elc" "starter-kit-ruby.elc" "fuzzy.elc" "._psvn.el" "rsense.el" "starter-kit-lisp.el" "dominating-file.elc" "starter-kit-bindings.el" "starter-kit-lisp.elc" "starter-kit-registers.elc" "._emacros.elc" "._color-theme-solarized" "._emacros.el" "README.markdown" "auto-complete-config.elc" "backups/" "starter-kit-eshell.elc" "fuzzy.el" "auto-complete-config.el" "emacros.elc" "color-theme-solarized/" "popup.elc" "ac-dict/" "starter-kit-js.el" "rsense.elc" "starter-kit-defuns.el" "../" "color-theme/" "starter-kit-eshell.el" "starter-kit-misc.elc" "popup.el" "psvn.elc" "starter-kit-misc.el" "starter-kit-elpa.elc" "package.el" "psvn.el" "auto-complete.el" "starter-kit-ruby.el" "TODO" "auto-complete.elc" "init.el" "places" "./" "loaddefs.el" "emacs-visited-files" "starter-kit-perl.elc" "elpa/")
+
+ ("/home/shri/.emacs.d/shri/" (20399 21122) "customize.el" "customize.el~" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

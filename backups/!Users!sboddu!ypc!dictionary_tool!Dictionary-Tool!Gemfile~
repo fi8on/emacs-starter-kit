@@ -1,0 +1,32 @@
+source 'http://rubygems.org'
+source 'http://gems.github.wc1.yellowpages.com'
+source 'http://gems.atti.wc1.yellowpages.com'
+
+gem 'rails', '3.0.4'
+gem 'mongrel', "1.2.0.pre2"
+gem 'json'
+gem 'passenger'
+gem 'mysql2', '0.2.11'
+group :development do
+  gem 'sqlite3'
+end
+gem 'unicorn'
+# Deploy with Capistrano
+gem 'capistrano'
+#To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
+gem 'ruby-debug'
+gem 'addressable'
+
+group :deploy do
+  gem 'atti_cap', '0.3.1'
+end
+
+gem 'newrelic_rpm'
+
+group :development, :test do
+  gem 'rspec', '2.5'
+  gem 'rspec-rails'
+  gem 'rcov'
+  gem 'watchr'
+  gem 'factory_girl_rails'
+end

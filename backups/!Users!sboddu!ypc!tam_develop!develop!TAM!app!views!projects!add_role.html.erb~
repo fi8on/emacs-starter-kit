@@ -1,0 +1,7 @@
+
+<h2><%= link_to "Roles", roles_path %> &#187; New Role</h2>
+
+<%= form_for(@role, :url => {:action => 'create' },:html => {:id => 'role_form'}) do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<p><%= f.submit "Create" %></p>
+<% end %>

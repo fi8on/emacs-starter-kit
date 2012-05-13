@@ -1,0 +1,18 @@
+# Your application name
+appname=syndication
+
+# Location where application logs are located
+loglocation=/usr/local/nextgen/syndication/shared/log
+
+# Email address where you want alerts to be sent to
+# Make sure all PRODUCTION ALERTS GO TO log-alerts@yplist.flight.yellowpages.com
+email=log-alerts@yplist.flight.yellowpages.com
+
+# list of files that needs to be copied to mogwai
+mogwailist=EventRequestLog.log,EventImpressionLog.log,EventClickLog.log,AdvClickLog.log,AdvBusinessImpressionLog.log,FreeClickLog.log,FreeBusinessImpressionLog.log,BusinessRequestLog.log,access.log,error.log,click_error.log,request_error.log,production_
+
+# If you have a separate action to run after log rotation, set it
+# here (without quotes, spaces OK).   You can use this to reopen
+# logs for nginx/unicorn/rainbows servers and avoid copytruncate
+# reopenaction=/home/t/etc/init.d/my_application reopen-logs
+

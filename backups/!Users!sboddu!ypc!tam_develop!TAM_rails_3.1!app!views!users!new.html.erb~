@@ -1,0 +1,41 @@
+<h2><%= link_to "Users", :controller => 'users', :action => 'index' %>  &#187; New User</h2>
+
+<div id="tab-search-users" class="tab-search" style="">
+
+  <div class="splitcontentleft">
+    <% users = User.active.find(:all, :limit => 100)  %>
+    <% if users.any? %>
+    <% form_for(@users, :url => {:action => 'create'},  :html => {:class => nil}) do |f| %>
+    <fieldset>
+      <legend>Users</legend>
+      <p>
+        <%= label_tag "user_search", "User Search" %>
+        <%= text_field_tag 'user_search', nil %>
+      </p>
+      <%= observe_field(:user_search, :frequency => 1,    :update =>   :users,   :url => { :controller => 'users', :action => 'autocomplete_for_user',:id =>2 }, :with => 'q')    %>
+      <div id="users">
+        <%= user_check_box_tags 'user[]', users %>
+      </div>
+    </fieldset>
+    <p>
+      <%= submit_tag "Add" %>
+    </p>
+  <% end %>
+    <% end %>  
+  </div>
+
+  <a  href="javascript:toggle();" id="non-atti-users"  class="non-atti-link"> Non-ATTi Users <-- (Click here)</a>
+<div id="toggle-non-atti" style="display: none">  
+  <div id="non-att-user-form" class="splitcontentright">
+    <% labelled_tabular_form_for :user, @user, :url => { :action => "create" }, :html => { :class => nil } do |f| %>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <p>
+      <%= submit_tag "Create" %>
+      <%= submit_tag "Create and continue", :name => 'continue' %>
+    </p>
+    <% end %>
+  </div>
+</div>
+</div>
+
+

@@ -1,0 +1,16 @@
+### Generated bashrc via cap task 'common:install_bash_files'
+
+case "${PATH}" in
+<%= ruby_prefix %>/bin:*)
+  ;;
+*)
+  export PATH=<%= path %>
+  ;;
+esac
+
+# Only need this for cruise control javascript testing.
+export JAVA_HOME=/usr/java/jdk1.5.0_06
+export PATH=$PATH:$JAVA_HOME/bin
+
+export RAILS_ENV=<%= app_env %>
+export RACK_ENV=<%= app_env %>

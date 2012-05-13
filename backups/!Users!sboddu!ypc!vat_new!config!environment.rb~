@@ -1,0 +1,10 @@
+# Load the rails application
+require File.expand_path('../application', __FILE__)
+
+# Initialize the rails application
+VatNew::Application.initialize!
+
+TIMEZONE="Pacific Time (US & Canada)"
+ATTR_LIST = ['hours','coupons']
+SSO_USERMAP = {'A' => :admin, 'U' => :guest,  'E' => :data_export,'L' => :data_import}
+SSO_ROLES =  [:admin, :guest,:data_export,:data_import]

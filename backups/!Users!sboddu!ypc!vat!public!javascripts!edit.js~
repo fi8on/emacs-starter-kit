@@ -1,0 +1,56 @@
+
+if($("#content_resize").hasClass("content_resize")) {
+
+  $.ajax({ url: "/validations/new", dataType: 'json', 
+           success: function(data){
+             var hour_attributes = [];
+             var url_attributes = [];
+             var coupon_attributes = [];
+             $.each(data,function(index,obj){
+               //   if(obj.attr_type == "hours_op"){
+               hour_attributes.push({
+                 att_type : obj.attr_type,
+                 ypid : obj.import_attribute.id,
+                 status : obj.import_attribute.status,
+                 extra_data : obj.extra_data,
+                 pre_validation : obj.import_attribute.pre_validation,
+                 post_validation : format_hours(obj.import_attribute.post_validation),
+                 comment : obj.import_attribute.comment,
+                 created_at : obj.import_attribute.created_at,
+                 updated_at : obj.import_attribute.updated_at,
+                 user : obj.import_attribute.users
+               });
+               
+
+             //   }
+               // else(obj.attr_type == "url"){
+               //   url_attributes.push({
+               //     att_type : obj.attr_type,
+               //     ypid : obj.attribute.id,
+               //     status : obj.attribute.status,
+               //   pre_validation : obj.attribute.pre_validation,
+               //   post_validation : obj.attribute.post_validation,
+               //   created_at : obj.attribute.created_at,
+               //   updated_at : obj.attribute.updated_at,
+               //   user : obj.attribute.users
+               // });
+                 
+               //  }
+                  
+             });
+             
+             if(data.length < 1){
+               $('#attribue_submit').hide();
+               $('.fbg').replaceWith('<h2>No more data for validation </h2>');
+             }
+             
+             // Compile the inline template as a named template
+             //ensures that the conversion from markup to a
+             //compiled-template function only happens once everytime
+             //a template is rendered the markup is converted to
+             //compiled function. 
+             $( "#attributeTemplate" ).template( "att_template" );
+             $.tmpl( "att_template", hour_attributes).appendTo( "#AttributeHolder" );            
+           }
+         }); 
+};

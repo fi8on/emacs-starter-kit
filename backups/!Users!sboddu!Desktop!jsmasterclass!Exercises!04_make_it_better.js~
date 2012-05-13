@@ -1,0 +1,33 @@
+// taken from http://www.dreamincode.net/code/snippet154.htm
+//
+// Find the weaknesses, and clean up the code.
+// Find at least 3 things you can make better!
+//
+// Test numbers (return true):
+// 4111111111111111
+// 378282246310005
+// 5555555555554444
+
+function isCreditCard( CC ) {
+     if (CC.length > 19)
+          return (false);
+
+     sum = 0; mul = 1; l = CC.length;
+     for (i = 0; i < l; i++)
+     {
+          digit = CC.substring(l-i-1,l-i);
+          tproduct = parseInt(digit ,10)*mul;
+          if (tproduct >= 10)
+               sum += (tproduct % 10) + 1;
+          else
+               sum += tproduct;
+          if (mul == 1)
+               mul++;
+          else
+               mul--;
+     }
+     if ((sum % 10) == 0)
+          return (true);
+     else
+          return (false);
+}

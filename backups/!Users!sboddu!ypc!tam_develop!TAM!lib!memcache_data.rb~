@@ -1,0 +1,8 @@
+class MemcacheData
+
+
+  def self.cache_users
+    p "--"*60
+  end
+
+end

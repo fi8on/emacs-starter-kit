@@ -1,0 +1,48 @@
+class RolesController < ApplicationController
+  layout 'admin'
+  
+  before_filter :require_admin
+
+  verify :method => :post, :only => [ :destroy, :move ],
+         :redirect_to => { :action => :index }
+
+  def index
+    @role_pages, @roles = paginate :roles, :per_page => 25, :order => 'builtin, position'
+    render :action => "index", :layout => false if request.xhr?
+  end
+
+  def new
+    # Prefills the form with 'Non member' role permissions
+    @role = Role.new(params[:role] || {:permissions => Role.non_member.permissions})
+    if request.post? && @role.save
+      flash[:notice] = "Role creation Successful"
+      redirect_to :action => 'index'
+    else
+      @permissions = @role.setable_permissions
+      @roles = Role.find :all, :order => 'builtin, position'
+    end
+  end
+
+  def edit
+    @role = Role.find(params[:id])
+    if request.post? and @role.update_attributes(params[:role])
+      flash[:notice] = "Role update Successful"
+      redirect_to :action => 'index'
+    else
+      @permissions = @role.setable_permissions  
+    end
+  end
+
+  def destroy
+    @role = Role.find(params[:id])
+    @role.destroy
+    
+    redirect_to :action => 'index'
+  rescue Exception => e
+    p e,"----"*70
+    flash[:error] =  "Cannot removing the role"
+    redirect_to :action => 'index'
+  end
+  
+ 
+end

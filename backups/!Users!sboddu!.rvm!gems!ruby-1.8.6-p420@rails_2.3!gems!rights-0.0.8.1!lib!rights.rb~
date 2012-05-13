@@ -1,0 +1,32 @@
+require 'rights/client'
+require 'rights/controller_additions'
+
+module Rights
+  @@app_name = nil
+  @@env = nil
+  @@url = "http://qa-tam.np.wc1.yellowpages.com:7071"
+  def self.server_url
+    @@url
+  end
+  
+  def self.server_url=(new_url)
+    @@url = new_url
+  end
+
+  def self.app_name
+    @@app_name
+  end
+
+  def self.app_name=(appname)
+    @@app_name = appname
+  end
+
+  def self.env
+    @@env
+  end
+  
+  def self.env=(envi)
+    @@env = envi
+  end
+  
+end

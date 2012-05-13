@@ -1,0 +1,43 @@
+class MemberPermission < ActiveRecord::Base
+  belongs_to :member
+  belongs_to :permission
+  
+  after_destroy :remove_member_if_empty
+
+  after_create :add_role_to_users
+  after_destroy :remove_role_from_users
+  
+  validates_presence_of :permission
+  
+  def validate
+    errors.add :permission_id, :invalid if permission && !permission.member?
+  end
+  
+  def inherited?
+    !inherited_from.nil?
+  end
+  
+  private
+  
+  def remove_member_if_empty
+    if member.permissions.empty?
+      member.destroy
+    end
+  end
+  
+  def add_role_to_users
+    if member.principal.is_a?(Role)
+      member.principal.users.each do |user|
+        user_member = Member.find_by_project_id_and_user_id(member.project_id, user.id) || Member.new(:project_id => member.project_id, :user_id => user.id)
+        user_member.member_permissions << MemberPermission.new(:permission => permission, :inherited_from => id)
+        user_member.save!
+      end
+    end
+  end
+  
+  def remove_role_from_users
+    MemberPermission.find(:all, :conditions => { :inherited_from => id }).group_by(&:member).each do |member, member_permissions|
+      member_permissions.each(&:destroy)
+    end
+  end
+end

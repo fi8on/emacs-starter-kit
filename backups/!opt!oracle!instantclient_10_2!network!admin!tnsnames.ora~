@@ -1,0 +1,1619 @@
+#
+# tnsnames.ora
+#
+#-----------------------------------------------------------------------------
+#    OID Databases
+#-----------------------------------------------------------------------------
+irvoid1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = oraldap.wc1.yellowpages.com)(PORT = 1521))
+     (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = irvoid1.yellowpages.com))
+   )
+
+ashoid1.yellowpages.com = 
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = oraldap.ev1.yellowpages.com)(PORT = 1521))
+     (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = ashoid1.yellowpages.com))
+   )
+ 
+#-----------------------------------------------------------------------------
+#  FMS Databases  
+#-----------------------------------------------------------------------------   
+fmsprod.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvfmsdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = fmsprod))
+   )
+
+fmsdev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvdevfmsdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = fmsdev))
+   )
+
+fmsqa.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qafmsdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = fmsqa))
+   )
+
+fmsstg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qafmsdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = fmsstg))
+   )
+
+fmsprodjr.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvfmsjr1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsprodjr.yellowpages.com))
+   )
+   
+fmsdevjr.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvfmsjr1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsdevjr.yellowpages.com))
+   )     
+
+fmsdevl.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devfmsdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsdevl.yellowpages.com))
+   )
+
+fmsqal.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qafmsdb3.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsqal.yellowpages.com))
+   )
+
+#-----------------------------------------------------------------------------
+#    OTG systems used by FMS
+#-----------------------------------------------------------------------------
+
+solo_otg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=tg4msql))
+     (HS=ok)
+   )
+
+dial_otg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=webmssql))
+     (HS=ok)
+   )
+
+soloqa.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=soloqa))
+     (HS=ok)
+   )
+
+soloweblead.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=tg4msql))
+     (HS=ok)
+   )
+
+solopayg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=solopayg))
+     (HS=ok)
+   )
+
+solopayc.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=solopayc))
+     (HS=ok)
+   )
+soloccap.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=soloccap))
+     (HS=ok)
+   )
+
+keenprd.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL= TCP)(Host= oracleotg.prod.wc1.yellowpages.com)(Port= 1521))
+     (CONNECT_DATA = (SID=keenprd))
+     (HS=ok)
+   )
+
+#-----------------------------------------------------------------------------
+#  LMS Databases  
+#-----------------------------------------------------------------------------    
+IRVLMSINFQA1_INFQA.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = IRVLMSINFQA1.flight.yellowpages.com)(PORT = 1521)))
+     (CONNECT_DATA = (SID = infqa))
+   )
+   
+infdev.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(Host = irvlmsinfdev1.flight.yellowpages.com)(Port = 1521)))
+     (CONNECT_DATA = (SID = infdev))
+   )
+
+IRVLMSINF1_INFPR.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = IRVLMSINF1.flight.yellowpages.com)(PORT = 1521)))
+     (CONNECT_DATA = (SID = infpr))
+   )
+
+INFPR.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = IRVLMSINF1.flight.yellowpages.com)(PORT = 1521)))
+     (CONNECT_DATA = (SID = infpr))
+   )
+
+#-----------------------------------------------------------------------------
+#  YP Databases  
+#-----------------------------------------------------------------------------
+
+ypnqa.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvqastgdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = ypnqa))
+   )
+
+ypnqa1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvqastgdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = ypnqa1))
+   )
+
+ypndev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devlistdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = ypndev))
+   )
+
+dev1yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devlistdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = dev1yp))
+   )
+
+qa1yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qalistdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = qa1yp))
+   ) 
+
+qa2yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qafastdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = qa2yp))
+   )
+
+listsb.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvstgdb2.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = listdb))
+   )
+
+qa3yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvstgdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = qa3yp))
+   )
+
+dev2yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devlistdb2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = dev2yp))
+   )
+
+dev3yp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devlistdb3.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = dev3yp))
+   )
+
+#-----------------------------------------------------------------------------
+#  IYP Databases  
+#-----------------------------------------------------------------------------
+
+iypprd.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvafrontier.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypprd))
+   )
+
+# another name for iypprd
+AUTOSYSDB.YELLOWPAGES.COM =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = irvafrontier.flight.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = iypprd))
+   )
+
+iypstby.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvafrontier2.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypprd))
+   )
+
+iypndev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = golddb01.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypndev))
+   )
+
+iypndev1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = golddb01.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypndev1))
+   )
+
+iypnqa.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = steeldb01.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypnqa))
+   )
+
+iypnqa1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = steeldb01.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iypnqa1))
+   )
+
+iypprdjr.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvaftjr1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = iypprdjr.yellowpages.com)
+    )
+   )
+
+iyp10g.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvqaafdb3.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = iyp10g))
+   )
+
+qa1iyp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvqaafdb3.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = qa1iyp))
+   )
+
+qa2iyp.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qaafdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = qa2iyp))
+   )
+
+#-----------------------------------------------------------------------------
+#   Enterprise Manager Grid Databases    
+#-----------------------------------------------------------------------------
+
+emrep.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(Host = oramgrdb1.wc1.yellowpages.com)(Port = 1521)))
+     (CONNECT_DATA = (SID = emrep))
+   )
+
+#-----------------------------------------------------------------------------
+#  Fast Databases  
+#-----------------------------------------------------------------------------
+
+ashfstpr.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = stgdb1.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = ashfstpr.yellowpages.com))
+   )
+
+
+ashfstpr_solr.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = stgdb1.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = solr_svc.yellowpages.com))
+   )
+
+ashfstsb.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = stgdb2.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = ashfstsb))
+   )
+
+gridprd.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(Host = gridproddb.ev1.yellowpages.com)(Port = 1521)))
+     (CONNECT_DATA = (SID = gridprd))
+   )
+
+#-----------------------------------------------------------------------------
+#    NG (web) Standalone Databases
+#-----------------------------------------------------------------------------
+
+webstg1.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = stgwebdb1.np.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = webstg1))
+   )
+
+webqa1.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = qangdb2.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = webqa1))
+   )
+
+
+irvwebstby.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webstbydb.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = irvwebdb))
+   )
+
+webdev1.yellowpages.com =
+   (DESCRIPTION =
+    (ADDRESS_LIST =
+     (ADDRESS = (PROTOCOL = TCP)(HOST = devngdb1.wc1.yellowpages.com)(PORT = 1521)))
+     (CONNECT_DATA = (SID = webdev1))
+   )
+
+#-----------------------------------------------------------------------------
+#  Other Databases  
+#-----------------------------------------------------------------------------
+
+irvwiki.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = wikidb1.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = irvwiki.yellowpages.com))
+   )
+
+ashwiki.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = wikidb1.prod.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = ashwiki.yellowpages.com))
+   )
+
+wikidev.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = wikidev-db.np.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = wikidev.yellowpages.com))    )
+
+irvjira.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = jiradb1.prod.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = irvjira.yellowpages.com))
+   )
+
+ashjira.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = jiradb1.prod.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = ashjira.yellowpages.com))
+   )
+
+jiradev.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = devjira-db.np.wc1.yellowpages.com) (PORT = 1521))      
+      (CONNECT_DATA = (SID = jiradev))
+   )
+
+autoqa.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = steeldb01.flight.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = autoqa))
+   )
+
+autoqa1.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = qaafdb1.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SID = autoqa1))
+   )
+
+lgendev.yellowpages.com = 
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = leadgen-dev.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = lgendev))
+   )
+
+lgenqa.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = leadgen-qa.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = lgenqa))
+   )
+
+lgenint.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = leadgen-int.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = lgenint))
+   )
+
+irvplndb.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = capacityplandb.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = irvplndb.yellowpages.com))
+   )
+
+ashplndb.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = capacityplandb.ev1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = ashplndb.yellowpages.com))
+   )
+
+isellprd.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = iselldb.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = isellprd))
+   )
+
+gridqa.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = grid-qa-oracle.np.ev1.yellowpages.com)(PORT = 1521)) 
+      (CONNECT_DATA = (SID = gridqa))
+   )
+
+isellqa.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = qaiselldb.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = isellqa))
+   )
+
+iselldev.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = deviselldb.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = iselldev))
+   )
+
+jiradev2.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = devjira-db.np.ev1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = jiradev2))
+   )
+
+jiradev3.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = sprinkles-db2.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = jiradev3))
+   )
+
+
+lgenstg.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = leadgen-stg.prod.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = lgenstg))
+   )
+
+devmdm.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = mdmdb-dev.np.wc1.yellowpages.com)(PORT = 1521))
+      (CONNECT_DATA = (SID = devmdm))
+   )
+
+#-----------------------------------------------------------------------------
+#    TargetingDB
+#-----------------------------------------------------------------------------
+tdbdev.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = tdb-oracle-dev.np.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = tdbdev.yellowpages.com))
+   )
+
+tdbqa.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = tdb-oracle-qa.np.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = tdbqa.yellowpages.com))
+   )
+
+tdbsbx.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = tdb-oracle-sbx.prod.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = tdbsbx.yellowpages.com))
+   )
+
+tdbstg.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = tdb-oracle-stage.np.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = tdbstg.yellowpages.com))
+   )
+                                                                                                              
+tdbprod.yellowpages.com =
+   (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP) (HOST = tdb-oracle.wc1.yellowpages.com) (PORT = 1521))
+      (CONNECT_DATA = (SERVICE_NAME = tdbprod.yellowpages.com))
+   )
+
+#-----------------------------------------------------------------------------
+#    Clusters
+#-----------------------------------------------------------------------------
+itestdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = itestdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+itestdb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = itestdb.yellowpages.com))
+   )
+
+itestdb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac2.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = itestdb.yellowpages.com))
+   )
+
+itestdb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac3.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = itestdb.yellowpages.com))
+   )
+
+atestdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = testrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = ON)
+   (FAILOVER=ON)	
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = atestdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ ) 
+
+atestdb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac1.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = atestdb.yellowpages.com))
+   )
+
+atestdb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac2.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = atestdb.yellowpages.com))
+   )
+
+atestdb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = testrac3.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = atestdb.yellowpages.com))
+   )
+
+
+irvwebdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON) 
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_rservices.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebrservices.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_xmlapi.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebxmlapi.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_publisher.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebpublisher.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_wolfpack.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irv_wolfpack.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_csr.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebcsr.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_admintool.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebadmintool.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_solr.yellowpages.com =
+	(DESCRIPTION=
+		(ADDRESS_LIST=
+			(FAILOVER=ON)
+			(LOAD_BALANCE=ON)
+			(ADDRESS=(PROTOCOL=TCP)(HOST=webrac1-v.wc1.yellowpages.com)(PORT=1521))
+			(ADDRESS=(PROTOCOL=TCP)(HOST=webrac2-v.wc1.yellowpages.com)(PORT=1521))
+			(ADDRESS=(PROTOCOL=TCP)(HOST=webrac3-v.wc1.yellowpages.com)(PORT=1521))
+			(CONNECT_DATA=
+			(SERVICE_NAME=irvwebsolr.yellowpages.com)
+		)
+	)
+)
+
+irvwebdb_apps.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_buzz.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebbuzz.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_duhlist.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebduhlist.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+irvwebdb_astroman.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = irvwebastroman.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+
+irvweb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvwebdb.yellowpages.com))
+   )
+
+irvweb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac2.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvwebdb.yellowpages.com))
+   )
+
+irvweb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac3.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvwebdb.yellowpages.com))
+   )
+
+ashwebdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON) 
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_rservices.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebrservices.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_xmlapi.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebxmlapi.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_publisher.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebpublisher.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+
+ashwebdb_csr.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebcsr.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_admintool.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebadmintool.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_solr.yellowpages.com =
+ (DESCRIPTION=
+   (ADDRESS_LIST=
+	(FAILOVER=ON)
+	(LOAD_BALANCE=ON)
+	(ADDRESS=(PROTOCOL=TCP)(HOST=webrac1-v.ev1.yellowpages.com)(PORT=1521))
+	(ADDRESS=(PROTOCOL=TCP)(HOST=webrac2-v.ev1.yellowpages.com)(PORT=1521))
+	(ADDRESS=(PROTOCOL=TCP)(HOST=webrac3-v.ev1.yellowpages.com)(PORT=1521))
+	(CONNECT_DATA=
+	(SERVICE_NAME=ashwebsolr.yellowpages.com)
+       )
+    )
+ )
+
+ashwebdb_buzz.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebbuzz.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+ashwebdb_astroman.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = webrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE =ON)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebastroman.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+
+ashweb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac1.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashwebdb.YELLOWPAGES.COM))
+   )
+
+ashweb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac2.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashwebdb.yellowpages.com))
+   )
+
+ashweb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = webrac3.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashwebdb.yellowpages.com))
+   )
+
+listdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = listdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+listdb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = fastrac1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = listdb.yellowpages.com))
+   )
+
+listdb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = fastrac2.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = listdb.yellowpages.com))
+   )
+listdb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = fastrac3.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = listdb.yellowpages.com))
+   )
+
+list_batchjob.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = batchjob.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+
+list_pcd2.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_pcd2.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_mdmapi.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_mdmapi.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_extd.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_extd.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_index.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_index.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_astro.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_astro.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_datatool.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_datatool.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_client.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = list_client.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+list_ldbapi.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = fastrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (FAILOVER=ON)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ldbapi.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+mdmdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = mdmrac1vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = mdmrac2vip.wc1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = mdmrac3vip.wc1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = mdmdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 3)
+     )
+   )
+ )
+
+mdmdb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = mdmrac1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = mdmdb.yellowpages.com))
+   )
+
+mdmdb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = mdmrac2.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = mdmdb.yellowpages.com))
+   )
+
+mdmdb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = mdmrac3.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = mdmdb.yellowpages.com))
+   )
+
+
+########################################
+# websplanet
+########################################
+
+awebpdb.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (CONNECT_DATA =
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = awebpdb.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+awebpdb_websplanet.yellowpages.com =
+ (DESCRIPTION =
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac1-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac2-v.ev1.yellowpages.com)(PORT = 1521))
+   (ADDRESS = (PROTOCOL = TCP)(HOST = planetrac3-v.ev1.yellowpages.com)(PORT = 1521))
+   (LOAD_BALANCE = yes)
+   (CONNECT_DATA = 
+     (SERVER = DEDICATED)
+     (SERVICE_NAME = ashwebsplanet.yellowpages.com)
+     (FAILOVER_MODE=
+        (TYPE = SELECT)
+        (METHOD = BASIC)
+        (RETRIES = 10)
+        (DELAY = 2)
+     )
+   )
+ )
+
+awebpdb1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = planetrac1.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = awebpdb.yellowpages.com))
+   )
+
+awebpdb2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = planetrac2.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = awebpdb.yellowpages.com))
+   )
+
+awebpdb3.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = planetrac3.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = awebpdb.yellowpages.com))
+   )
+
+##############################################
+
+qassodb.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qassodb1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = qassodb.yellowpages.com))
+)
+
+ashdwstg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = sundb1.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashdwstg.yellowpages.com))
+)
+
+irvsso.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = ssodb1.prod.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvsso.yellowpages.com))
+)
+
+ashsso.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = ssodb1.prod.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashsso.yellowpages.com))
+)
+
+crpmigdb.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = corp-migrationdb.prod.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = crpmigdb.yellowpages.com))
+)
+
+qa2mdm.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qamdmdb2.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = qa2mdm.yellowpages.com))
+)
+
+lgenpsqa.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = leadgen-psqa.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lgenpsqa.yellowpages.com))
+)
+
+lgenpsin.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = leadgen-psint.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lgenpsin.yellowpages.com))
+)
+
+devauto1.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = autosysdev1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = devauto1.yellowpages.com))
+)
+
+
+irvwiki2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = wiki2db.prod.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvwiki2.yellowpages.com))
+)
+
+ashwiki2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = wiki2db.prod.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashwiki2.yellowpages.com))
+)
+
+fmsdev2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvdevfmsdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsdev2.yellowpages.com))
+)
+
+
+lwesdev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devlwescollectordb1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lwesdev.yellowpages.com))
+)
+
+
+lgendev2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = leadgen-dev2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lgendev2.yellowpages.com))
+)
+
+isellstg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = isellstgdb.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = isellstg.yellowpages.com))
+)
+
+webspstg.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = planetstg.np.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = webspstg.yellowpages.com))
+)
+
+lmcfgprod.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = logminer1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lmcfgprod.yellowpages.com))
+)
+
+ssodev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = devssodb1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ssodev.yellowpages.com))
+)
+
+fmsqa2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = qafmsdb1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsqa2.yellowpages.com))
+)
+
+irvblog.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = blogdb.prod.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvblog.yellowpages.com))
+)
+
+ashblog.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = blogdb.prod.ev1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashblog.yellowpages.com))
+)
+
+fmsprod2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = irvfmsdb1.flight.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = fmsprod2.yellowpages.com))
+)
+
+irvamdev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = amtrac1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvamdev.yellowpages.com))
+)
+
+ashamdev.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = amtrac2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = ashamdev.yellowpages.com))
+)
+
+lgenqa2.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = leadgen-qa2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lgenqa2.yellowpages.com))
+)
+
+lgendemo.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = leadgen-demo.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = lgendemo.yellowpages.com))
+)
+
+stg1af.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = afstgdb.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = stg1af.yellowpages.com))
+)
+
+qa1auto.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = autosysqa1.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = qa1auto.yellowpages.com))
+)
+
+qa2auto.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = autosysqa2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = qa2auto.yellowpages.com))
+)
+
+
+qa3auto.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = autosysqa3.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = qa3auto.yellowpages.com))
+)
+
+autosys.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = autosys1.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = autosys.yellowpages.com))
+)
+
+irvwmirr.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = wikidb-mirror.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvwmirr.yellowpages.com))
+)
+
+
+irvjmirr.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = jiradb1-mirror.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA =
+     (SERVICE_NAME = irvjmirr.yellowpages.com))
+)
+
+#---------------------
+# Vishal DB
+#---------------------
+vishaldb.yellowpages.com =
+   (DESCRIPTION =
+     (ADDRESS = (PROTOCOL = TCP) (HOST = vishalmehta2.np.wc1.yellowpages.com) (PORT = 1521))
+     (CONNECT_DATA = (SID = vishaldb))
+   )
+
+#-----------------------------------------------------------------------------
+#    End of File
+#-----------------------------------------------------------------------------
+   
+   

@@ -1,0 +1,42 @@
+module CategoryAttributes
+  module AttributesHelper
+    CSS = ".attribute-input label.S, .attribute-input label.M{display:block;} .attribute-input ul{height:150px;overflow:auto;border: solid 1px #DDD;padding-left: 3px;}.attribute-input li{margin: 4px 0;font-size: 1.1em;}.attribute-input label{font-weight:bold;font-size:1.1em;}"
+    
+    # lui attributes
+    # -----------------------------------------
+    def render_html()
+      str  = <<-END
+      <div class='attribute-input'>
+      <label class='#{self.group}'>#{self.label}</label>
+      #{render_input}
+      </div>
+    END
+    end
+    
+    def render_input()
+      if is_single?
+        inputs = ["<li><input type='radio' name='listing_attrs[#{self.attr_code}]' value='None' /> None</li>"]
+        inputs += self.allowed_values.collect do |allowed|
+          checked =  current_values.include?(allowed) ? "CHECKED='checked'" : ""
+          <<-HTML
+          <li>
+            <input type='radio' name='listing_attrs[#{self.attr_code}]' value='#{allowed}' #{checked} /> #{allowed}
+          </li>
+        HTML
+        end
+        "<ul>" + inputs.join(" ") + "</ul>"
+      else
+        # inputs = attribute['permissible_values'].collect do |permissible|
+        inputs = self.allowed_values.collect do |allowed|
+          checked =  current_values.include?(allowed) ? "CHECKED='checked'" : ""
+          <<-HTML
+          <li>
+            <input type='checkbox' name='listing_attrs[#{self.attr_code}][]' value='#{allowed}' #{checked} /> #{allowed}
+          </li>
+        HTML
+        end
+        "<ul>" + inputs.join(" ") + "</ul>"
+      end
+    end
+  end
+end

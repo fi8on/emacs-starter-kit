@@ -1,0 +1,52 @@
+require "net/http"
+require "uri"
+require 'json'
+module Rights
+  class Client
+    attr_accessor :login, :app_name, :env, :permissions
+
+    def initialize(login, app_name = Rights.app_name, environment = Rights.env)
+      @login = login
+      @app_name = app_name
+      @env = environment
+    end
+
+    def permissions
+      uri = Rights.server_url +
+        "/rights?user_id=#{CGI::escape(@login)}&project=#{CGI::escape(@app_name)}&environment=#{CGI::escape(@env)}"
+      uri = URI.parse(uri)
+      resp = Net::HTTP.get_response(uri)
+      if resp.code == "200"
+        JSON.parse resp.body
+      else
+        raise ConnectionError.new
+      end
+    rescue Exception => e
+      raise ConnectionError.new(e)
+    end
+
+    ## placeholder for role
+    def roles
+      uri = Rights.server_url +
+        "/get_roles?user_id=#{CGI::escape(@login)}&project=#{CGI::escape(@app_name)}&environment=#{CGI::escape(@env)}"
+      uri = URI.parse(uri)
+      resp = Net::HTTP.get_response(uri)
+      if resp.code == "200"
+        JSON.parse resp.body
+      else
+        raise ConnectionError.new
+      end
+    rescue Exception => e
+      raise ConnectionError.new(e)
+    end
+
+  end
+  
+  class ConnectionError < Exception
+    attr_accessor :orig_exception
+    def initialize(orig_ex = nil)
+      @orig_exception = orig_ex
+    end
+    
+  end
+end

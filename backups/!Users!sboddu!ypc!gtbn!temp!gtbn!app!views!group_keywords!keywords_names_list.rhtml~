@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+ <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+ <title>Ghost Tag Business Names <%= controller.action_name %></title>
+ <%= javascript_include_tag :defaults %>
+ <%= active_scaffold_includes %>
+
+</head>
+<body>
+
+<% i =0 %>
+
+<% form_for(:group_keywords, @group_keywords , :method =>
+'POST',:url => { :action => 'update_keywords', :controller =>
+'group_keywords',:id =>@id}) do |ff| %>
+
+
+<table class="name_search_results">
+<input type="hidden" name="keywords_list" value="<%= @keywords.length %>">
+
+<% for list_each in  @keywords %>
+<%  if( i%2 == 0) %>
+<tr class="d0">
+<% else %>
+ <tr class="d1">
+<% end %>
+<td>
+ <%=h list_each %>
+</td>
+<td>
+<input type="checkbox" class="check" name="add_keywords_<%= i %>" value="<%=h list_each rescue nil %>"
+
+</td>
+</tr>
+<% i = i+1 %>
+<% end %>
+
+<%= ff.submit "submit"  if  (@keywords.length > 0) %>
+<% end %>
+
+</table>
+
+</body>
+</html>

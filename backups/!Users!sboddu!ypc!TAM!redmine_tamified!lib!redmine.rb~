@@ -1,0 +1,76 @@
+require 'redmine/access_control'
+require 'redmine/menu_manager'
+require 'redmine/search'
+# require 'redmine/custom_field_format'
+require 'redmine/mime_type'
+require 'redmine/core_ext'
+require 'redmine/themes'
+require 'redmine/hook'
+require 'redmine/notifiable'
+require 'redmine/scm/base'
+
+
+if RUBY_VERSION < '1.9'
+  require 'faster_csv'
+else
+  require 'csv'
+  FCSV = CSV
+end
+
+# Redmine::CustomFieldFormat.map do |fields|
+#   fields.register Redmine::CustomFieldFormat.new('string', :label => :label_string, :order => 1)
+#   fields.register Redmine::CustomFieldFormat.new('text', :label => :label_text, :order => 2)
+#   fields.register Redmine::CustomFieldFormat.new('int', :label => :label_integer, :order => 3)
+#   fields.register Redmine::CustomFieldFormat.new('float', :label => :label_float, :order => 4)
+#   fields.register Redmine::CustomFieldFormat.new('list', :label => :label_list, :order => 5)
+#   fields.register Redmine::CustomFieldFormat.new('date', :label => :label_date, :order => 6)
+#   fields.register Redmine::CustomFieldFormat.new('bool', :label => :label_boolean, :order => 7)
+# end
+
+# Permissions
+Redmine::AccessControl.map do |map|
+  map.permission :view_project, {:projects => [:show], :activities => [:index]}, :public => true
+  map.permission :search_project, {:search => :index}, :public => true
+  map.permission :add_project, {:projects => [:new, :create]}, :require => :loggedin
+  map.permission :edit_project, {:projects => [:settings, :edit, :update]}, :require => :member
+  map.permission :select_project_modules, {:projects => :modules}, :require => :member
+  map.permission :manage_members, {:projects => :settings, :members => [:new, :edit, :destroy, :autocomplete_for_member]}, :require => :member
+   
+end
+
+Redmine::MenuManager.map :top_menu do |menu|
+  menu.push :home, :home_path
+  menu.push :projects, { :controller => 'projects', :action => 'index' }, :caption => :label_project_plural
+  menu.push :administration, { :controller => 'admin', :action => 'index' }, :if => Proc.new { User.current.admin? }, :last => true
+
+end
+
+Redmine::MenuManager.map :account_menu do |menu|
+  menu.push :login, :signin_path, :if => Proc.new { !User.current.logged? }
+#  menu.push :register, { :controller => 'account', :action => 'register' }, :if => Proc.new { !User.current.logged? && Setting.self_registration? }
+  menu.push :logout, :signout_path, :if => Proc.new { User.current.logged? }
+end
+
+Redmine::MenuManager.map :application_menu do |menu|
+  # Empty
+end
+
+Redmine::MenuManager.map :admin_menu do |menu|
+  menu.push :projects, {:controller => 'admin', :action => 'projects'}, :caption => :label_project_plural
+  menu.push :users, {:controller => 'users'}, :caption => :label_user_plural
+  menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural
+  menu.push :roles, {:controller => 'roles'}, :caption => :label_role_and_permissions
+  menu.push :settings, {:controller => 'settings'}
+end
+
+Redmine::MenuManager.map :project_menu do |menu|
+  menu.push :overview, { :controller => 'projects', :action => 'show' }
+  menu.push :settings, { :controller => 'projects', :action => 'settings' }, :last => true
+end
+
+
+Redmine::Search.map do |search|
+  search.register :projects
+end
+
+ActionView::Template.register_template_handler :rsb, Redmine::Views::ApiTemplateHandler

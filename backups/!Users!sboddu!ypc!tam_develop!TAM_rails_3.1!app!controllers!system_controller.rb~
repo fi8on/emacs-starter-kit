@@ -1,0 +1,30 @@
+class SystemController < ApplicationController
+  def sysinfo
+    gem_hash = {}
+    Gem.loaded_specs.sort.collect{|name,spec| gem_hash[name]="#{spec.version}" }
+    version_file = File.join(File.dirname(__FILE__), '../../', 'VERSION')
+    version = File.exist?(version_file) ? YAML.load(File.read(version_file)) : "No version found"
+    sys_hash = {
+      'service' => {
+        'name'        => 'lui',
+        'deployed_at' => version['deployed_at'],
+        'deployed_by' => version['deployed_by'],
+        'repository'  => "#{version['scm_url']} r#{version['scm_rev']}",
+        'rails_env'   => RAILS_ENV,
+        'hostname'    => Socket.gethostname() },
+      'gems'    => gem_hash,
+      'env'     => ENV.to_hash
+    }
+    render :json => sys_hash.to_json
+  end
+
+  def health
+    # note: this relative path is only available after capistrano deployment
+    health_file = File.join(File.dirname(__FILE__), '../../../../shared', 'health.txt')
+    if File.exist?(health_file) then
+      render :text => "OK", :status => 200
+    else
+      render :text => "404", :status => 404
+    end
+  end
+end
